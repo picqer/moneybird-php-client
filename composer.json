@@ -1,0 +1,30 @@
+{
+  "name": "picqer/moneybird-php-client",
+  "type": "library",
+  "description": "A PHP Client for the Moneybird V2 API",
+  "keywords": [
+    "api",
+    "php",
+    "moneybird"
+  ],
+  "homepage": "http://github.com/picqer/moneybird-php-client",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Stephan Groen",
+      "email": "info@picqer.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Picqer\\Financials\\Moneybird\\": "src/Picqer/Financials/Moneybird"
+    }
+  }
+}

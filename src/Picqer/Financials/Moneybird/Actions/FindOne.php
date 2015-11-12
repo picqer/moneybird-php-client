@@ -1,0 +1,20 @@
+<?php namespace Picqer\Financials\Moneybird\Actions;
+
+/**
+ * Class FindOne
+ * @package Picqer\Financials\Moneybird\Actions
+ */
+trait FindOne {
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function find($id)
+    {
+        $result = $this->connection()->get($this->url . '/' . urlencode($id));
+
+        return $this->makeFromResponse($result);
+    }
+
+}
