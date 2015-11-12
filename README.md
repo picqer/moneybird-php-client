@@ -24,10 +24,12 @@ If you have no authorization code yet, you will need this first. The client supp
 ```php
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 $connection = new \Picqer\Financials\Moneybird\Connection();
-$connection->setRedirectUrl(REDIRECTURL);
-$connection->setClientId(CLIENTID);
-$connection->setClientSecret(CLIENTSECRET);
+$connection->setRedirectUrl('REDIRECTURL');
+$connection->setClientId('CLIENTID');
+$connection->setClientSecret('CLIENTSECRET');
 $connection->redirectForAuthorization();
 ```
 
@@ -41,16 +43,18 @@ automatically.
 ```php
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 $connection = new \Picqer\Financials\Moneybird\Connection();
-$connection->setRedirectUrl(REDIRECTURL);
-$connection->setClientId(CLIENTID);
-$connection->setClientSecret(CLIENTSECRET);
+$connection->setRedirectUrl('REDIRECTURL');
+$connection->setClientId('CLIENTID');
+$connection->setClientSecret('CLIENTSECRET');
 
 // Get authorization code as described in readme (always set this when available)
-$connection->setAuthorizationCode(AUTHORIZATIONCODE);
+$connection->setAuthorizationCode('AUTHORIZATIONCODE');
 
 // Set this in case you got the access token, otherwise client will fetch it (always set this when available)
-$connection->setAccessToken(ACCESSTOKEN);
+$connection->setAccessToken('ACCESSTOKEN');
 
 try {
     $connection->connect();
