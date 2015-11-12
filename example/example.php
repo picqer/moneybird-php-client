@@ -4,9 +4,9 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 // Set these params
-define('REDIRECTURL', 'http://example.org/callback.php');
-define('CLIENTID', '');
-define('CLIENTSECRET', '');
+$redirectUrl = 'http://example.org/callback.php';
+$clientId = '';
+$clientSecret = '';
 
 // Set the administrationid to work with
 $administrationId = '';
@@ -41,12 +41,12 @@ function setValue($key, $value)
  * Function to authorize with Moneybird, this redirects to Moneybird login promt and retrieves authorization code
  * to set up requests for oAuth tokens
  */
-function authorize()
+function authorize($redirectUrl, $clientId, $clientSecret)
 {
     $connection = new \Picqer\Financials\Moneybird\Connection();
-    $connection->setRedirectUrl(REDIRECTURL);
-    $connection->setClientId(CLIENTID);
-    $connection->setClientSecret(CLIENTSECRET);
+    $connection->setRedirectUrl($redirectUrl);
+    $connection->setClientId($clientId);
+    $connection->setClientSecret($clientSecret);
     $connection->redirectForAuthorization();
 }
 
@@ -56,12 +56,12 @@ function authorize()
  * @return \Picqer\Financials\Moneybird\Connection
  * @throws Exception
  */
-function connect()
+function connect($redirectUrl, $clientId, $clientSecret)
 {
     $connection = new \Picqer\Financials\Moneybird\Connection();
-    $connection->setRedirectUrl(REDIRECTURL);
-    $connection->setClientId(CLIENTID);
-    $connection->setClientSecret(CLIENTSECRET);
+    $connection->setRedirectUrl($redirectUrl);
+    $connection->setClientId($clientId);
+    $connection->setClientSecret($clientSecret);
 
     // Retrieves authorizationcode from database
     if (getValue('authorizationcode')) {
@@ -93,11 +93,11 @@ if (isset($_GET['code']) && is_null(getValue('authorizationcode'))) {
 
 // If we do not have a authorization code, authorize first to setup tokens
 if (getValue('authorizationcode') === null) {
-    authorize();
+    authorize($redirectUrl, $clientId, $clientSecret);
 }
 
 // Create the Moneybird client
-$connection = connect();
+$connection = connect($redirectUrl, $clientId, $clientSecret);
 $connection->setAdministrationId($administrationId);
 $moneybird = new \Picqer\Financials\Moneybird\Moneybird($connection);
 
