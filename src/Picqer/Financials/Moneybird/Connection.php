@@ -393,7 +393,7 @@ class Connection
             return 'http://httpbin.org/' . $method;
         }
 
-        return $this->apiUrl . '/' . $this->administrationId . '/' . $url . '.json';
+        return $this->apiUrl . '/' . ($this->administrationId ? $this->administrationId . '/' : '') . $url . '.json';
     }
 
     /**
