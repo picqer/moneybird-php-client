@@ -103,10 +103,10 @@ $moneybird = new \Picqer\Financials\Moneybird\Moneybird($connection);
 
 // Get the contacts from our administration
 try {
-    $contacts = $moneybird->salesInvoice()->get();
+    $salesInvoices = $moneybird->salesInvoice()->get();
 
-    foreach ($contacts as $contact) {
-        var_dump($contact);
+    foreach ($salesInvoices as $salesInvoice) {
+        var_dump($salesInvoice);
     }
 } catch (\Exception $e) {
     echo get_class($e) . ' : ' . $e->getMessage();

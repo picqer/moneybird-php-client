@@ -101,13 +101,18 @@ $contacts = $moneybird->contact()->getVersions([
   2384563478959922
 ]);
 var_dump($contacts); // Array with two Contact objects
+
+// Example: List sales invoices that are in draft (max 100)
+$salesInvoices = $moneybird->salesInvoice()->filter([
+  'state' => 'draft'
+]);
+var_dump($salesInvoices); // Array with filtered SalesInvoice objects
 ```
 
 ## Code example
 See for example: [example/example.php](example/example.php)
 
 ## TODO
-- Filtering
 - Receiving webhooks support (would be nice)
 - Some linked/nested entities (notes, attachments etcetera)
 - Dedicated Exception for RateLimit reached and return of Retry-After value
