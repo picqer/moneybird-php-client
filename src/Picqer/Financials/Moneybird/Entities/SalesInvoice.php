@@ -5,6 +5,7 @@ use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -75,4 +76,23 @@ class SalesInvoice extends Model {
     protected $multipleNestedEntities = [
         'details' => 'SalesInvoiceDetail'
     ];
+
+    /**
+     * Instruct Moneybird to send the invoice to the contact
+     *
+     * @param string $deliveryMethod Email/Post/Manual are allowed types
+     * @throws ApiException
+     */
+    public function sendInvoice($deliveryMethod = 'Email')
+    {
+        if (!in_array($deliveryMethod, ['Email', 'Post', 'Manual'])) {
+            throw new ApiException('Invalid delivery method for sending invoice');
+        }
+
+        $this->connection->patch($this->url . '/' . $this->id . '/send_invoice', json_encode([
+            'sales_invoice_sending' => [
+                'delivery_method' => $deliveryMethod
+            ]
+        ]));
+    }
 }
