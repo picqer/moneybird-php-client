@@ -177,6 +177,21 @@ abstract class Model
      */
     public function json()
     {
+        $array = $this->getArrayWithNestedObjects();
+
+        return json_encode($array);
+    }
+
+    /**
+     * @return string
+     */
+    public function jsonWithNamespace()
+    {
+        return json_encode([$this->namespace => $this->getArrayWithNestedObjects()]);
+    }
+
+    private function getArrayWithNestedObjects()
+    {
         $result = [];
 
         foreach ($this->attributes as $attributeName => $attributeValue) {
@@ -195,16 +210,9 @@ abstract class Model
             }
         }
 
-        return json_encode($result);
+        return $result;
     }
 
-    /**
-     * @return string
-     */
-    public function jsonWithNamespace()
-    {
-        return json_encode([$this->namespace => $this->attributes]);
-    }
 
     /**
      * @param $response
