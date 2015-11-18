@@ -205,7 +205,7 @@ abstract class Model
 
             if (array_key_exists($attributeName, $this->getMultipleNestedEntities())) {
                 foreach ($attributeValue as $attributeObject) {
-                    $result[$attributeName] = $attributeObject->attributes;
+                    $result[$attributeName][] = $attributeObject->attributes;
                 }
             }
         }
