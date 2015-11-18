@@ -204,6 +204,7 @@ abstract class Model
             }
 
             if (array_key_exists($attributeName, $this->getMultipleNestedEntities())) {
+                $result[$attributeName] = [];
                 foreach ($attributeValue as $attributeObject) {
                     $result[$attributeName][] = $attributeObject->attributes;
                 }
