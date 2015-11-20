@@ -190,7 +190,7 @@ abstract class Model
         return json_encode([$this->namespace => $this->getArrayWithNestedObjects()]);
     }
 
-    private function getArrayWithNestedObjects()
+    private function getArrayWithNestedObjects($useAttributesAppend = true)
     {
         $result = [];
 
@@ -204,6 +204,9 @@ abstract class Model
             }
 
             if (array_key_exists($attributeName, $this->getMultipleNestedEntities())) {
+                if ($useAttributesAppend) {
+                    $attributeName .= '_attributes';
+                }
                 $result[$attributeName] = [];
                 foreach ($attributeValue as $attributeObject) {
                     $result[$attributeName][] = $attributeObject->attributes;
