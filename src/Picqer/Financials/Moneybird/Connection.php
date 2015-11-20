@@ -76,6 +76,11 @@ class Connection
     private $testing = false;
 
     /**
+     * @var array
+     */
+    private $scopes = [];
+
+    /**
      * @return Client
      */
     private function client()
@@ -239,7 +244,7 @@ class Connection
             'client_id' => $this->clientId,
             'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
-            'scope' => 'sales_invoices documents estimates bank settings'
+            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank settings'
         ));
     }
 
@@ -438,6 +443,14 @@ class Connection
         }
 
         return $this->tokenUrl;
+    }
+
+    /**
+     * @param array $scopes
+     */
+    public function setScopes($scopes)
+    {
+        $this->scopes = $scopes;
     }
 
 }
