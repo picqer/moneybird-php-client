@@ -33,6 +33,7 @@ class SalesInvoice extends Model {
         'reference',
         'language',
         'currency',
+        'prices_are_incl_tax',
         'discount',
         'original_sales_invoice_id',
         'paid_at',
