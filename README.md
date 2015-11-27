@@ -4,10 +4,12 @@
 
 PHP Client for Moneybird V2
 
-**Work in progress!**
-
 ## Installation
-Will be on Packagist/Composer soon.
+This project can easily be installed through Composer.
+
+```
+composer require picqer/moneybird-php-client
+```
 
 ## Usage
 You need to have to following credentials and information ready. You can get this from your Moneybird account.
