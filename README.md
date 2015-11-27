@@ -85,11 +85,13 @@ $contact->company_name = 'Picqer';
 $contact->firstname = 'Stephan';
 $contact->lastname = 'Groen';
 $contact->save();
+var_dump($contact); // Contact object (as saved in Moneybird)
 
 // Example: Update existing contact, change email address
 $contact = $moneybird->contact()->find(89672345789233);
 $contact->email = 'example@example.org';
 $contact->save();
+var_dump($contact); // Contact object (as saved in Moneybird)
 
 // Example: Use the Moneybird synchronisation API
 $contactVersions = $moneybird->contact()->listVersions();

@@ -13,10 +13,10 @@ trait Storable {
     {
         if ($this->exists())
         {
-            return $this->update();
+            $this->update();
         } else
         {
-            return $this->insert();
+            $this->insert();
         }
     }
 
@@ -27,7 +27,7 @@ trait Storable {
     {
         $result = $this->connection()->post($this->url, $this->jsonWithNamespace());
 
-        return $this->makeFromResponse($result);
+        $this->selfFromResponse($result);
     }
 
     /**
@@ -37,7 +37,7 @@ trait Storable {
     {
         $result = $this->connection()->patch($this->url . '/' . urlencode($this->id), $this->jsonWithNamespace());
 
-        return $this->makeFromResponse($result);
+        $this->selfFromResponse($result);
     }
 
 }

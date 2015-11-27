@@ -219,6 +219,7 @@ abstract class Model
 
 
     /**
+     * Create a new object with the response from the API
      * @param $response
      * @return static
      */
@@ -227,20 +228,31 @@ abstract class Model
         $entity = new static($this->connection);
         $entity->fill($response);
 
-        foreach ($entity->getSingleNestedEntities() as $key => $value)
+        $entity->selfFromResponse($response);
+
+        return $entity;
+    }
+
+    /**
+     * Recreate this object with the response from the API
+     * @param $response
+     */
+    public function selfFromResponse($response)
+    {
+        $this->fill($response);
+
+        foreach ($this->getSingleNestedEntities() as $key => $value)
         {
             $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
-            $entity->$key = new $entityName($this->connection, $response[$key]);
+            $this->$key = new $entityName($this->connection, $response[$key]);
         }
 
-        foreach ($entity->getMultipleNestedEntities() as $key => $value)
+        foreach ($this->getMultipleNestedEntities() as $key => $value)
         {
             $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
             $instaniatedEntity = new $entityName($this->connection);
-            $entity->$key = $instaniatedEntity->collectionFromResult($response[$key]);
+            $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
         }
-
-        return $entity;
     }
 
     /**

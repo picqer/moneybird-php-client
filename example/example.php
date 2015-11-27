@@ -101,7 +101,7 @@ $connection = connect($redirectUrl, $clientId, $clientSecret);
 $connection->setAdministrationId($administrationId);
 $moneybird = new \Picqer\Financials\Moneybird\Moneybird($connection);
 
-// Get the contacts from our administration
+// Get the sales invoices from our administration
 try {
     $salesInvoices = $moneybird->salesInvoice()->get();
 
