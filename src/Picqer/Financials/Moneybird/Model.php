@@ -253,6 +253,8 @@ abstract class Model
             $instaniatedEntity = new $entityName($this->connection);
             $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
         }
+
+        return $this;
     }
 
     /**
