@@ -75,7 +75,10 @@ class SalesInvoice extends Model {
      * @var array
      */
     protected $multipleNestedEntities = [
-        'details' => 'SalesInvoiceDetail'
+        'details' => [
+            'entity' => 'SalesInvoiceDetail',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
     ];
 
     /**

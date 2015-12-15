@@ -2,6 +2,7 @@
 
 use Picqer\Financials\Moneybird\Entities\Administration;
 use Picqer\Financials\Moneybird\Entities\Contact;
+use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\CustomField;
 use Picqer\Financials\Moneybird\Entities\DocumentStyle;
 use Picqer\Financials\Moneybird\Entities\FinancialAccount;
@@ -59,6 +60,14 @@ class Moneybird
     public function contact()
     {
         return new Contact($this->connection);
+    }
+
+    /**
+     * @return ContactCustomField
+     */
+    public function contactCustomField()
+    {
+        return new ContactCustomField($this->connection);
     }
 
     /**

@@ -11,7 +11,8 @@ use Picqer\Financials\Moneybird\Model;
  * Class Contact
  * @package Picqer\Financials\Moneybird
  */
-class Contact extends Model {
+class Contact extends Model
+{
 
     use FindAll, FindOne, Storable, Removable, Synchronizable;
 
@@ -67,4 +68,15 @@ class Contact extends Model {
      * @var string
      */
     protected $namespace = 'contact';
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'custom_fields' => [
+            'entity' => 'ContactCustomField',
+            'type' => self::NESTING_TYPE_NESTED_OBJECTS,
+        ],
+    ];
+
 }

@@ -7,6 +7,9 @@
 abstract class Model
 {
 
+    const NESTING_TYPE_ARRAY_OF_OBJECTS = 0;
+    const NESTING_TYPE_NESTED_OBJECTS = 1;
+
     /**
      * @var Connection
      */
@@ -44,10 +47,15 @@ abstract class Model
     protected $singleNestedEntities = [];
 
     /**
+     * Array containing the name of the attribute that contains nested objects as key and an array with the entity name
+     * and json representation type
+     *
+     * JSON representation of an array of objects (NESTING_TYPE_ARRAY_OF_OBJECTS) : [ {}, {} ]
+     * JSON representation of nested objects (NESTING_TYPE_NESTED_OBJECTS): { "0": {}, "1": {} }
+     *
      * @var array
      */
     protected $multipleNestedEntities = [];
-
 
     /**
      * Model constructor.
@@ -193,6 +201,7 @@ abstract class Model
     private function getArrayWithNestedObjects($useAttributesAppend = true)
     {
         $result = [];
+        $multipleNestedEntities = $this->getMultipleNestedEntities();
 
         foreach ($this->attributes as $attributeName => $attributeValue) {
             if (! is_object($attributeValue)) {
@@ -203,13 +212,20 @@ abstract class Model
                 $result[$attributeName] = $attributeValue->attributes;
             }
 
-            if (array_key_exists($attributeName, $this->getMultipleNestedEntities())) {
+            if (array_key_exists($attributeName, $multipleNestedEntities)) {
                 if ($useAttributesAppend) {
-                    $attributeName .= '_attributes';
+                    $attributeNameToUse = $attributeName . '_attributes';
+                } else {
+                    $attributeNameToUse = $attributeName;
                 }
-                $result[$attributeName] = [];
-                foreach ($attributeValue as $attributeObject) {
-                    $result[$attributeName][] = $attributeObject->attributes;
+
+                $result[$attributeNameToUse] = [];
+                foreach ($attributeValue as $attributeEntity) {
+                    $result[$attributeNameToUse][] = $attributeEntity->attributes;
+
+                    if ($multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS) {
+                        $result[$attributeNameToUse] = (object)$result[$attributeNameToUse];
+                    }
                 }
             }
         }
@@ -236,6 +252,7 @@ abstract class Model
     /**
      * Recreate this object with the response from the API
      * @param $response
+     * @return $this
      */
     public function selfFromResponse($response)
     {
@@ -249,7 +266,7 @@ abstract class Model
 
         foreach ($this->getMultipleNestedEntities() as $key => $value)
         {
-            $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
+            $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
             $instaniatedEntity = new $entityName($this->connection);
             $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
         }
