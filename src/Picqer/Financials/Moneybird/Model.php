@@ -260,15 +260,19 @@ abstract class Model
 
         foreach ($this->getSingleNestedEntities() as $key => $value)
         {
-            $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
-            $this->$key = new $entityName($this->connection, $response[$key]);
+            if (isset($response[$key])) {
+                $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
+                $this->$key = new $entityName($this->connection, $response[$key]);
+            }
         }
 
         foreach ($this->getMultipleNestedEntities() as $key => $value)
         {
-            $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
-            $instaniatedEntity = new $entityName($this->connection);
-            $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
+            if (isset($response[$key])) {
+                $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
+                $instaniatedEntity = new $entityName($this->connection);
+                $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
+            }
         }
 
         return $this;

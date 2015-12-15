@@ -19,6 +19,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\Contact');
     }
 
+    public function testContactCustomFieldEntity()
+    {
+        $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\ContactCustomField');
+    }
+
     public function testCustomFieldEntity()
     {
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\CustomField');
