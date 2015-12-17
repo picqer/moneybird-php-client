@@ -12,7 +12,7 @@ trait FindAll
      */
     public function get()
     {
-        $result = $this->connection()->get($this->url);
+        $result = $this->connection()->get($this->getUrl());
 
         return $this->collectionFromResult($result);
     }

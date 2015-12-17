@@ -25,7 +25,7 @@ trait Storable {
      */
     public function insert()
     {
-        $result = $this->connection()->post($this->url, $this->jsonWithNamespace());
+        $result = $this->connection()->post($this->getUrl(), $this->jsonWithNamespace());
 
         return $this->selfFromResponse($result);
     }
@@ -35,7 +35,7 @@ trait Storable {
      */
     public function update()
     {
-        $result = $this->connection()->patch($this->url . '/' . urlencode($this->id), $this->jsonWithNamespace());
+        $result = $this->connection()->patch($this->getUrl() . '/' . urlencode($this->id), $this->jsonWithNamespace());
 
         return $this->selfFromResponse($result);
     }

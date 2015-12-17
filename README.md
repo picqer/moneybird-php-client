@@ -111,6 +111,10 @@ $salesInvoices = $moneybird->salesInvoice()->filter([
   'state' => 'draft'
 ]);
 var_dump($salesInvoices); // Array with filtered SalesInvoice objects
+
+// Example: Get import mappings for contacts
+$mappings = $moneybird->importMapping()->setType('contact')->get();
+var_dump($mappings); // Array with ImportMapping objects
 ```
 
 ## Code example

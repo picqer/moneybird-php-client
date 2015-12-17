@@ -12,6 +12,8 @@ class ImportMapping extends Model {
 
     use FindAll, FindOne;
 
+    protected $type = null;
+
     /**
      * @var array
      */
@@ -26,4 +28,28 @@ class ImportMapping extends Model {
      * @var string
      */
     protected $url = 'import_mappings';
+
+    /**
+     * @param string $type The type of import mapping to request
+     *
+     * Type should be any of: financial_account bank_mutation contact document_attachment general_journal identity
+     * incoming_invoice attachment payment history invoice_attachment transaction ledger_account tax_rate product
+     * print_invoice recurring_template invoice workflow document_style
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUrl()
+    {
+        if (is_null($this->type)) {
+            return $this->url;
+        }
+
+        return $this->url . '/' . $this->type;
+    }
 }

@@ -329,4 +329,12 @@ abstract class Model
         return $result;
     }
 
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
 }

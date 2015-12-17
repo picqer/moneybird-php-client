@@ -17,7 +17,7 @@ trait Filterable
             $filterList[] = $key .':' . $value;
         }
 
-        $result = $this->connection()->get($this->url, ['filter' => implode(',', $filterList)]);
+        $result = $this->connection()->get($this->getUrl(), ['filter' => implode(',', $filterList)]);
 
         return $this->collectionFromResult($result);
     }
