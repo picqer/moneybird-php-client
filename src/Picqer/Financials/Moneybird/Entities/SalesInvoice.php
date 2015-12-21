@@ -99,4 +99,17 @@ class SalesInvoice extends Model {
             ]
         ]));
     }
+    
+    /**
+     * Find SalesInvoice by invoice_id
+     *
+     * @param $invoiceId
+     * @return static
+     */
+    public function findByInvoiceId($invoiceId)
+    {
+        $result = $this->connection()->get($this->getUrl() . '/find_by_invoice_id/' . urlencode($invoiceId));
+
+        return $this->makeFromResponse($result);
+    }
 }
