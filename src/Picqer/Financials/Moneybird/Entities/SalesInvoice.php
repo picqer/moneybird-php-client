@@ -112,4 +112,25 @@ class SalesInvoice extends Model {
 
         return $this->makeFromResponse($result);
     }
+    
+    /**
+     * Register a payment for the current invoice
+     *
+     * @param array $data required keys are payment_date and price
+     * @throws ApiException
+     */
+    public function registerPayment(array $data)
+    {
+        if  (! isset($data['payment_date'])) {
+            throw new ApiException('Required [payment_date] is missing');
+        }
+
+        if  (! isset($data['price'])) {
+            throw new ApiException('Required [price] is missing');
+        }
+
+        $this->connection()->patch($this->url . '/' . $this->id . '/register_payment', json_encode([
+            'payment' => $data
+        ]));
+    }
 }
