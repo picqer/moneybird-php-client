@@ -337,4 +337,15 @@ abstract class Model
         return $this->url;
     }
 
+    /**
+     * Determine if an attribute exists on the model
+     *
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return (isset($this->attributes[$name]) && !is_null($this->attributes[$name]));
+    }
+
 }
