@@ -115,6 +115,14 @@ var_dump($salesInvoices); // Array with filtered SalesInvoice objects
 // Example: Get import mappings for contacts
 $mappings = $moneybird->importMapping()->setType('contact')->get();
 var_dump($mappings); // Array with ImportMapping objects
+
+// Example: Register a payment for a sales invoice
+$salesInvoicePayment = $moneybird->salesInvoicePayment();
+$salesInvoicePayment->price = 153.75;
+$salesInvoicePayment->payment_date = '2015-12-03';
+
+$salesInvoice = $moneybird->salesInvoice()->find(3498576378625);
+$salesInvoice->registerPayment($salesInvoicePayment);
 ```
 
 ## Code example
