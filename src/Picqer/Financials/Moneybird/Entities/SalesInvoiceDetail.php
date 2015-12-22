@@ -18,6 +18,7 @@ class SalesInvoiceDetail extends Model
         'ledger_account_id',
         'amount',
         'description',
+        'period',
         'price',
         'row_order',
         'total_price_excl_tax_with_discount',
