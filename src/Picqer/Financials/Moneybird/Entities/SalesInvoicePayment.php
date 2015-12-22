@@ -1,0 +1,35 @@
+<?php namespace Picqer\Financials\Moneybird\Entities;
+
+use Picqer\Financials\Moneybird\Model;
+
+/**
+ * Class SalesInvoicePayment
+ * @package Picqer\Financials\Moneybird\Entities
+ */
+class SalesInvoicePayment extends Model {
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'invoice_type',
+        'invoice_id',
+        'financial_account_id',
+        'user_id',
+        'payment_transaction_id',
+        'price',
+        'price_base',
+        'payment_date',
+        'credit_invoice_id',
+        'financial_mutation_id',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * @var string
+     */
+    protected $namespace = 'payment';
+
+}

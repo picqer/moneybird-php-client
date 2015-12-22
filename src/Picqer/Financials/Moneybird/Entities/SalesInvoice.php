@@ -79,6 +79,10 @@ class SalesInvoice extends Model {
             'entity' => 'SalesInvoiceDetail',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
+        'payments' => [
+            'entity' => 'SalesInvoicePayment',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
     ];
 
     /**
@@ -112,25 +116,25 @@ class SalesInvoice extends Model {
 
         return $this->makeFromResponse($result);
     }
-    
+
     /**
      * Register a payment for the current invoice
      *
-     * @param array $data required keys are payment_date and price
+     * @param SalesInvoicePayment $salesInvoicePayment (payment_date and price are required)
      * @throws ApiException
      */
-    public function registerPayment(array $data)
+    public function registerPayment(SalesInvoicePayment $salesInvoicePayment)
     {
-        if  (! isset($data['payment_date'])) {
+        if  (! isset($salesInvoicePayment->payment_date)) {
             throw new ApiException('Required [payment_date] is missing');
         }
 
-        if  (! isset($data['price'])) {
+        if  (! isset($salesInvoicePayment->price)) {
             throw new ApiException('Required [price] is missing');
         }
 
-        $this->connection()->patch($this->url . '/' . $this->id . '/register_payment', json_encode([
-            'payment' => $data
-        ]));
+        $this->connection()->patch($this->url . '/' . $this->id . '/register_payment',
+            $salesInvoicePayment->jsonWithNamespace()
+        );
     }
 }

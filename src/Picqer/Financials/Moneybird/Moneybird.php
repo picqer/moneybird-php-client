@@ -18,6 +18,7 @@ use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
 use Picqer\Financials\Moneybird\Entities\Webhook;
@@ -188,6 +189,14 @@ class Moneybird
     public function salesInvoiceDetail()
     {
         return new SalesInvoiceDetail($this->connection);
+    }
+
+    /**
+     * @return SalesInvoicePayment
+     */
+    public function salesInvoicePayment()
+    {
+        return new SalesInvoicePayment($this->connection);
     }
 
     /**

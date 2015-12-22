@@ -104,6 +104,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail');
     }
 
+    public function testSalesInvoicePaymentEntity()
+    {
+        $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\SalesInvoicePayment');
+    }
+
     public function testTaxRateEntity()
     {
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\TaxRate');
