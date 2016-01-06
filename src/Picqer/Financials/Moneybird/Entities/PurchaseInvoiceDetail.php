@@ -3,9 +3,9 @@
 use Picqer\Financials\Moneybird\Entities\Generic\InvoiceDetail;
 
 /**
- * Class SalesInvoiceDetail
+ * Class PurchaseInvoiceDetail
  * @package Picqer\Financials\Moneybird\Entities
  */
-class SalesInvoiceDetail extends InvoiceDetail
+class PurchaseInvoiceDetail extends InvoiceDetail
 {
 }
