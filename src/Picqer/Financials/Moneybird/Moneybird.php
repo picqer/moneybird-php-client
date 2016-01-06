@@ -48,187 +48,210 @@ class Moneybird
     }
 
     /**
+     * @param array $attributes
      * @return Administration
      */
-    public function administration()
+    public function administration($attributes = [])
     {
-        return new Administration($this->connection);
+        return new Administration($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return Contact
      */
-    public function contact()
+    public function contact($attributes = [])
     {
-        return new Contact($this->connection);
+        return new Contact($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return ContactCustomField
      */
-    public function contactCustomField()
+    public function contactCustomField($attributes = [])
     {
-        return new ContactCustomField($this->connection);
+        return new ContactCustomField($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return CustomField
      */
-    public function customField()
+    public function customField($attributes = [])
     {
-        return new CustomField($this->connection);
+        return new CustomField($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return DocumentStyle
      */
-    public function documentStyle()
+    public function documentStyle($attributes = [])
     {
-        return new DocumentStyle($this->connection);
+        return new DocumentStyle($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return FinancialAccount
      */
-    public function financialAccount()
+    public function financialAccount($attributes = [])
     {
-        return new FinancialAccount($this->connection);
+        return new FinancialAccount($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return FinancialMutation
      */
-    public function financialMutation()
+    public function financialMutation($attributes = [])
     {
-        return new FinancialMutation($this->connection);
+        return new FinancialMutation($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return GeneralDocument
      */
-    public function generalDocument()
+    public function generalDocument($attributes = [])
     {
-        return new GeneralDocument($this->connection);
+        return new GeneralDocument($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return GeneralJournalDocument
      */
-    public function generalJournalDocument()
+    public function generalJournalDocument($attributes = [])
     {
-        return new GeneralJournalDocument($this->connection);
+        return new GeneralJournalDocument($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return Identity
      */
-    public function identity()
+    public function identity($attributes = [])
     {
-        return new Identity($this->connection);
+        return new Identity($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return ImportMapping
      */
-    public function importMapping()
+    public function importMapping($attributes = [])
     {
-        return new ImportMapping($this->connection);
+        return new ImportMapping($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return LedgerAccount
      */
-    public function ledgerAccount()
+    public function ledgerAccount($attributes = [])
     {
-        return new LedgerAccount($this->connection);
+        return new LedgerAccount($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return Product
      */
-    public function product()
+    public function product($attributes = [])
     {
-        return new Product($this->connection);
+        return new Product($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return PurchaseInvoice
      */
-    public function purchaseInvoice()
+    public function purchaseInvoice($attributes = [])
     {
-        return new PurchaseInvoice($this->connection);
+        return new PurchaseInvoice($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return Receipt
      */
-    public function receipt()
+    public function receipt($attributes = [])
     {
-        return new Receipt($this->connection);
+        return new Receipt($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return RecurringSalesInvoice
      */
-    public function recurringSalesInvoice()
+    public function recurringSalesInvoice($attributes = [])
     {
-        return new RecurringSalesInvoice($this->connection);
+        return new RecurringSalesInvoice($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return SalesInvoice
      */
-    public function salesInvoice()
+    public function salesInvoice($attributes = [])
     {
-        return new SalesInvoice($this->connection);
+        return new SalesInvoice($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return SalesInvoiceDetail
      */
-    public function salesInvoiceDetail()
+    public function salesInvoiceDetail($attributes = [])
     {
-        return new SalesInvoiceDetail($this->connection);
+        return new SalesInvoiceDetail($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return SalesInvoicePayment
      */
-    public function salesInvoicePayment()
+    public function salesInvoicePayment($attributes = [])
     {
-        return new SalesInvoicePayment($this->connection);
+        return new SalesInvoicePayment($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return TaxRate
      */
-    public function taxRate()
+    public function taxRate($attributes = [])
     {
-        return new TaxRate($this->connection);
+        return new TaxRate($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return TypelessDocument
      */
-    public function typelessDocument()
+    public function typelessDocument($attributes = [])
     {
-        return new TypelessDocument($this->connection);
+        return new TypelessDocument($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return Webhook
      */
-    public function webhook()
+    public function webhook($attributes = [])
     {
-        return new Webhook($this->connection);
+        return new Webhook($this->connection, $attributes);
     }
 
     /**
+     * @param array $attributes
      * @return Workflow
      */
-    public function workflow()
+    public function workflow($attributes = [])
     {
-        return new Workflow($this->connection);
+        return new Workflow($this->connection, $attributes);
     }
 
 }
