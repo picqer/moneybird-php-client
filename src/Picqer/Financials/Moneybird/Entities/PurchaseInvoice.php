@@ -10,8 +10,8 @@ use Picqer\Financials\Moneybird\Model;
  * Class PurchaseInvoice
  * @package Picqer\Financials\Moneybird\Entities
  */
-class PurchaseInvoice extends Model {
-
+class PurchaseInvoice extends Model
+{
     use FindAll, FindOne, Storable, Removable;
 
     /**
@@ -53,4 +53,21 @@ class PurchaseInvoice extends Model {
      * @var string
      */
     protected $namespace = 'purchase_invoice';
+
+    /**
+     * @var array
+     */
+    protected $singleNestedEntities = [
+        'contact' => 'Contact'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'details' => [
+            'entity' => 'PurchaseInvoiceDetail',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 }
