@@ -84,6 +84,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\PurchaseInvoice');
     }
 
+    public function testPurchaseDetailInvoiceEntity()
+    {
+        $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail');
+    }
+
     public function testReceiptEntity()
     {
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\Receipt');
@@ -92,6 +97,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     public function testRecurringSalesInvoiceEntity()
     {
         $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice');
+    }
+
+    public function testRecurringSalesInvoiceDetailEntity()
+    {
+        $this->performEntityTest('\Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail');
     }
 
     public function testSalesInvoiceEntity()
