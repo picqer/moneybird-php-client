@@ -149,7 +149,7 @@ class Connection
         }
 
         // If we have a token, sign the request
-        if (!$this->needsAuthentication() && !empty($this->accessToken)) {
+        if (! empty($this->accessToken)) {
             $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
 
