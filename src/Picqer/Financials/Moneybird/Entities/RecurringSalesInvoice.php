@@ -53,4 +53,18 @@ class RecurringSalesInvoice extends Model {
      * @var string
      */
     protected $namespace = 'recurring_sales_invoice';
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'details' => [
+            'entity' => 'SalesInvoiceDetail',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'payments' => [
+            'entity' => 'SalesInvoicePayment',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 }
