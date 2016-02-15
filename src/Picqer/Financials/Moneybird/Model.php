@@ -227,6 +227,13 @@ abstract class Model
                         $result[$attributeNameToUse] = (object)$result[$attributeNameToUse];
                     }
                 }
+
+                if (
+                    $multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS
+                    && empty($result[$attributeNameToUse])
+                ) {
+                    $result[$attributeNameToUse] = new \StdClass();
+                }
             }
         }
 
