@@ -73,11 +73,11 @@ $connection->getAccessToken(); // will return the access token you need to save
 $moneybird = new \Picqer\Financials\Moneybird\Moneybird($connection);
 
 // Example: Fetch list of salesinvoices 
-$salesInvoices = $moneybird->salesInvoice->get();
+$salesInvoices = $moneybird->salesInvoice()->get();
 var_dump($salesInvoices); // Array with SalesInvoice objects
 
 // Example: Fetch a sales invoice
-$salesInvoice = $moneybird->salesInvoice->find(3498576378625);
+$salesInvoice = $moneybird->salesInvoice()->find(3498576378625);
 var_dump($salesInvoice); // SalesInvoice object
 
 // Example: Create a new contact
