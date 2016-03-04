@@ -5,6 +5,7 @@ use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\CustomField;
 use Picqer\Financials\Moneybird\Entities\DocumentStyle;
+use Picqer\Financials\Moneybird\Entities\Estimate;
 use Picqer\Financials\Moneybird\Entities\FinancialAccount;
 use Picqer\Financials\Moneybird\Entities\FinancialMutation;
 use Picqer\Financials\Moneybird\Entities\GeneralDocument;
@@ -90,6 +91,15 @@ class Moneybird
     public function documentStyle($attributes = [])
     {
         return new DocumentStyle($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return Estimate
+     */
+    public function estimate($attributes = [])
+    {
+        return new Estimate($this->connection, $attributes);
     }
 
     /**
