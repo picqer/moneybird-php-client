@@ -15,6 +15,7 @@ use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
 use Picqer\Financials\Moneybird\Entities\Product;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
+use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
@@ -181,6 +182,15 @@ class Moneybird
     public function purchaseInvoice($attributes = [])
     {
         return new PurchaseInvoice($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return PurchaseInvoiceDetail
+     */
+    public function purchaseInvoiceDetail($attributes = [])
+    {
+        return new PurchaseInvoiceDetail($this->connection, $attributes);
     }
 
     /**
