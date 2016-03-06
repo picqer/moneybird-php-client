@@ -13,6 +13,7 @@ class ContactCustomField extends Model {
      */
     protected $fillable = [
         'id',
+        'name',
         'value',
     ];
 
