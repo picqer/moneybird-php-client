@@ -36,6 +36,9 @@ trait Storable {
     public function update()
     {
         $result = $this->connection()->patch($this->getUrl() . '/' . urlencode($this->id), $this->jsonWithNamespace());
+        if ($result === 200) {
+            return true;
+        }
 
         return $this->selfFromResponse($result);
     }
