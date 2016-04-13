@@ -123,6 +123,21 @@ $salesInvoicePayment->payment_date = '2015-12-03';
 
 $salesInvoice = $moneybird->salesInvoice()->find(3498576378625);
 $salesInvoice->registerPayment($salesInvoicePayment);
+
+// How to add SalesInvoiceDetails (invoice lines) to a SalesInvoice
+$salesInvoiceDetailsArray = [];
+
+foreach ($invoiceLines as $invoiceLine) { // Your invoice lines
+   $salesInvoiceDetail = $moneybird->SalesInvoiceDetail();
+   $salesInvoiceDetail->price = 34.33;
+   ...
+
+   $salesInvoiceDetailsArray[] = $salesInvoiceDetail;
+}
+
+$salesInvoice = $moneybird->salesInvoice();
+$salesInvoice->details = $salesInvoiceDetails;
+
 ```
 
 ## Code example
