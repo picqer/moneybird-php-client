@@ -21,6 +21,7 @@ use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
 use Picqer\Financials\Moneybird\Entities\Webhook;
@@ -236,6 +237,15 @@ class Moneybird
     public function salesInvoicePayment($attributes = [])
     {
         return new SalesInvoicePayment($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return SalesInvoiceCustomField
+     */
+    public function salesInvoiceCustomField($attributes = [])
+    {
+        return new SalesInvoiceCustomField($this->connection, $attributes);
     }
 
     /**

@@ -24,6 +24,7 @@ class SalesInvoice extends Model {
         'contact_id',
         'contact',
         'invoice_id',
+        'invoice_sequence_id',
         'workflow_id',
         'document_style_id',
         'identity_id',
@@ -81,6 +82,10 @@ class SalesInvoice extends Model {
         ],
         'payments' => [
             'entity' => 'SalesInvoicePayment',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'custom_fields' => [
+            'entity' => 'SalesInvoiceCustomField',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
