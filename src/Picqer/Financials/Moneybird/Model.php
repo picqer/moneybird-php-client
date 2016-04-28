@@ -195,7 +195,11 @@ abstract class Model
      */
     public function jsonWithNamespace()
     {
-        return json_encode([$this->namespace => $this->getArrayWithNestedObjects()]);
+        if ($this->namespace !== '') {
+            return json_encode([$this->namespace => $this->getArrayWithNestedObjects()]);
+        } else {
+            return $this->json();
+        }
     }
 
     private function getArrayWithNestedObjects($useAttributesAppend = true)
