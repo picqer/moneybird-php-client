@@ -27,5 +27,5 @@ class Webhook extends Model {
     /**
      * @var string
      */
-    protected $url = 'webhooks';
+    protected $endpoint = 'webhooks';
 }

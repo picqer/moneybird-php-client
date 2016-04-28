@@ -48,7 +48,7 @@ class PurchaseInvoice extends Model
     /**
      * @var string
      */
-    protected $url = 'documents/purchase_invoices';
+    protected $endpoint = 'documents/purchase_invoices';
 
     /**
      * @var string

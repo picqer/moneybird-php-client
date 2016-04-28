@@ -57,7 +57,7 @@ class SalesInvoice extends Model {
     /**
      * @var string
      */
-    protected $url = 'sales_invoices';
+    protected $endpoint = 'sales_invoices';
 
     /**
      * @var string
@@ -97,7 +97,7 @@ class SalesInvoice extends Model {
             throw new ApiException('Invalid delivery method for sending invoice');
         }
 
-        $this->connection->patch($this->url . '/' . $this->id . '/send_invoice', json_encode([
+        $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
             'sales_invoice_sending' => [
                 'delivery_method' => $deliveryMethod
             ]
@@ -112,7 +112,7 @@ class SalesInvoice extends Model {
      */
     public function findByInvoiceId($invoiceId)
     {
-        $result = $this->connection()->get($this->getUrl() . '/find_by_invoice_id/' . urlencode($invoiceId));
+        $result = $this->connection()->get($this->getEndpoint() . '/find_by_invoice_id/' . urlencode($invoiceId));
 
         return $this->makeFromResponse($result);
     }
@@ -133,7 +133,7 @@ class SalesInvoice extends Model {
             throw new ApiException('Required [price] is missing');
         }
 
-        $this->connection()->patch($this->url . '/' . $this->id . '/register_payment',
+        $this->connection()->patch($this->endpoint . '/' . $this->id . '/register_payment',
             $salesInvoicePayment->jsonWithNamespace()
         );
     }

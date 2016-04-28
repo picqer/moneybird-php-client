@@ -40,5 +40,5 @@ class FinancialMutation extends Model {
     /**
      * @var string
      */
-    protected $url = 'financial_mutations';
+    protected $endpoint = 'financial_mutations';
 }
