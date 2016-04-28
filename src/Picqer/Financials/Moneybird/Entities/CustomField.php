@@ -23,5 +23,5 @@ class CustomField extends Model {
     /**
      * @var string
      */
-    protected $url = 'custom_fields';
+    protected $endpoint = 'custom_fields';
 }

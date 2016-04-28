@@ -62,7 +62,7 @@ class Contact extends Model
     /**
      * @var string
      */
-    protected $url = 'contacts';
+    protected $endpoint = 'contacts';
 
     /**
      * @var string

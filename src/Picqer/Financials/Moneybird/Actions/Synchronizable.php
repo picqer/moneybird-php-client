@@ -12,7 +12,7 @@ trait Synchronizable
      */
     public function listVersions()
     {
-        $result = $this->connection()->get($this->getUrl() . '/synchronization');
+        $result = $this->connection()->get($this->getEndpoint() . '/synchronization');
 
         return $this->collectionFromResult($result);
     }
@@ -23,7 +23,7 @@ trait Synchronizable
      */
     public function getVersions(array $ids)
     {
-        $result = $this->connection()->post($this->getUrl() .'/synchronization', json_encode([
+        $result = $this->connection()->post($this->getEndpoint() .'/synchronization', json_encode([
             'ids' => $ids
         ]));
 

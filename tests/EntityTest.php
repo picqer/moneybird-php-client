@@ -154,7 +154,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertTrue($reflectionClass->hasProperty('fillable'));
-        $this->assertTrue($reflectionClass->hasProperty('url'));
+        $this->assertTrue($reflectionClass->hasProperty('endpoint'));
         $this->assertEquals('Picqer\Financials\Moneybird\Entities', $reflectionClass->getNamespaceName());
     }
 

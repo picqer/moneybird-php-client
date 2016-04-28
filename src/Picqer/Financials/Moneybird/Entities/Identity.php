@@ -38,7 +38,7 @@ class Identity extends Model {
     /**
      * @var string
      */
-    protected $url = 'identities';
+    protected $endpoint = 'identities';
 
     /**
      * @var string
