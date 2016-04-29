@@ -43,5 +43,5 @@ class DocumentStyle extends Model {
     /**
      * @var string
      */
-    protected $url = 'document_styles';
+    protected $endpoint = 'document_styles';
 }

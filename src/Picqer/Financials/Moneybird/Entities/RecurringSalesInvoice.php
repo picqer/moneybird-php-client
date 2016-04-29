@@ -47,7 +47,7 @@ class RecurringSalesInvoice extends Model {
     /**
      * @var string
      */
-    protected $url = 'recurring_sales_invoices';
+    protected $endpoint = 'recurring_sales_invoices';
 
     /**
      * @var string

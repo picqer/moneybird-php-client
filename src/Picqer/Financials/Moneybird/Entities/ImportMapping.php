@@ -27,7 +27,7 @@ class ImportMapping extends Model {
     /**
      * @var string
      */
-    protected $url = 'import_mappings';
+    protected $endpoint = 'import_mappings';
 
     /**
      * @param string $type The type of import mapping to request
@@ -44,12 +44,12 @@ class ImportMapping extends Model {
         return $this;
     }
 
-    public function getUrl()
+    public function getEndpoint()
     {
         if (is_null($this->type)) {
-            return $this->url;
+            return $this->endpoint;
         }
 
-        return $this->url . '/' . $this->type;
+        return $this->endpoint . '/' . $this->type;
     }
 }
