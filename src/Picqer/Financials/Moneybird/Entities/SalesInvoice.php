@@ -150,7 +150,7 @@ class SalesInvoice extends Model {
      */
     public function addNote(Note $note)
     {
-        $this->connection()->post($this->url . '/' . $this->id . '/notes',
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
             $note->jsonWithNamespace()
         );
     }
