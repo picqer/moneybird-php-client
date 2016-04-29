@@ -22,7 +22,7 @@ class SalesInvoiceReminder extends Model {
         'email_address',
     ];
 
-    protected $url = 'sales_invoices';
+    protected $endpoint = 'sales_invoices';
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class SalesInvoiceReminder extends Model {
         }, $this->sales_invoices);
         unset($aReminder['sales_invoices']);
 
-        $this->connection->post($this->url . '/send_reminders', json_encode([
+        $this->connection->post($this->endpoint . '/send_reminders', json_encode([
             'sales_invoice_reminders' => [$aReminder]
         ]));
     }
