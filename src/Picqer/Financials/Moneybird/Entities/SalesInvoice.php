@@ -83,6 +83,10 @@ class SalesInvoice extends Model {
             'entity' => 'SalesInvoicePayment',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
+        'notes' => [
+            'entity' => 'Note',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
     ];
 
     /**
@@ -103,7 +107,7 @@ class SalesInvoice extends Model {
             ]
         ]));
     }
-    
+
     /**
      * Find SalesInvoice by invoice_id
      *
@@ -135,6 +139,19 @@ class SalesInvoice extends Model {
 
         $this->connection()->patch($this->url . '/' . $this->id . '/register_payment',
             $salesInvoicePayment->jsonWithNamespace()
+        );
+    }
+
+    /**
+     * Add a note to the current invoice
+     *
+     * @param Note $note
+     * @throws ApiException
+     */
+    public function addNote(Note $note)
+    {
+        $this->connection()->post($this->url . '/' . $this->id . '/notes',
+            $note->jsonWithNamespace()
         );
     }
 }

@@ -18,6 +18,7 @@ use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
@@ -74,6 +75,15 @@ class Moneybird
     public function contactCustomField($attributes = [])
     {
         return new ContactCustomField($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return Note
+     */
+    public function note($attributes = [])
+    {
+        return new Note($this->connection, $attributes);
     }
 
     /**

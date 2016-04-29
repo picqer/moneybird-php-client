@@ -31,5 +31,4 @@ class SalesInvoicePayment extends Model {
      * @var string
      */
     protected $namespace = 'payment';
-
 }
