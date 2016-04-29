@@ -66,7 +66,7 @@ class Estimate extends Model
     /**
      * @var string
      */
-    protected $url = 'estimates';
+    protected $endpoint = 'estimates';
 
     /**
      * @var string

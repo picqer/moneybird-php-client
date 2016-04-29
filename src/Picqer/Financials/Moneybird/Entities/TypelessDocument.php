@@ -32,7 +32,7 @@ class TypelessDocument extends Model {
     /**
      * @var string
      */
-    protected $url = 'documents/typeless_documents';
+    protected $endpoint = 'documents/typeless_documents';
 
     /**
      * @var string

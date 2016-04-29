@@ -47,7 +47,7 @@ class Receipt extends Model {
     /**
      * @var string
      */
-    protected $url = 'documents/receipts';
+    protected $endpoint = 'documents/receipts';
 
     /**
      * @var string
