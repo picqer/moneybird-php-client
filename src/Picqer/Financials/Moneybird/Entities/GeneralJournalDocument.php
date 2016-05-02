@@ -30,7 +30,7 @@ class GeneralJournalDocument extends Model {
     /**
      * @var string
      */
-    protected $url = 'documents/general_journal_documents';
+    protected $endpoint = 'documents/general_journal_documents';
 
     /**
      * @var string

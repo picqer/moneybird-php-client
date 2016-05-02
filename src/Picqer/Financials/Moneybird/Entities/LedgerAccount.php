@@ -29,7 +29,7 @@ class LedgerAccount extends Model {
     /**
      * @var string
      */
-    protected $url = 'ledger_accounts';
+    protected $endpoint = 'ledger_accounts';
 
     /**
      * @var string

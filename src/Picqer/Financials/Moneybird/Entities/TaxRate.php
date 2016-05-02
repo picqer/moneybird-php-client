@@ -28,5 +28,5 @@ class TaxRate extends Model {
     /**
      * @var string
      */
-    protected $url = 'tax_rates';
+    protected $endpoint = 'tax_rates';
 }

@@ -30,7 +30,7 @@ class Product extends Model {
     /**
      * @var string
      */
-    protected $url = 'products';
+    protected $endpoint = 'products';
 
     /**
      * @var string
