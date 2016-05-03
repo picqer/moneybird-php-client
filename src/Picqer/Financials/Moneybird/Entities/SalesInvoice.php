@@ -53,6 +53,7 @@ class SalesInvoice extends Model {
         'custom_fields',
         'notes',
         'attachments',
+        'version',
     ];
 
     /**
