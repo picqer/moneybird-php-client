@@ -79,4 +79,10 @@ class Contact extends Model
         ],
     ];
 
+    public function findByCustomerId($customerId) {
+        $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
+
+        return $this->makeFromResponse($result);
+    }
+
 }
