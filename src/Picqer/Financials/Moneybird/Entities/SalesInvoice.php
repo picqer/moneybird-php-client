@@ -25,6 +25,7 @@ class SalesInvoice extends Model {
         'contact_id',
         'contact',
         'invoice_id',
+        'invoice_sequence_id',
         'workflow_id',
         'document_style_id',
         'identity_id',
@@ -77,6 +78,10 @@ class SalesInvoice extends Model {
      * @var array
      */
     protected $multipleNestedEntities = [
+        'custom_fields' => [
+            'entity' => 'SalesInvoiceCustomField',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'details' => [
             'entity' => 'SalesInvoiceDetail',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
