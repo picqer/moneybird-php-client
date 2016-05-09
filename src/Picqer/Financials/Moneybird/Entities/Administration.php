@@ -26,5 +26,5 @@ class Administration extends Model {
     /**
      * @var string
      */
-    protected $url = 'administrations';
+    protected $endpoint = 'administrations';
 }

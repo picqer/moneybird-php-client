@@ -12,7 +12,7 @@ trait FindOne {
      */
     public function find($id)
     {
-        $result = $this->connection()->get($this->getUrl() . '/' . urlencode($id));
+        $result = $this->connection()->get($this->getEndpoint() . '/' . urlencode($id));
 
         return $this->makeFromResponse($result);
     }

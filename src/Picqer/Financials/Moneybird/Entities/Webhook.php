@@ -12,7 +12,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class Webhook extends Model {
 
-    use FindAll, FindOne, Storable, Removable;
+    use FindAll, Storable, Removable;
 
     /**
      * @var array
@@ -27,5 +27,5 @@ class Webhook extends Model {
     /**
      * @var string
      */
-    protected $url = 'webhooks';
+    protected $endpoint = 'webhooks';
 }

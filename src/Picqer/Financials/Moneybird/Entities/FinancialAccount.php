@@ -29,5 +29,5 @@ class FinancialAccount extends Model {
     /**
      * @var string
      */
-    protected $url = 'financial_accounts';
+    protected $endpoint = 'financial_accounts';
 }

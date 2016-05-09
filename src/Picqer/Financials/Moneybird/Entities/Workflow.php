@@ -30,5 +30,5 @@ class Workflow extends Model {
     /**
      * @var string
      */
-    protected $url = 'workflows';
+    protected $endpoint = 'workflows';
 }

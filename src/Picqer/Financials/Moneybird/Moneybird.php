@@ -18,10 +18,12 @@ use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
-use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
 use Picqer\Financials\Moneybird\Entities\Webhook;
@@ -75,6 +77,15 @@ class Moneybird
     public function contactCustomField($attributes = [])
     {
         return new ContactCustomField($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return Note
+     */
+    public function note($attributes = [])
+    {
+        return new Note($this->connection, $attributes);
     }
 
     /**
@@ -223,6 +234,15 @@ class Moneybird
 
     /**
      * @param array $attributes
+     * @return SalesInvoiceCustomField
+     */
+    public function salesInvoiceCustomField($attributes = [])
+    {
+        return new SalesInvoiceCustomField($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
      * @return SalesInvoiceDetail
      */
     public function salesInvoiceDetail($attributes = [])
@@ -241,11 +261,11 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return SalesInvoiceCustomField
+     * @return SalesInvoiceReminder
      */
-    public function salesInvoiceCustomField($attributes = [])
+    public function salesInvoiceReminder($attributes = [])
     {
-        return new SalesInvoiceCustomField($this->connection, $attributes);
+        return new SalesInvoiceReminder($this->connection, $attributes);
     }
 
     /**

@@ -1,27 +1,24 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
-use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class CustomField
+ * Class Note
  * @package Picqer\Financials\Moneybird\Entities
  */
-class CustomField extends Model {
-
-    use FindAll;
-
+class Note extends Model {
     /**
      * @var array
      */
     protected $fillable = [
         'id',
-        'name',
-        'source',
+        'note',
+        'todo',
+        'assignee_id',
     ];
 
     /**
      * @var string
      */
-    protected $endpoint = 'custom_fields';
+    protected $namespace = 'note';
 }

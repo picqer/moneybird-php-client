@@ -28,7 +28,7 @@ abstract class Model
     /**
      * @var string The URL endpoint of this model
      */
-    protected $url = '';
+    protected $endpoint = '';
 
     /**
      * @var string Name of the primary key for this model
@@ -187,7 +187,7 @@ abstract class Model
     {
         $array = $this->getArrayWithNestedObjects();
 
-        return json_encode($array);
+        return json_encode($array, JSON_FORCE_OBJECT);
     }
 
     /**
@@ -195,7 +195,11 @@ abstract class Model
      */
     public function jsonWithNamespace()
     {
-        return json_encode([$this->namespace => $this->getArrayWithNestedObjects()]);
+        if ($this->namespace !== '') {
+            return json_encode([$this->namespace => $this->getArrayWithNestedObjects()], JSON_FORCE_OBJECT);
+        } else {
+            return $this->json();
+        }
     }
 
     private function getArrayWithNestedObjects($useAttributesAppend = true)
@@ -339,9 +343,9 @@ abstract class Model
     /**
      * @return string
      */
-    public function getUrl()
+    public function getEndpoint()
     {
-        return $this->url;
+        return $this->endpoint;
     }
 
     /**

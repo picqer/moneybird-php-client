@@ -62,7 +62,7 @@ class Contact extends Model
     /**
      * @var string
      */
-    protected $url = 'contacts';
+    protected $endpoint = 'contacts';
 
     /**
      * @var string
@@ -78,5 +78,11 @@ class Contact extends Model
             'type' => self::NESTING_TYPE_NESTED_OBJECTS,
         ],
     ];
+
+    public function findByCustomerId($customerId) {
+        $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
+
+        return $this->makeFromResponse($result);
+    }
 
 }
