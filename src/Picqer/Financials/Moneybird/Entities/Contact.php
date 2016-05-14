@@ -56,6 +56,7 @@ class Contact extends Model
         'updated_at',
         'notes',
         'custom_fields',
+        'custom_fields_attributes',
         'version'
     ];
 
