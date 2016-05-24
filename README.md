@@ -80,6 +80,10 @@ var_dump($salesInvoices); // Array with SalesInvoice objects
 $salesInvoice = $moneybird->salesInvoice()->find(3498576378625);
 var_dump($salesInvoice); // SalesInvoice object
 
+// Example: Get sales invoice PDF contents
+// *** Officially unsupported in the Moneybird API ***
+$pdfContents = $salesInvoice->download();
+
 // Example: Create a new contact
 $contact = $moneybird->contact();
 
