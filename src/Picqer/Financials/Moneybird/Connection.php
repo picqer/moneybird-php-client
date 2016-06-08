@@ -395,7 +395,7 @@ class Connection
     private function formatUrl($url, $method = 'get')
     {
         if ($this->testing) {
-            return 'http://httpbin.org/' . $method;
+            return 'https://httpbin.org/' . $method;
         }
 
         return $this->apiUrl . '/' . ($this->administrationId ? $this->administrationId . '/' : '') . $url . '.json';
@@ -439,7 +439,7 @@ class Connection
     public function getTokenUrl()
     {
         if ($this->testing) {
-            return 'http://httpbin.org/post';
+            return 'https://httpbin.org/post';
         }
 
         return $this->tokenUrl;
