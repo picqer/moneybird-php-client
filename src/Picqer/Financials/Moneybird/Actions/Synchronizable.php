@@ -33,7 +33,7 @@ trait Synchronizable
     /**
      * @return mixed
      */
-    public function filter(array $filters)
+    public function listVersionsFilter(array $filters)
     {
         $filterList = [];
         foreach ($filters as $key => $value) {
