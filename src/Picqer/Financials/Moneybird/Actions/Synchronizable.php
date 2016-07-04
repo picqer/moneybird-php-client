@@ -30,4 +30,18 @@ trait Synchronizable
         return $this->collectionFromResult($result);
     }
 
+    /**
+     * @return mixed
+     */
+    public function filter(array $filters)
+    {
+        $filterList = [];
+        foreach ($filters as $key => $value) {
+            $filterList[] = $key .':' . $value;
+        }
+
+        $result = $this->connection()->get($this->getEndpoint() .'/synchronization', ['filter' => implode(',', $filterList)]);
+
+        return $this->collectionFromResult($result);
+    }
 }
