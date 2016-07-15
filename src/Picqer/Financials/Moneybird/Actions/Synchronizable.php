@@ -10,9 +10,21 @@ trait Synchronizable
     /**
      * @return mixed
      */
-    public function listVersions()
+    public function listVersions(array $filters = [])
     {
-        $result = $this->connection()->get($this->getEndpoint() . '/synchronization');
+        $filter = [];
+
+        if ( ! empty($filters))
+        {
+            $filterList = [];
+            foreach ($filters as $key => $value) {
+                $filterList[] = $key .':' . $value;
+            }
+
+            $filter = ['filter' => implode(',', $filterList)];
+        }
+
+        $result = $this->connection()->get($this->getEndpoint() . '/synchronization', $filter);
 
         return $this->collectionFromResult($result);
     }
@@ -29,5 +41,4 @@ trait Synchronizable
 
         return $this->collectionFromResult($result);
     }
-
 }
