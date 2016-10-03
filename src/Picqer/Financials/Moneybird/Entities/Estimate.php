@@ -30,7 +30,7 @@ class Estimate extends Model
         'id',
         'contact_id',
         'contact',
-        'esimate_id',
+        'estimate_id',
         'workflow_id',
         'document_style_id',
         'identity_id',
