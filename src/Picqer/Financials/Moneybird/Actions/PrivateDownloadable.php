@@ -32,7 +32,7 @@ trait PrivateDownloadable
             'Authorization' => 'Bearer ' . $connection->getAccessToken(),
         ];
 
-        $endpoint = 'https://moneybird.com/' . $connection->getAdministrationId() . '/sales_invoices/' . $this->id . '.pdf';
+        $endpoint = 'https://moneybird.com/' . $connection->getAdministrationId() . '/' . $this->endpoint . '/' . $this->id . '.pdf';
         $body = '';
             
         $request = new Request('GET', $endpoint, $headers, $body);
