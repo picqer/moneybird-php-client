@@ -6,6 +6,7 @@ use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Actions\Filterable;
+use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -20,7 +21,7 @@ use Picqer\Financials\Moneybird\Model;
 class Estimate extends Model
 {
 
-    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable;
+    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, PrivateDownloadable;
 
     /**
      * @var array
