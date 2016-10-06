@@ -33,6 +33,7 @@ class RecurringSalesInvoice extends Model {
         'discount',
         'first_due_interval',
         'auto_send',
+        'mergeable',
         'sending_scheduled_at',
         'sending_scheduled_user_id',
         'frequency_type',
