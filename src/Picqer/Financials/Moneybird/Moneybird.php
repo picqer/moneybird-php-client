@@ -153,6 +153,14 @@ class Moneybird
     }
 
     /**
+     * @return Connection
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    /**
      * @param array $attributes
      * @return Identity
      */
