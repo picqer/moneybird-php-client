@@ -253,8 +253,6 @@ abstract class Model
     public function makeFromResponse($response)
     {
         $entity = new static($this->connection);
-        $entity->fill($response);
-
         $entity->selfFromResponse($response);
 
         return $entity;
