@@ -162,4 +162,18 @@ class SalesInvoice extends Model {
             $note->jsonWithNamespace()
         );
     }
+	
+	/**
+	 * Create a credit invoice based on the current invoice.
+	 *
+	 * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+	 */
+	public function duplicateToCreditInvoice()
+	{
+		$response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
+			json_encode([])	// No body needed for this call. The patch method however needs one.
+		);
+		
+		return $this->makeFromResponse($response);
+	}
 }

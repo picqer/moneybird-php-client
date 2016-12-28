@@ -84,6 +84,10 @@ var_dump($salesInvoice); // SalesInvoice object
 // *** Officially unsupported in the Moneybird API ***
 $pdfContents = $salesInvoice->download();
 
+// Example: Create credit invoice based on existing invoice
+$creditInvoice = $salesInvoice->duplicateToCreditInvoice();
+var_dump($creditInvoice); // SalesInvoice object
+
 // Example: Create a new contact
 $contact = $moneybird->contact();
 
