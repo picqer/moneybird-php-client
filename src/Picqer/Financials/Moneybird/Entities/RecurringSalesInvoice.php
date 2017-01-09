@@ -1,9 +1,11 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -12,7 +14,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class RecurringSalesInvoice extends Model {
 
-    use FindAll, FindOne, Storable, Removable;
+    use FindAll, FindOne, Storable, Removable, Filterable, Synchronizable;
 
     /**
      * @var array
