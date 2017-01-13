@@ -10,6 +10,7 @@ use Picqer\Financials\Moneybird\Entities\FinancialAccount;
 use Picqer\Financials\Moneybird\Entities\FinancialMutation;
 use Picqer\Financials\Moneybird\Entities\GeneralDocument;
 use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
+use Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry;
 use Picqer\Financials\Moneybird\Entities\Identity;
 use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
@@ -150,6 +151,15 @@ class Moneybird
     public function generalJournalDocument($attributes = [])
     {
         return new GeneralJournalDocument($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return generalJournalDocumentEntry
+     */
+    public function generalJournalDocumentEntry($attributes = [])
+    {
+        return new generalJournalDocumentEntry($this->connection, $attributes);
     }
 
     /**
