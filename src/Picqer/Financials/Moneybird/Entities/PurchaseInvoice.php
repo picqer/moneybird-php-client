@@ -72,4 +72,26 @@ class PurchaseInvoice extends Model
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
+
+    /**
+     * Register a payment for the current purchase invoice
+     *
+     * @param PurchaseInvoicePayment $purchaseInvoicePayment (payment_date and price are required)
+     * @throws ApiException
+     */
+    public function registerPayment(PurchaseInvoicePayment $purchaseInvoicePayment)
+    {
+        if  (! isset($purchaseInvoicePayment->payment_date)) {
+            throw new ApiException('Required [payment_date] is missing');
+        }
+
+        if  (! isset($purchaseInvoicePayment->price)) {
+            throw new ApiException('Required [price] is missing');
+        }
+
+        $this->connection()->patch($this->endpoint . '/' . $this->id . '/register_payment',
+            $purchaseInvoicePayment->jsonWithNamespace()
+        );
+    }
+
 }
