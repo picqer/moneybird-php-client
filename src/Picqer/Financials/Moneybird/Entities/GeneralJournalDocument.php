@@ -20,6 +20,7 @@ class GeneralJournalDocument extends Model {
     protected $fillable = [
         'id',
         'reference',
+        'date',
         'created_at',
         'updated_at',
         'general_journal_document_entries',
