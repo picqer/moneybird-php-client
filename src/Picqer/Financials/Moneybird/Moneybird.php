@@ -155,11 +155,11 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return generalJournalDocumentEntry
+     * @return GeneralJournalDocumentEntry
      */
     public function generalJournalDocumentEntry($attributes = [])
     {
-        return new generalJournalDocumentEntry($this->connection, $attributes);
+        return new GeneralJournalDocumentEntry($this->connection, $attributes);
     }
 
     /**
