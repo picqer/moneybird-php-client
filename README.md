@@ -144,7 +144,7 @@ foreach ($invoiceLines as $invoiceLine) { // Your invoice lines
 }
 
 $salesInvoice = $moneybird->salesInvoice();
-$salesInvoice->details = $salesInvoiceDetails;
+$salesInvoice->details = $salesInvoiceDetailsArray;
 
 ```
 
