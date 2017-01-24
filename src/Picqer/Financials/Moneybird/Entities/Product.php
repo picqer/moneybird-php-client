@@ -21,6 +21,8 @@ class Product extends Model {
         'id',
         'description',
         'price',
+        'frequency',
+        'frequency_type',
         'tax_rate_id',
         'ledger_account_id',
         'created_at',
