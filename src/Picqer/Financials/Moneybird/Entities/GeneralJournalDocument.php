@@ -20,6 +20,7 @@ class GeneralJournalDocument extends Model {
     protected $fillable = [
         'id',
         'reference',
+        'date',
         'created_at',
         'updated_at',
         'general_journal_document_entries',
@@ -36,4 +37,14 @@ class GeneralJournalDocument extends Model {
      * @var string
      */
     protected $namespace = 'general_journal_document';
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'general_journal_document_entries' => [
+            'entity' => 'GeneralJournalDocumentEntry',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 }
