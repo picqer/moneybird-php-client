@@ -73,5 +73,23 @@ class Estimate extends Model
      * @var string
      */
     protected $namespace = 'estimate';
+    
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'custom_fields' => [
+            'entity' => 'SalesInvoiceCustomField',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'details' => [
+            'entity' => 'SalesInvoiceDetail',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'notes' => [
+            'entity' => 'Note',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 
 }
