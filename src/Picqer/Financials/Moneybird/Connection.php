@@ -81,6 +81,11 @@ class Connection
     private $scopes = [];
 
     /**
+     * @var bool
+     */
+    private $followPagination = true;
+
+    /**
      * @return Client
      */
     private function client()
@@ -178,8 +183,10 @@ class Connection
 
             $json = $this->parseResponse($response);
 
-            if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
-                $json = array_merge($json, $this->get($url, $nextParams));
+            if ($this->followPagination) {
+                if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
+                    $json = array_merge($json, $this->get($url, $nextParams));
+                }
             }
 
             return $json;
@@ -477,6 +484,14 @@ class Connection
     public function setScopes($scopes)
     {
         $this->scopes = $scopes;
+    }
+
+    /**
+     * @param bool $followPagination
+     */
+    public function setFollowPagination($followPagination)
+    {
+        $this->followPagination = $followPagination;
     }
 
 }
