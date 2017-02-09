@@ -8,6 +8,7 @@ trait Filterable
 {
 
     /**
+     * @param array $filters
      * @return mixed
      */
     public function filter(array $filters)
