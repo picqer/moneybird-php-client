@@ -42,13 +42,13 @@ class Moneybird
     /**
      * The HTTP connection
      *
-     * @var Connection
+     * @var \Picqer\Financials\Moneybird\Connection
      */
     protected $connection;
 
     /**
      * Moneybird constructor.
-     * @param Connection $connection
+     * @param \Picqer\Financials\Moneybird\Connection $connection
      */
     public function __construct(Connection $connection)
     {
@@ -57,7 +57,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Administration
+     * @return \Picqer\Financials\Moneybird\Entities\Administration
      */
     public function administration($attributes = [])
     {
@@ -66,7 +66,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Contact
+     * @return \Picqer\Financials\Moneybird\Entities\Contact
      */
     public function contact($attributes = [])
     {
@@ -75,7 +75,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return ContactCustomField
+     * @return \Picqer\Financials\Moneybird\Entities\ContactCustomField
      */
     public function contactCustomField($attributes = [])
     {
@@ -84,7 +84,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Note
+     * @return \Picqer\Financials\Moneybird\Entities\Note
      */
     public function note($attributes = [])
     {
@@ -93,7 +93,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return CustomField
+     * @return \Picqer\Financials\Moneybird\Entities\CustomField
      */
     public function customField($attributes = [])
     {
@@ -102,7 +102,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return DocumentStyle
+     * @return \Picqer\Financials\Moneybird\Entities\DocumentStyle
      */
     public function documentStyle($attributes = [])
     {
@@ -111,7 +111,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Estimate
+     * @return \Picqer\Financials\Moneybird\Entities\Estimate
      */
     public function estimate($attributes = [])
     {
@@ -120,7 +120,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return FinancialAccount
+     * @return \Picqer\Financials\Moneybird\Entities\FinancialAccount
      */
     public function financialAccount($attributes = [])
     {
@@ -129,7 +129,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return FinancialMutation
+     * @return \Picqer\Financials\Moneybird\Entities\FinancialMutation
      */
     public function financialMutation($attributes = [])
     {
@@ -138,7 +138,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return GeneralDocument
+     * @return \Picqer\Financials\Moneybird\Entities\GeneralDocument
      */
     public function generalDocument($attributes = [])
     {
@@ -147,7 +147,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return GeneralJournalDocument
+     * @return \Picqer\Financials\Moneybird\Entities\GeneralJournalDocument
      */
     public function generalJournalDocument($attributes = [])
     {
@@ -156,7 +156,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return GeneralJournalDocumentEntry
+     * @return \Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry
      */
     public function generalJournalDocumentEntry($attributes = [])
     {
@@ -164,7 +164,7 @@ class Moneybird
     }
 
     /**
-     * @return Connection
+     * @return \Picqer\Financials\Moneybird\Connection
      */
     public function getConnection()
     {
@@ -173,7 +173,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Identity
+     * @return \Picqer\Financials\Moneybird\Entities\Identity
      */
     public function identity($attributes = [])
     {
@@ -182,7 +182,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return ImportMapping
+     * @return \Picqer\Financials\Moneybird\Entities\ImportMapping
      */
     public function importMapping($attributes = [])
     {
@@ -191,7 +191,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return LedgerAccount
+     * @return \Picqer\Financials\Moneybird\Entities\LedgerAccount
      */
     public function ledgerAccount($attributes = [])
     {
@@ -200,7 +200,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Product
+     * @return \Picqer\Financials\Moneybird\Entities\Product
      */
     public function product($attributes = [])
     {
@@ -209,7 +209,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return PurchaseInvoice
+     * @return \Picqer\Financials\Moneybird\Entities\PurchaseInvoice
      */
     public function purchaseInvoice($attributes = [])
     {
@@ -218,7 +218,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return PurchaseInvoiceDetail
+     * @return \Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail
      */
     public function purchaseInvoiceDetail($attributes = [])
     {
@@ -227,7 +227,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return PurchaseInvoicePayment
+     * @return \Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment
      */
     public function purchaseInvoicePayment($attributes = [])
     {
@@ -236,7 +236,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Receipt
+     * @return \Picqer\Financials\Moneybird\Entities\Receipt
      */
     public function receipt($attributes = [])
     {
@@ -245,7 +245,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return RecurringSalesInvoice
+     * @return \Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice
      */
     public function recurringSalesInvoice($attributes = [])
     {
@@ -254,7 +254,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return RecurringSalesInvoiceDetail
+     * @return \Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail
      */
     public function recurringSalesInvoiceDetail($attributes = [])
     {
@@ -263,7 +263,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return SalesInvoice
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
      */
     public function salesInvoice($attributes = [])
     {
@@ -272,7 +272,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return SalesInvoiceCustomField
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField
      */
     public function salesInvoiceCustomField($attributes = [])
     {
@@ -281,7 +281,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return SalesInvoiceDetail
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail
      */
     public function salesInvoiceDetail($attributes = [])
     {
@@ -290,7 +290,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return SalesInvoicePayment
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoicePayment
      */
     public function salesInvoicePayment($attributes = [])
     {
@@ -299,7 +299,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return SalesInvoiceReminder
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder
      */
     public function salesInvoiceReminder($attributes = [])
     {
@@ -308,7 +308,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return TaxRate
+     * @return \Picqer\Financials\Moneybird\Entities\TaxRate
      */
     public function taxRate($attributes = [])
     {
@@ -317,7 +317,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return TypelessDocument
+     * @return \Picqer\Financials\Moneybird\Entities\TypelessDocument
      */
     public function typelessDocument($attributes = [])
     {
@@ -326,7 +326,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Webhook
+     * @return \Picqer\Financials\Moneybird\Entities\Webhook
      */
     public function webhook($attributes = [])
     {
@@ -335,7 +335,7 @@ class Moneybird
 
     /**
      * @param array $attributes
-     * @return Workflow
+     * @return \Picqer\Financials\Moneybird\Entities\Workflow
      */
     public function workflow($attributes = [])
     {
