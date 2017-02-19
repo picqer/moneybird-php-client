@@ -81,11 +81,6 @@ class Connection
     private $scopes = [];
 
     /**
-     * @var bool
-     */
-    private $followPagination = true;
-
-    /**
      * @return Client
      */
     private function client()
@@ -172,10 +167,11 @@ class Connection
     /**
      * @param $url
      * @param array $params
+     * @param bool $fetchAll
      * @return mixed
      * @throws ApiException
      */
-    public function get($url, array $params = [])
+    public function get($url, array $params = [], $fetchAll = false)
     {
         try {
             $request = $this->createRequest('GET', $this->formatUrl($url, 'get'), null, $params);
@@ -183,9 +179,9 @@ class Connection
 
             $json = $this->parseResponse($response);
 
-            if ($this->followPagination) {
+            if ($fetchAll === true) {
                 if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
-                    $json = array_merge($json, $this->get($url, $nextParams));
+                    $json = array_merge($json, $this->get($url, $nextParams, $fetchAll));
                 }
             }
 
@@ -484,14 +480,6 @@ class Connection
     public function setScopes($scopes)
     {
         $this->scopes = $scopes;
-    }
-
-    /**
-     * @param bool $followPagination
-     */
-    public function setFollowPagination($followPagination)
-    {
-        $this->followPagination = $followPagination;
     }
 
 }
