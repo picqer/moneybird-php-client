@@ -68,7 +68,7 @@ class FinancialMutation extends Model {
             array(
                 'booking_type' => $bookingType,
                 'booking_id' => $bookingId,
-                'price_base' => $price,
+                'price_base' => $priceBase,
                 'price' => $price,
                 'description' => $description,
                 'payment_batch_identifier' => $paymentBatchIdentifier,
