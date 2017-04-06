@@ -2,6 +2,7 @@
 
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
+use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -10,7 +11,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class FinancialMutation extends Model {
 
-    use FindAll, Filterable;
+    use FindAll, Filterable, Synchronizable;
 
     /**
      * @var array
