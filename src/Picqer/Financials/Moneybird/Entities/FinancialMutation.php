@@ -42,4 +42,38 @@ class FinancialMutation extends Model {
      * @var string
      */
     protected $endpoint = 'financial_mutations';
+    
+    /**
+     * @param string $bookingType
+     * @param string | int $bookingId
+     * @param string | float $priceBase
+     * @param string | float $price
+     * @param string $description
+     * @param string $paymentBatchIdentifier
+     * 
+     * @return int
+     */
+    public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
+    {
+        if (!in_array($bookingType, ['SalesInvoice', 'Document', 'LedgerAccount', 'PaymentTransactionBatch', 'NewPurchaseInvoice', 'NewReceipt'])) {
+            throw new ApiException('Invalid booking type to link FinancialMutation');
+        }
+        if (!is_numeric($bookingId)) {
+            throw new ApiException('Invalid Booking identifier to link FinancialMutation');
+        }
+
+        //Filter out potential NULL values
+        $parameters = array_filter(
+            array(
+                'booking_type' => $bookingType,
+                'booking_id' => $bookingId,
+                'price_base' => $price,
+                'price' => $price,
+                'description' => $description,
+                'payment_batch_identifier' => $paymentBatchIdentifier,
+            )
+        );
+
+        return $this->connection->patch($this->endpoint . '/' . $this->id . '/link_booking', json_encode($parameters));
+    }
 }
