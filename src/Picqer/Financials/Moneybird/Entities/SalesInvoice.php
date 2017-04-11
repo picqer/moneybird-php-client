@@ -13,6 +13,41 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class SalesInvoice
  * @package Picqer\Financials\Moneybird\Entities
+ * @property int | string $id
+ * @property int | string $contact_id
+ * @property Contact $contact
+ * @property int | string $invoice_id
+ * @property string $invoice_sequence_id
+ * @property int | string $workflow_id
+ * @property int | string $document_style_id
+ * @property int | string $identity_id
+ * @property string $state
+ * @property string $invoice_date
+ * @property string $payment_conditions
+ * @property string $reference
+ * @property string $language
+ * @property string $currency
+ * @property bool $prices_are_incl_tax
+ * @property string $discount
+ * @property string $original_sales_invoice_id
+ * @property string $paid_at
+ * @property string $sent_at
+ * @property string $created_at
+ * @property string $updated_at
+ * @property SalesInvoiceDetail[] $details
+ * @property SalesInvoicePayment[] $payments
+ * @property string $total_paid
+ * @property string $total_unpaid
+ * @property string $total_price_excl_tax
+ * @property string $total_price_excl_tax_base
+ * @property string $total_price_incl_tax
+ * @property string $total_price_incl_tax_base
+ * @property string $url
+ * @property SalesInvoiceCustomField[] $custom_fields
+ * @property Note[] $notes
+ * @property GeneralDocument[] $attachments
+ * @property string $version
+ *
  */
 class SalesInvoice extends Model {
 
