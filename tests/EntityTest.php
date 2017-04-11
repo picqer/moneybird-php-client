@@ -46,7 +46,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 
     public function testFinancialMutationEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Administration::class);
+        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\FinancialMutation::class);
     }
 
     public function testGeneralDocumentEntity()
