@@ -54,6 +54,8 @@ class Estimate extends Model
         'pre_text',
         'post_text',
         'details',
+        'details_attributes',
+        'prices_are_incl_tax',
         'total_price_excl_tax',
         'total_price_excl_tax_base',
         'total_price_incl_tax',
