@@ -23,4 +23,19 @@ trait Filterable
         return $this->collectionFromResult($result);
     }
 
+    /**
+     * @return mixed
+     */
+    public function filterAll(array $filters)
+    {
+        $filterList = [];
+        foreach ($filters as $key => $value) {
+            $filterList[] = $key .':' . $value;
+        }
+
+        $result = $this->connection()->get($this->getEndpoint(), ['filter' => implode(',', $filterList)], true);
+
+        return $this->collectionFromResult($result);
+    }
+
 }

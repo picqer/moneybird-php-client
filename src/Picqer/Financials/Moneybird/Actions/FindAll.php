@@ -17,4 +17,14 @@ trait FindAll
         return $this->collectionFromResult($result);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        $result = $this->connection()->get($this->getEndpoint(), [], true);
+
+        return $this->collectionFromResult($result);
+    }
+
 }

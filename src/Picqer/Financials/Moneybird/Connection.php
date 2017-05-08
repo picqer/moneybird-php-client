@@ -167,16 +167,25 @@ class Connection
     /**
      * @param $url
      * @param array $params
+     * @param bool $fetchAll
      * @return mixed
      * @throws ApiException
      */
-    public function get($url, array $params = [])
+    public function get($url, array $params = [], $fetchAll = false)
     {
         try {
             $request = $this->createRequest('GET', $this->formatUrl($url, 'get'), null, $params);
             $response = $this->client()->send($request);
 
-            return $this->parseResponse($response);
+            $json = $this->parseResponse($response);
+
+            if ($fetchAll === true) {
+                if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
+                    $json = array_merge($json, $this->get($url, $nextParams, $fetchAll));
+                }
+            }
+
+            return $json;
         } catch (Exception $e) {
             $this->parseExceptionForErrorMessages($e);
         }
@@ -321,6 +330,26 @@ class Connection
         } catch (\RuntimeException $e) {
             throw new ApiException($e->getMessage());
         }
+    }
+
+    /**
+     * @param $headerLine
+     * @return bool|array
+     */
+    private function getNextParams($headerLine)
+    {
+        $links = Psr7\parse_header($headerLine);
+
+        foreach ($links as $link) {
+            if (isset($link['rel']) && $link['rel'] === 'next') {
+                $query = parse_url(trim($link[0], '<>'), PHP_URL_QUERY);
+                parse_str($query, $params);
+
+                return $params;
+            }
+        }
+
+        return false;
     }
 
     /**
