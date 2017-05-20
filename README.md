@@ -40,9 +40,16 @@ $connection->redirectForAuthorization();
 This will perform a redirect to Moneybird at which you can login and authorize the app for a specific Moneybird administration.
 After login, Moneybird will redirect you to the callback URL with request param "code" which you should save as the authorization code.
 
+### Setting the administration ID
+
+Most methods require you to set the Administration ID to fetch the correct data. You can get the Administration ID from the URL at MoneyBird, but you can also list the administrations your user has access to running the following method after connecting. In the code samples below there's an example on how to set the first administrations from the results of the call below:
+
+```php
+$administrations = $moneybird->administration()->getAll();
+```
+
 ### Normal actions
-After you have the authorization code as described above, you can perform normal requests. The client will take care of the accesstoken
-automatically.
+After you have the authorization code as described above, you can perform normal requests. The client will take care of the accesstoken automatically.
 
 ```php
 <?php
@@ -71,6 +78,10 @@ $connection->getAccessToken(); // will return the access token you need to save
 
 // Set up a new Moneybird instance and inject the connection
 $moneybird = new \Picqer\Financials\Moneybird\Moneybird($connection);
+
+// Example: Get administrations and set the first result as active administration
+$administrations = $moneybird->administration()->getAll();
+$connection->setAdministrationId($administrations[0]['id']);
 
 // Example: Fetch list of salesinvoices 
 $salesInvoices = $moneybird->salesInvoice()->get();
