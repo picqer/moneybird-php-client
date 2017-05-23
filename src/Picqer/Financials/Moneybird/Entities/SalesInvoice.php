@@ -114,6 +114,8 @@ class SalesInvoice extends Model {
                 'delivery_method' => $deliveryMethod
             ]
         ]));
+	    
+	return $this;
     }
 
     /**
