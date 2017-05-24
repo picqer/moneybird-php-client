@@ -101,6 +101,7 @@ class SalesInvoice extends Model {
      * Instruct Moneybird to send the invoice to the contact
      *
      * @param string $deliveryMethod Email/Post/Manual are allowed types
+     * @return $this
      * @throws ApiException
      */
     public function sendInvoice($deliveryMethod = 'Email')
@@ -135,6 +136,7 @@ class SalesInvoice extends Model {
      * Register a payment for the current invoice
      *
      * @param SalesInvoicePayment $salesInvoicePayment (payment_date and price are required)
+     * @return $this
      * @throws ApiException
      */
     public function registerPayment(SalesInvoicePayment $salesInvoicePayment)
@@ -150,12 +152,15 @@ class SalesInvoice extends Model {
         $this->connection()->patch($this->endpoint . '/' . $this->id . '/register_payment',
             $salesInvoicePayment->jsonWithNamespace()
         );
+	    
+	return $this;
     }
 
     /**
      * Add a note to the current invoice
      *
      * @param Note $note
+     * @return $this
      * @throws ApiException
      */
     public function addNote(Note $note)
@@ -163,6 +168,8 @@ class SalesInvoice extends Model {
         $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
             $note->jsonWithNamespace()
         );
+	    
+	return $this;
     }
 	
 	/**
