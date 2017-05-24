@@ -77,6 +77,7 @@ class PurchaseInvoice extends Model
      * Register a payment for the current purchase invoice
      *
      * @param PurchaseInvoicePayment $purchaseInvoicePayment (payment_date and price are required)
+     * @return mixed
      * @throws ApiException
      */
     public function registerPayment(PurchaseInvoicePayment $purchaseInvoicePayment)
@@ -92,6 +93,8 @@ class PurchaseInvoice extends Model
         $this->connection()->patch($this->endpoint . '/' . $this->id . '/register_payment',
             $purchaseInvoicePayment->jsonWithNamespace()
         );
+        
+        return $this;
     }
 
 }
