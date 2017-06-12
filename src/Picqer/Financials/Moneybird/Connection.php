@@ -97,6 +97,7 @@ class Connection
         $this->client = new Client([
             'http_errors' => true,
             'handler' => $handlerStack,
+            'expect' => false,
         ]);
 
         return $this->client;
