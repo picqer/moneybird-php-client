@@ -32,6 +32,7 @@ class SalesInvoice extends Model {
         'identity_id',
         'state',
         'invoice_date',
+        'due_date',
         'payment_conditions',
         'reference',
         'language',
@@ -171,7 +172,7 @@ class SalesInvoice extends Model {
 	    
 	return $this;
     }
-	
+
 	/**
 	 * Create a credit invoice based on the current invoice.
 	 *
@@ -182,7 +183,7 @@ class SalesInvoice extends Model {
 		$response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
 			json_encode([])	// No body needed for this call. The patch method however needs one.
 		);
-		
+
 		return $this->makeFromResponse($response);
 	}
 }
