@@ -48,6 +48,7 @@ class RecurringSalesInvoice extends Model {
         'has_desired_count',
         'desired_count',
         'version',
+        'active',
     ];
 
     /**
