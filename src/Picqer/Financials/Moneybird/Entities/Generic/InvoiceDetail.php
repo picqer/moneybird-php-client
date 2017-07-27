@@ -24,6 +24,7 @@ abstract class InvoiceDetail extends Model
         'total_price_excl_tax_with_discount_base',
         'tax_report_reference',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'product_id'
     ];
 }
