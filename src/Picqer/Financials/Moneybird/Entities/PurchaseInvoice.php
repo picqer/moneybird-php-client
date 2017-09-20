@@ -44,6 +44,7 @@ class PurchaseInvoice extends Model
         'payments',
         'notes',
         'attachments',
+        'version'
     ];
 
     /**
