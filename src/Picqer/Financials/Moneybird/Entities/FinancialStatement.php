@@ -21,7 +21,7 @@ class FinancialStatement extends Model {
         'official_date',
         'official_balance',
         'importer_service',
-        'financial_mutations_attributes',
+        'financial_mutations',
         'update_journal_entries',
     ];
 
@@ -39,7 +39,7 @@ class FinancialStatement extends Model {
      * @var array
      */
     protected $multipleNestedEntities = [
-        'financial_mutations_attributes' => [
+        'financial_mutations' => [
             'entity' => 'FinancialMutation',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
