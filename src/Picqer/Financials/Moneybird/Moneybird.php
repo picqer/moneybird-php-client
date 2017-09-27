@@ -8,6 +8,7 @@ use Picqer\Financials\Moneybird\Entities\DocumentStyle;
 use Picqer\Financials\Moneybird\Entities\Estimate;
 use Picqer\Financials\Moneybird\Entities\FinancialAccount;
 use Picqer\Financials\Moneybird\Entities\FinancialMutation;
+use Picqer\Financials\Moneybird\Entities\FinancialStatement;
 use Picqer\Financials\Moneybird\Entities\GeneralDocument;
 use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
 use Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry;
@@ -134,6 +135,15 @@ class Moneybird
     public function financialMutation($attributes = [])
     {
         return new FinancialMutation($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\FinancialStatement
+     */
+    public function financialStatement($attributes = [])
+    {
+        return new FinancialStatement($this->connection, $attributes);
     }
 
     /**

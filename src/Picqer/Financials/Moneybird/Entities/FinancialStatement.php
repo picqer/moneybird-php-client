@@ -1,5 +1,7 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
+use Picqer\Financials\Moneybird\Actions\Removable;
+use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -7,6 +9,8 @@ use Picqer\Financials\Moneybird\Model;
  * @package Picqer\Financials\Moneybird\Entities
  */
 class FinancialStatement extends Model {
+
+    use Storable, Removable;
 
     /**
      * @var array
@@ -17,6 +21,7 @@ class FinancialStatement extends Model {
         'official_date',
         'official_balance',
         'importer_service',
+        'financial_mutations_attributes',
         'update_journal_entries',
     ];
 
@@ -29,8 +34,8 @@ class FinancialStatement extends Model {
      * @var array
      */
     protected $multipleNestedEntities = [
-        'FinancialMutation' => [
-            'entity' => 'SalesInvoiceCustomField',
+        'financial_mutations_attributes' => [
+            'entity' => 'FinancialMutation',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
