@@ -31,6 +31,11 @@ class FinancialStatement extends Model {
     protected $endpoint = 'financial_statements';
 
     /**
+     * @var string
+     */
+    protected $namespace = 'financial_statement';
+
+    /**
      * @var array
      */
     protected $multipleNestedEntities = [
