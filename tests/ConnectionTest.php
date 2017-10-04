@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Psr\Http\Message\RequestInterface;
@@ -18,7 +19,6 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     /**
      * Container to hold the Guzzle history (by reference)
      *
-     *
      * @var array
      */
     private $container;
@@ -28,7 +28,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      *
      * @return \Picqer\Financials\Moneybird\Connection
      */
-    private function getConnectionForTesting($additionalMiddlewares = array())
+    private function getConnectionForTesting(array $additionalMiddlewares = array())
     {
         $this->container = [];
         $history = Middleware::history($this->container);
@@ -50,6 +50,20 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         return $connection;
     }
 
+    /**
+     * @param int $requestNumber
+     *
+     * @return RequestInterface
+     */
+    private function getRequestFromHistoryContainer($requestNumber = 0)
+    {
+        $this->assertArrayHasKey($requestNumber, $this->container);
+        $this->assertArrayHasKey('request', $this->container[$requestNumber]);
+        $this->assertInstanceOf(RequestInterface::class, $this->container[$requestNumber]['request']);
+
+        return $this->container[$requestNumber]['request'];
+    }
+
     public function testClientIncludesAuthenticationHeader()
     {
         $connection = $this->getConnectionForTesting();
@@ -57,7 +71,8 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
         $contact->get();
 
-        $this->assertEquals('Bearer testAccessToken', $this->container[0]['request']->getHeaderLine('Authorization'));
+        $request = $this->getRequestFromHistoryContainer();
+        $this->assertEquals('Bearer testAccessToken', $request->getHeaderLine('Authorization'));
     }
 
     public function testClientIncludesJsonHeaders()
@@ -67,8 +82,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
         $contact->get();
 
-        $this->assertEquals('application/json', $this->container[0]['request']->getHeaderLine('Accept'));
-        $this->assertEquals('application/json', $this->container[0]['request']->getHeaderLine('Content-Type'));
+        $request = $this->getRequestFromHistoryContainer();
+        $this->assertEquals('application/json', $request->getHeaderLine('Accept'));
+        $this->assertEquals('application/json', $request->getHeaderLine('Content-Type'));
     }
 
     public function testClientTriesToGetAccessTokenWhenNoneGiven()
@@ -79,12 +95,13 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
         $contact->get();
 
-        $this->assertEquals('POST', $this->container[0]['request']->getMethod());
+        $request = $this->getRequestFromHistoryContainer();
+        $this->assertEquals('POST', $request->getMethod());
 
-        Psr7\rewind_body($this->container[0]['request']);
+        Psr7\rewind_body($request);
         $this->assertEquals(
             'redirect_uri=testRedirectUrl&grant_type=authorization_code&client_id=testClientId&client_secret=testClientSecret&code=testAuthorizationCode',
-            $this->container[0]['request']->getBody()->getContents()
+            $request->getBody()->getContents()
         );
     }
 
@@ -96,7 +113,8 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
         $contact->get();
 
-        $this->assertEquals('GET', $this->container[1]['request']->getMethod());
+        $request = $this->getRequestFromHistoryContainer(1);
+        $this->assertEquals('GET', $request->getMethod());
     }
 
     public function testClientDetectsApiRateLimit()
@@ -125,6 +143,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     {
         return function (callable $handler) use ($header, $value) {
             return function (RequestInterface $request, array $options) use ($handler, $header, $value) {
+                /* @var PromiseInterface $promise */
                 $promise = $handler($request, $options);
 
                 return $promise->then(
@@ -144,6 +163,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     {
         return function (callable $handler) use($statusCode) {
             return function (RequestInterface $request, array $options) use ($handler, $statusCode) {
+                /* @var PromiseInterface $promise */
                 $promise = $handler($request, $options);
 
                 return $promise->then(
