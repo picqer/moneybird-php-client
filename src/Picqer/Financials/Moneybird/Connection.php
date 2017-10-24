@@ -7,7 +7,9 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7;
+use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Connection
@@ -130,7 +132,7 @@ class Connection
 
     /**
      * @param string $method
-     * @param $endpoint
+     * @param string $endpoint
      * @param null $body
      * @param array $params
      * @param array $headers
@@ -166,7 +168,7 @@ class Connection
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @param array $params
      * @param bool $fetchAll
      * @return mixed
@@ -193,8 +195,8 @@ class Connection
     }
 
     /**
-     * @param $url
-     * @param $body
+     * @param string $url
+     * @param string $body
      * @return mixed
      * @throws ApiException
      */
@@ -211,8 +213,8 @@ class Connection
     }
 
     /**
-     * @param $url
-     * @param $body
+     * @param string $url
+     * @param string $body
      * @return mixed
      * @throws ApiException
      */
@@ -229,7 +231,7 @@ class Connection
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @return mixed
      * @throws ApiException
      */
@@ -291,7 +293,7 @@ class Connection
     }
 
     /**
-     *
+     * @return void
      */
     public function redirectForAuthorization()
     {
@@ -335,7 +337,7 @@ class Connection
 
     /**
      * @param $headerLine
-     * @return bool|array
+     * @return bool | array
      */
     private function getNextParams($headerLine)
     {
@@ -393,17 +395,19 @@ class Connection
     }
 
     /**
-     * Parse the reponse in the Exception to return the Exact error messages
-     * @param Exception $e
-     * @throws ApiException
+     * Parse the response in the Exception to return the Exact error messages.
+     *
+     * @param Exception $exception
+     *
+     * @throws ApiException | TooManyRequestsException
      */
-    private function parseExceptionForErrorMessages(Exception $e)
+    private function parseExceptionForErrorMessages(Exception $exception)
     {
-        if (!$e instanceof BadResponseException) {
-            throw new ApiException($e->getMessage());
+        if (!$exception instanceof BadResponseException) {
+            throw new ApiException($exception->getMessage());
         }
 
-        $response = $e->getResponse();
+        $response = $exception->getResponse();
         Psr7\rewind_body($response);
         $responseBody = $response->getBody()->getContents();
         $decodedResponseBody = json_decode($responseBody, true);
@@ -414,12 +418,34 @@ class Connection
             $errorMessage = $responseBody;
         }
 
+        $this->checkWhetherRateLimitHasBeenReached($response, $errorMessage);
+
         throw new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode());
     }
 
     /**
-     * @param $url
+     * @param ResponseInterface $response
+     * @param string $errorMessage
+     *
+     * @return void
+     *
+     * @throws TooManyRequestsException
+     */
+    private function checkWhetherRateLimitHasBeenReached(ResponseInterface $response, $errorMessage)
+    {
+        $retryAfterHeaders = $response->getHeader('Retry-After');
+        if($response->getStatusCode() === 429 && count($retryAfterHeaders) > 0){
+            $exception = new TooManyRequestsException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode());
+            $exception->retryAfterNumberOfSeconds = (int) current($retryAfterHeaders);
+
+            throw $exception;
+        }
+    }
+
+    /**
+     * @param string $url
      * @param string $method
+     *
      * @return string
      */
     private function formatUrl($url, $method = 'get')
@@ -448,7 +474,7 @@ class Connection
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isTesting()
     {
@@ -456,7 +482,7 @@ class Connection
     }
 
     /**
-     * @param boolean $testing
+     * @param bool $testing
      */
     public function setTesting($testing)
     {
