@@ -18,13 +18,13 @@ trait FindAll
     }
 
     /**
+     * @param string $query
      * @return mixed
      */
-    public function getAll()
+    public function getAll($query = '')
     {
-        $result = $this->connection()->get($this->getEndpoint(), [], true);
+        $result = $this->connection()->get($this->getEndpoint(), ['query' => $query], true);
 
         return $this->collectionFromResult($result);
     }
-
 }
