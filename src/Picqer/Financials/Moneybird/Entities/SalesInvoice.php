@@ -150,7 +150,7 @@ class SalesInvoice extends Model {
             throw new ApiException('Required [price] is missing');
         }
 
-        $this->connection()->patch($this->endpoint . '/' . $this->id . '/register_payment',
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
             $salesInvoicePayment->jsonWithNamespace()
         );
 	    
