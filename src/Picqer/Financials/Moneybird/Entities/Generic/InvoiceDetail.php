@@ -25,6 +25,7 @@ abstract class InvoiceDetail extends Model
         'tax_report_reference',
         'created_at',
         'updated_at',
-        'product_id'
+        'product_id',
+        '_destroy'
     ];
 }
