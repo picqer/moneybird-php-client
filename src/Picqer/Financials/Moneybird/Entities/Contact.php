@@ -84,5 +84,20 @@ class Contact extends Model
 
         return $this->makeFromResponse($result);
     }
+    
+    /**
+     * Add a note to the current contact
+     *
+     * @param Note $note
+     * @return $this
+     * @throws ApiException
+     */
+    public function addNote(Note $note)
+    {
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
+            $note->jsonWithNamespace()
+        );
+	return $this;
+    }
 
 }
