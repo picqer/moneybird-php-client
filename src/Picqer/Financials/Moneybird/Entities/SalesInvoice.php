@@ -116,7 +116,7 @@ class SalesInvoice extends Model {
                 'delivery_method' => $deliveryMethod
             ]
         ]));
-	    
+
 	return $this;
     }
 
@@ -153,7 +153,7 @@ class SalesInvoice extends Model {
         $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
             $salesInvoicePayment->jsonWithNamespace()
         );
-	    
+
 	return $this;
     }
 
@@ -169,7 +169,7 @@ class SalesInvoice extends Model {
         $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
             $note->jsonWithNamespace()
         );
-	    
+
 	return $this;
     }
 
