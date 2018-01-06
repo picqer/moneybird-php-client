@@ -153,6 +153,8 @@ abstract class Model
         if (isset( $this->attributes[$key] )) {
             return $this->attributes[$key];
         }
+
+        return null;
     }
 
 
