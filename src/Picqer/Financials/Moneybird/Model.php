@@ -163,7 +163,7 @@ abstract class Model
     public function __set($key, $value)
     {
         if ($this->isFillable($key)) {
-            return $this->setAttribute($key, $value);
+            $this->setAttribute($key, $value);
         }
     }
 
