@@ -40,6 +40,10 @@ function setValue($key, $value)
 /**
  * Function to authorize with Moneybird, this redirects to Moneybird login promt and retrieves authorization code
  * to set up requests for oAuth tokens
+ *
+ * @param string $redirectUrl
+ * @param string $clientId
+ * @param string $clientSecret
  */
 function authorize($redirectUrl, $clientId, $clientSecret)
 {
@@ -52,6 +56,10 @@ function authorize($redirectUrl, $clientId, $clientSecret)
 
 /**
  * Function to connect to Moneybird, this creates the client and automatically retrieves oAuth tokens if needed
+ *
+ * @param string $redirectUrl
+ * @param string $clientId
+ * @param string $clientSecret
  *
  * @return \Picqer\Financials\Moneybird\Connection
  * @throws Exception
