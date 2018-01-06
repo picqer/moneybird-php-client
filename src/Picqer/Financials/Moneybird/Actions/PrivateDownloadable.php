@@ -24,7 +24,7 @@ trait PrivateDownloadable
      */
     public function download()
     {
-        $connection = $this->connection;
+        $connection = $this->connection();
         $client = $connection->connect();
         
         $headers = [
