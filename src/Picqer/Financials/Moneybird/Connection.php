@@ -415,7 +415,7 @@ class Connection
         $responseBody = $response->getBody()->getContents();
         $decodedResponseBody = json_decode($responseBody, true);
 
-        if (!is_null($decodedResponseBody) && isset($decodedResponseBody['error']['message']['value'])) {
+        if (null !== $decodedResponseBody && isset($decodedResponseBody['error']['message']['value'])) {
             $errorMessage = $decodedResponseBody['error']['message']['value'];
         } else {
             $errorMessage = $responseBody;

@@ -367,7 +367,7 @@ abstract class Model
      */
     public function __isset($name)
     {
-        return (isset($this->attributes[$name]) && !is_null($this->attributes[$name]));
+        return (isset($this->attributes[$name]) && null !== $this->attributes[$name]);
     }
 
 }

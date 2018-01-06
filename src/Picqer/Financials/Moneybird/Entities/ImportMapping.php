@@ -46,7 +46,7 @@ class ImportMapping extends Model {
 
     public function getEndpoint()
     {
-        if (is_null($this->type)) {
+        if (null === $this->type) {
             return $this->endpoint;
         }
 
