@@ -181,7 +181,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 
     public function testMoneybirdClass()
     {
-        $reflectionClass = new ReflectionClass(Moneybird::class);
+        $reflectionClass = new \ReflectionClass(Moneybird::class);
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertTrue($reflectionClass->hasProperty('connection'));
@@ -190,7 +190,7 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 
     private function performEntityTest($entityName)
     {
-        $reflectionClass = new ReflectionClass($entityName);
+        $reflectionClass = new \ReflectionClass($entityName);
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertTrue($reflectionClass->hasProperty('fillable'));
