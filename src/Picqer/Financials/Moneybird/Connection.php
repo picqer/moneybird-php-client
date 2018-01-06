@@ -136,7 +136,9 @@ class Connection
      * @param null $body
      * @param array $params
      * @param array $headers
-     * @return Request
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
     {
@@ -197,6 +199,7 @@ class Connection
     /**
      * @param string $url
      * @param string $body
+     *
      * @return mixed
      * @throws ApiException
      */

@@ -20,6 +20,8 @@ trait PrivateDownloadable
      * Download invoice as PDF
      *
      * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function download()
     {

@@ -123,8 +123,11 @@ class SalesInvoice extends Model {
     /**
      * Find SalesInvoice by invoice_id
      *
-     * @param $invoiceId
+     * @param string|int $invoiceId
+     *
      * @return static
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function findByInvoiceId($invoiceId)
     {

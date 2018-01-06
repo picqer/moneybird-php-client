@@ -10,6 +10,7 @@ trait Filterable
     /**
      * @param array $filters
      * @return mixed
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function filter(array $filters)
     {
@@ -24,7 +25,10 @@ trait Filterable
     }
 
     /**
+     * @param array $filters
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function filterAll(array $filters)
     {

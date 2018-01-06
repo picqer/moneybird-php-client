@@ -59,7 +59,7 @@ abstract class Model
 
     /**
      * Model constructor.
-     * @param Connection $connection
+     * @param \Picqer\Financials\Moneybird\Connection $connection
      * @param array $attributes
      */
     public function __construct(Connection $connection, array $attributes = [ ])
@@ -72,7 +72,7 @@ abstract class Model
     /**
      * Get the connection instance
      *
-     * @return Connection
+     * @return \Picqer\Financials\Moneybird\Connection
      */
     public function connection()
     {
@@ -124,7 +124,7 @@ abstract class Model
 
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     protected function isFillable($key)
@@ -134,8 +134,8 @@ abstract class Model
 
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      */
     protected function setAttribute($key, $value)
     {
@@ -144,7 +144,8 @@ abstract class Model
 
 
     /**
-     * @param $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -156,8 +157,8 @@ abstract class Model
 
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      */
     public function __set($key, $value)
     {
@@ -202,6 +203,11 @@ abstract class Model
         }
     }
 
+    /**
+     * @param bool $useAttributesAppend
+     *
+     * @return array
+     */
     private function getArrayWithNestedObjects($useAttributesAppend = true)
     {
         $result = [];
@@ -247,7 +253,9 @@ abstract class Model
 
     /**
      * Create a new object with the response from the API
+     *
      * @param $response
+     *
      * @return static
      */
     public function makeFromResponse($response)
@@ -260,7 +268,9 @@ abstract class Model
 
     /**
      * Recreate this object with the response from the API
+     *
      * @param $response
+     *
      * @return $this
      */
     public function selfFromResponse($response)
@@ -289,6 +299,7 @@ abstract class Model
 
     /**
      * @param $result
+     *
      * @return array
      */
     public function collectionFromResult($result)
@@ -349,7 +360,8 @@ abstract class Model
     /**
      * Determine if an attribute exists on the model
      *
-     * @param $name
+     * @param string $name
+     *
      * @return bool
      */
     public function __isset($name)

@@ -7,8 +7,11 @@
 trait FindOne {
 
     /**
-     * @param $id
+     * @param string|int $id
+     *
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function find($id)
     {
