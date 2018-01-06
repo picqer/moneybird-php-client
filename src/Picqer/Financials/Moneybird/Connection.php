@@ -185,7 +185,7 @@ class Connection
             $json = $this->parseResponse($response);
 
             if ($fetchAll === true) {
-                if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
+                if ($nextParams = $this->getNextParams($response->getHeaderLine('Link'))) {
                     $json = array_merge($json, $this->get($url, $nextParams, $fetchAll));
                 }
             }
