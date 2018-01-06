@@ -289,6 +289,7 @@ abstract class Model
         {
             if (isset($response[$key])) {
                 $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
+                /** @var \Picqer\Financials\Moneybird\Model $instaniatedEntity */
                 $instaniatedEntity = new $entityName($this->connection);
                 $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
             }
