@@ -95,7 +95,7 @@ function connect($redirectUrl, $clientId, $clientSecret)
 }
 
 // If authorization code is returned from Moneybird, save this to use for token request
-if (isset($_GET['code']) && is_null(getValue('authorizationcode'))) {
+if (isset($_GET['code']) && null === getValue('authorizationcode')) {
     setValue('authorizationcode', $_GET['code']);
 }
 
