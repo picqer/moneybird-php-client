@@ -5,6 +5,20 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class InvoiceDetail
  * @package Picqer\Financials\Moneybird\Entities\Generic
+ *
+ * @property int $id
+ * @property int $tax_rate_id
+ * @property int $ledger_account_id
+ * @property float|int $amount
+ * @property string $description
+ * @property mixed $period
+ * @property mixed $price
+ * @property mixed $row_order
+ * @property mixed $total_price_excl_tax_with_discount
+ * @property mixed $total_price_excl_tax_with_discount_base
+ * @property mixed $tax_report_reference
+ * @property int $created_at
+ * @property int $updated_at
  */
 abstract class InvoiceDetail extends Model
 {

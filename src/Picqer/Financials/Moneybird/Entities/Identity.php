@@ -9,6 +9,22 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class Identity
  * @package Picqer\Financials\Moneybird\Entities
+ *
+ * @property $id
+ * @property $company_name
+ * @property $city
+ * @property $country
+ * @property $zipcode
+ * @property $address1
+ * @property $address2
+ * @property $email
+ * @property $phone
+ * @property $bank_account_name
+ * @property $bank_account_number
+ * @property $bank_account_bic
+ * @property $custom_fields
+ * @property $created_at
+ * @property $updated_at
  */
 class Identity extends Model {
 

@@ -13,6 +13,14 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class SalesInvoice
  * @package Picqer\Financials\Moneybird\Entities
+ *
+ * @property int|string $id
+ * @property string $url
+ * @property array $details
+ * @property mixed $prices_are_incl_tax
+ * @property mixed $document_style_id
+ * @property mixed $contact_id
+ * @property mixed $workflow_id
  */
 class SalesInvoice extends Model {
 

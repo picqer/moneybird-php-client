@@ -10,6 +10,19 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class Contact
  * @package Picqer\Financials\Moneybird
+ *
+ * @property int|string $id
+ * @property string $company_name
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $address1
+ * @property string $address2
+ * @property string $zipcode
+ * @property string $city
+ * @property string $country
+ * @property string $email
+ * @property string $phone
+ * @property \Picqer\Financials\Moneybird\Entities\CustomField[] $custom_fields
  */
 class Contact extends Model
 {
