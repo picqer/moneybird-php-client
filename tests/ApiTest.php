@@ -58,6 +58,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $this->connection->setAdministrationId($administrationId);
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testFindAllWebHooksTriggersHttpGet()
     {
         $attributes = [
@@ -72,6 +75,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $webHook->get();
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testStoreWebHookTriggersHttpPost()
     {
         $attributes = [
@@ -86,6 +92,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $webHook->save();
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testFinancialMutationLinkToBooking()
     {
         $financialMutationId = 1;

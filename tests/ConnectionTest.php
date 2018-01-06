@@ -64,6 +64,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         return $this->container[$requestNumber]['request'];
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientIncludesAuthenticationHeader()
     {
         $connection = $this->getConnectionForTesting();
@@ -75,6 +78,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Bearer testAccessToken', $request->getHeaderLine('Authorization'));
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientIncludesJsonHeaders()
     {
         $connection = $this->getConnectionForTesting();
@@ -87,6 +93,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('application/json', $request->getHeaderLine('Content-Type'));
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientTriesToGetAccessTokenWhenNoneGiven()
     {
         $connection = $this->getConnectionForTesting();
@@ -105,6 +114,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientContinuesWithRequestAfterGettingAccessTokenWhenNoneGiven()
     {
         $connection = $this->getConnectionForTesting();
@@ -117,6 +129,9 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $request->getMethod());
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientDetectsApiRateLimit()
     {
         $responseStatusCode = 429;
