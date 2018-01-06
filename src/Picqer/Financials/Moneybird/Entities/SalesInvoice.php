@@ -180,6 +180,8 @@ class SalesInvoice extends Model {
      * Create a credit invoice based on the current invoice.
      *
      * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function duplicateToCreditInvoice()
     {
