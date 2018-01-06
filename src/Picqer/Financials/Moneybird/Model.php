@@ -315,7 +315,7 @@ abstract class Model
 
         $collection = [ ];
         foreach ($result as $r) {
-            $collection[] = static::makeFromResponse($r);
+            $collection[] = $this->makeFromResponse($r);
         }
 
         return $collection;
