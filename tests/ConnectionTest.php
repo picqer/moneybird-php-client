@@ -4,6 +4,8 @@ use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
+use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -33,7 +35,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->container = [];
         $history = Middleware::history($this->container);
 
-        $connection = new \Picqer\Financials\Moneybird\Connection();
+        $connection = new Connection();
         $connection->insertMiddleWare($history);
         if(count($additionalMiddlewares) > 0){
             foreach($additionalMiddlewares as $additionalMiddleware){
@@ -71,7 +73,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->getConnectionForTesting();
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer();
@@ -85,7 +87,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     {
         $connection = $this->getConnectionForTesting();
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer();
@@ -101,7 +103,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connection = $this->getConnectionForTesting();
         $connection->setAccessToken(null);
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer();
@@ -122,7 +124,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $connection = $this->getConnectionForTesting();
         $connection->setAccessToken(null);
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer(1);
@@ -145,7 +147,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         );
 
         $connection = $this->getConnectionForTesting($additionalMiddlewares);
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         try {
             $contact->get();
         } catch(TooManyRequestsException $exception){

@@ -1,5 +1,35 @@
 <?php
 
+use Picqer\Financials\Moneybird\Entities\Administration;
+use Picqer\Financials\Moneybird\Entities\Contact;
+use Picqer\Financials\Moneybird\Entities\ContactCustomField;
+use Picqer\Financials\Moneybird\Entities\CustomField;
+use Picqer\Financials\Moneybird\Entities\DocumentStyle;
+use Picqer\Financials\Moneybird\Entities\Estimate;
+use Picqer\Financials\Moneybird\Entities\FinancialAccount;
+use Picqer\Financials\Moneybird\Entities\FinancialMutation;
+use Picqer\Financials\Moneybird\Entities\GeneralDocument;
+use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
+use Picqer\Financials\Moneybird\Entities\Identity;
+use Picqer\Financials\Moneybird\Entities\ImportMapping;
+use Picqer\Financials\Moneybird\Entities\LedgerAccount;
+use Picqer\Financials\Moneybird\Entities\Note;
+use Picqer\Financials\Moneybird\Entities\Product;
+use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
+use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\Receipt;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
+use Picqer\Financials\Moneybird\Entities\TaxRate;
+use Picqer\Financials\Moneybird\Entities\TypelessDocument;
+use Picqer\Financials\Moneybird\Entities\Webhook;
+use Picqer\Financials\Moneybird\Entities\Workflow;
+use Picqer\Financials\Moneybird\Moneybird;
+
 /**
  * Class EntityTest
  *
@@ -11,147 +41,147 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 
     public function testAdministrationEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Administration::class);
+        $this->performEntityTest(Administration::class);
     }
 
     public function testContactEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Contact::class);
+        $this->performEntityTest(Contact::class);
     }
 
     public function testContactCustomFieldEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\ContactCustomField::class);
+        $this->performEntityTest(ContactCustomField::class);
     }
 
     public function testCustomFieldEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\CustomField::class);
+        $this->performEntityTest(CustomField::class);
     }
 
     public function testDocumentStyleEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\DocumentStyle::class);
+        $this->performEntityTest(DocumentStyle::class);
     }
 
     public function testEstimateEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Estimate::class);
+        $this->performEntityTest(Estimate::class);
     }
 
     public function testFinancialAccountEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\FinancialAccount::class);
+        $this->performEntityTest(FinancialAccount::class);
     }
 
     public function testFinancialMutationEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\FinancialMutation::class);
+        $this->performEntityTest(FinancialMutation::class);
     }
 
     public function testGeneralDocumentEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\GeneralDocument::class);
+        $this->performEntityTest(GeneralDocument::class);
     }
 
     public function testGeneralJournalDocumentEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\GeneralJournalDocument::class);
+        $this->performEntityTest(GeneralJournalDocument::class);
     }
 
     public function testIdentityEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Identity::class);
+        $this->performEntityTest(Identity::class);
     }
 
     public function testImportMappingEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\ImportMapping::class);
+        $this->performEntityTest(ImportMapping::class);
     }
 
     public function testLedgerAccountEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\LedgerAccount::class);
+        $this->performEntityTest(LedgerAccount::class);
     }
 
     public function testProductEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Product::class);
+        $this->performEntityTest(Product::class);
     }
 
     public function testPurchaseInvoiceEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\PurchaseInvoice::class);
+        $this->performEntityTest(PurchaseInvoice::class);
     }
 
     public function testPurchaseDetailInvoiceEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail::class);
+        $this->performEntityTest(PurchaseInvoiceDetail::class);
     }
 
     public function testReceiptEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Receipt::class);
+        $this->performEntityTest(Receipt::class);
     }
 
     public function testRecurringSalesInvoiceEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice::class);
+        $this->performEntityTest(RecurringSalesInvoice::class);
     }
 
     public function testRecurringSalesInvoiceDetailEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail::class);
+        $this->performEntityTest(RecurringSalesInvoiceDetail::class);
     }
 
     public function testSalesInvoiceEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\SalesInvoice::class);
+        $this->performEntityTest(SalesInvoice::class);
     }
 
     public function testSalesInvoiceDetailEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail::class);
+        $this->performEntityTest(SalesInvoiceDetail::class);
     }
 
     public function testSalesInvoicePaymentEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\SalesInvoicePayment::class);
+        $this->performEntityTest(SalesInvoicePayment::class);
     }
 
     public function testSalesInvoiceReminderEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder::class);
+        $this->performEntityTest(SalesInvoiceReminder::class);
     }
 
     public function testNoteEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Note::class);
+        $this->performEntityTest(Note::class);
     }
 
     public function testTaxRateEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\TaxRate::class);
+        $this->performEntityTest(TaxRate::class);
     }
 
     public function testTypelessDocumentEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\TypelessDocument::class);
+        $this->performEntityTest(TypelessDocument::class);
     }
 
     public function testWebhookEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Webhook::class);
+        $this->performEntityTest(Webhook::class);
     }
 
     public function testWorkflowEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\Workflow::class);
+        $this->performEntityTest(Workflow::class);
     }
 
     public function testMoneybirdClass()
     {
-        $reflectionClass = new ReflectionClass(\Picqer\Financials\Moneybird\Moneybird::class);
+        $reflectionClass = new ReflectionClass(Moneybird::class);
 
         $this->assertTrue($reflectionClass->isInstantiable());
         $this->assertTrue($reflectionClass->hasProperty('connection'));
