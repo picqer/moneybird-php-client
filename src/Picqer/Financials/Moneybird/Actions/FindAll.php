@@ -6,6 +6,7 @@
  */
 trait FindAll
 {
+    use BaseTrait;
 
     /**
      * @return mixed

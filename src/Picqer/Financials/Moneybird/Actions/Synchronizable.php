@@ -6,6 +6,7 @@
  */
 trait Synchronizable
 {
+    use BaseTrait;
 
     /**
      * @return mixed

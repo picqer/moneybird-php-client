@@ -6,6 +6,7 @@
  */
 trait Filterable
 {
+    use BaseTrait;
 
     /**
      * @param array $filters

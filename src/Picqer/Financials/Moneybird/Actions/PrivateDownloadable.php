@@ -15,7 +15,8 @@ use GuzzleHttp\Psr7\Request;
  */
 trait PrivateDownloadable
 {
-    
+    use BaseTrait;
+
     /**
      * Download invoice as PDF
      *
