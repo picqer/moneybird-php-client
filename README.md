@@ -147,7 +147,7 @@ $salesInvoice->registerPayment($salesInvoicePayment);
 $salesInvoiceDetailsArray = [];
 
 foreach ($invoiceLines as $invoiceLine) { // Your invoice lines
-   $salesInvoiceDetail = $moneybird->SalesInvoiceDetail();
+   $salesInvoiceDetail = $moneybird->salesInvoiceDetail();
    $salesInvoiceDetail->price = 34.33;
    ...
 
