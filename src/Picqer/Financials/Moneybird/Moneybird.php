@@ -1,5 +1,7 @@
 <?php namespace Picqer\Financials\Moneybird;
 
+use Picqer\Financials\Moneybird\Connection\ApiConnection;
+use Picqer\Financials\Moneybird\Connection\ApiConnectionInterface;
 use Picqer\Financials\Moneybird\Entities\Administration;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
@@ -45,15 +47,28 @@ class Moneybird
     /**
      * The HTTP connection
      *
-     * @var \Picqer\Financials\Moneybird\Connection
+     * @var \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface
      */
     protected $connection;
 
     /**
-     * Moneybird constructor.
-     * @param \Picqer\Financials\Moneybird\Connection $connection
+     * @param string $accessToken
+     * @param string|int $administrationId
+     *
+     * @return \Picqer\Financials\Moneybird\Moneybird
      */
-    public function __construct(Connection $connection)
+    public static function create($accessToken, $administrationId)
+    {
+        $connection = ApiConnection::createRoot($accessToken)
+            ->withAdministrationId($administrationId);
+
+        return new self($connection);
+    }
+
+    /**
+     * @param \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface $connection
+     */
+    public function __construct(ApiConnectionInterface $connection)
     {
         $this->connection = $connection;
     }
@@ -178,7 +193,7 @@ class Moneybird
     }
 
     /**
-     * @return \Picqer\Financials\Moneybird\Connection
+     * @return \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface
      */
     public function getConnection()
     {

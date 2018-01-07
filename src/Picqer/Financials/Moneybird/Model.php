@@ -1,5 +1,7 @@
 <?php namespace Picqer\Financials\Moneybird;
 
+use Picqer\Financials\Moneybird\Connection\ApiConnectionInterface;
+
 /**
  * Class Model
  * @package Picqer\Financials\Moneybird
@@ -11,7 +13,7 @@ abstract class Model
     const NESTING_TYPE_NESTED_OBJECTS = 1;
 
     /**
-     * @var Connection
+     * @var \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface
      */
     protected $connection;
 
@@ -59,10 +61,10 @@ abstract class Model
 
     /**
      * Model constructor.
-     * @param \Picqer\Financials\Moneybird\Connection $connection
+     * @param \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface $connection
      * @param array $attributes
      */
-    public function __construct(Connection $connection, array $attributes = [ ])
+    public function __construct(ApiConnectionInterface $connection, array $attributes = [ ])
     {
         $this->connection = $connection;
         $this->fill($attributes);
@@ -72,7 +74,7 @@ abstract class Model
     /**
      * Get the connection instance
      *
-     * @return \Picqer\Financials\Moneybird\Connection
+     * @return \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface
      */
     public function connection()
     {

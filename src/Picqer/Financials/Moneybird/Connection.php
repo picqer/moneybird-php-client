@@ -7,6 +7,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Picqer\Financials\Moneybird\Connection\ApiConnectionInterface;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Psr\Http\Message\ResponseInterface;
@@ -15,7 +16,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class Connection
  * @package Picqer\Financials\Moneybird
  */
-class Connection
+class Connection implements ApiConnectionInterface
 {
     /**
      * @var string

@@ -6,7 +6,7 @@ trait BaseTrait
 {
 
     /**
-     * @return \Picqer\Financials\Moneybird\Connection
+     * @return \Picqer\Financials\Moneybird\Connection\ApiConnectionInterface
      *
      * @see \Picqer\Financials\Moneybird\Model::connection()
      */
