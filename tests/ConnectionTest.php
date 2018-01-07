@@ -151,10 +151,6 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
                         return $response->withHeader($header, $value);
                     }
                 );
-
-                $request = $request->withHeader($header, $value);
-
-                return $handler($request, $options);
             };
         };
     }
