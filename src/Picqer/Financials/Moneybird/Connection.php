@@ -474,6 +474,28 @@ class Connection
     }
 
     /**
+     * @param int|string $administrationId
+     *
+     * @return static
+     */
+    public function withAdministrationId($administrationId)
+    {
+        $clone = clone $this;
+        $clone->administrationId = $administrationId;
+        return $clone;
+    }
+
+    /**
+     * @return static
+     */
+    public function withoutAdministrationId()
+    {
+        $clone = clone $this;
+        $clone->administrationId = null;
+        return $clone;
+    }
+
+    /**
      * @return bool
      */
     public function isTesting()
