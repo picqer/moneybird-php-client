@@ -19,11 +19,12 @@ trait FindAll
 
     /**
      * @param array $params
+     * @param bool $fetchAll
      * @return mixed
      */
-    public function getAll($params = [])
+    public function getAll($params = [], $fetchAll = true)
     {
-        $result = $this->connection()->get($this->getEndpoint(), $params, true);
+        $result = $this->connection()->get($this->getEndpoint(), $params, $fetchAll);
 
         return $this->collectionFromResult($result);
     }
