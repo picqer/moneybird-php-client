@@ -27,4 +27,5 @@ trait FindAll
 
         return $this->collectionFromResult($result);
     }
+    
 }
