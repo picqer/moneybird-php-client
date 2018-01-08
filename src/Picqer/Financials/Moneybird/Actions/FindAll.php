@@ -18,12 +18,12 @@ trait FindAll
     }
 
     /**
-     * @param string $query
+     * @param array $params
      * @return mixed
      */
-    public function getAll($query = '')
+    public function getAll($params = [])
     {
-        $result = $this->connection()->get($this->getEndpoint(), ['query' => $query], true);
+        $result = $this->connection()->get($this->getEndpoint(), $params, true);
 
         return $this->collectionFromResult($result);
     }
