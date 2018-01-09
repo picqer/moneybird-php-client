@@ -53,4 +53,14 @@ class Receipt extends Model {
      * @var string
      */
     protected $namespace = 'receipt';
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'details' => [
+            'entity' => 'ReceiptDetail',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 }
