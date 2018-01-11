@@ -3,7 +3,7 @@
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class PurchaseInvoiceDetail
+ * Class ReceiptDetail
  * @package Picqer\Financials\Moneybird\Entities
  */
 class ReceiptDetail extends Model
