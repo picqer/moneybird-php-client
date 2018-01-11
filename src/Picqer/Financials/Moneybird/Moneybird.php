@@ -22,6 +22,7 @@ use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
@@ -262,6 +263,15 @@ class Moneybird
     public function recurringSalesInvoice($attributes = [])
     {
         return new RecurringSalesInvoice($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField
+     */
+    public function recurringSalesInvoiceCustomField($attributes = [])
+    {
+        return new RecurringSalesInvoiceCustomField($this->connection, $attributes);
     }
 
     /**

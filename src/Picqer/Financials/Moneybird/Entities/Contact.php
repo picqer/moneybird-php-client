@@ -5,6 +5,7 @@ use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -83,7 +84,7 @@ class Contact extends Model
      * @param string|int $customerId
      *
      * @return static
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     * @throws ApiException
      */
     public function findByCustomerId($customerId) {
         $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
