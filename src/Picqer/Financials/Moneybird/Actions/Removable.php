@@ -6,6 +6,8 @@
  */
 trait Removable {
 
+    use BaseTrait;
+
     /**
      * @return mixed
      *

@@ -6,6 +6,8 @@
  */
 trait Storable {
 
+    use BaseTrait;
+
     /**
      * @return mixed
      *

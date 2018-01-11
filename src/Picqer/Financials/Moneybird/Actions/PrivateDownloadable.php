@@ -15,7 +15,8 @@ use GuzzleHttp\Psr7\Request;
  */
 trait PrivateDownloadable
 {
-    
+    use BaseTrait;
+
     /**
      * Download invoice as PDF
      *
@@ -25,7 +26,7 @@ trait PrivateDownloadable
      */
     public function download()
     {
-        $connection = $this->connection;
+        $connection = $this->connection();
         $client = $connection->connect();
         
         $headers = [

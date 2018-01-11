@@ -6,6 +6,8 @@
  */
 trait FindOne {
 
+    use BaseTrait;
+
     /**
      * @param string|int $id
      *
