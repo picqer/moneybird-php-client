@@ -79,6 +79,12 @@ class Contact extends Model
         ],
     ];
 
+    /**
+     * @param string|int $customerId
+     *
+     * @return static
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function findByCustomerId($customerId) {
         $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
 

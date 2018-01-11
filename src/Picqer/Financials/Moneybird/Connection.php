@@ -4,9 +4,9 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Psr\Http\Message\ResponseInterface;
@@ -136,7 +136,9 @@ class Connection
      * @param null $body
      * @param array $params
      * @param array $headers
-     * @return Request
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
     {
@@ -183,7 +185,7 @@ class Connection
             $json = $this->parseResponse($response);
 
             if ($fetchAll === true) {
-                if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
+                if ($nextParams = $this->getNextParams($response->getHeaderLine('Link'))) {
                     $json = array_merge($json, $this->get($url, $nextParams, $fetchAll));
                 }
             }
@@ -197,6 +199,7 @@ class Connection
     /**
      * @param string $url
      * @param string $body
+     *
      * @return mixed
      * @throws ApiException
      */
@@ -412,7 +415,7 @@ class Connection
         $responseBody = $response->getBody()->getContents();
         $decodedResponseBody = json_decode($responseBody, true);
 
-        if (!is_null($decodedResponseBody) && isset($decodedResponseBody['error']['message']['value'])) {
+        if (null !== $decodedResponseBody && isset($decodedResponseBody['error']['message']['value'])) {
             $errorMessage = $decodedResponseBody['error']['message']['value'];
         } else {
             $errorMessage = $responseBody;

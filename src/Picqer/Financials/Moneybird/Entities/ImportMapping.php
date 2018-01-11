@@ -12,7 +12,10 @@ class ImportMapping extends Model {
 
     use FindAll, FindOne;
 
-    protected $type = null;
+    /**
+     * @var string|null
+     */
+    protected $type;
 
     /**
      * @var array
@@ -46,7 +49,7 @@ class ImportMapping extends Model {
 
     public function getEndpoint()
     {
-        if (is_null($this->type)) {
+        if (null === $this->type) {
             return $this->endpoint;
         }
 
