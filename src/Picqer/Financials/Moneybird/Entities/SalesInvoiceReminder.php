@@ -31,6 +31,8 @@ class SalesInvoiceReminder extends Model {
 
     /**
      * Pushes the reminder.
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function send()
     {

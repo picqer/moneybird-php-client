@@ -6,8 +6,12 @@
  */
 trait Removable {
 
+    use BaseTrait;
+
     /**
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function delete()
     {

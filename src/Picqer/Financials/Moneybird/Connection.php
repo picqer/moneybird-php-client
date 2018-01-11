@@ -4,9 +4,9 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Psr\Http\Message\ResponseInterface;
@@ -136,7 +136,9 @@ class Connection
      * @param null $body
      * @param array $params
      * @param array $headers
-     * @return Request
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
     {
@@ -183,20 +185,21 @@ class Connection
             $json = $this->parseResponse($response);
 
             if ($fetchAll === true) {
-                if (($nextParams = $this->getNextParams($response->getHeaderLine('Link')))) {
+                if ($nextParams = $this->getNextParams($response->getHeaderLine('Link'))) {
                     $json = array_merge($json, $this->get($url, $nextParams, $fetchAll));
                 }
             }
 
             return $json;
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
     /**
      * @param string $url
      * @param string $body
+     *
      * @return mixed
      * @throws ApiException
      */
@@ -208,7 +211,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -226,7 +229,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -243,7 +246,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -399,20 +402,27 @@ class Connection
      *
      * @param Exception $exception
      *
-     * @throws ApiException | TooManyRequestsException
+     * @return \Picqer\Financials\Moneybird\Exceptions\ApiException
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException
      */
     private function parseExceptionForErrorMessages(Exception $exception)
     {
         if (!$exception instanceof BadResponseException) {
-            throw new ApiException($exception->getMessage());
+            return new ApiException($exception->getMessage(), 0, $exception);
         }
 
         $response = $exception->getResponse();
+
+        if (null === $response) {
+            return new ApiException('Response is NULL.', 0, $exception);
+        }
+
         Psr7\rewind_body($response);
         $responseBody = $response->getBody()->getContents();
         $decodedResponseBody = json_decode($responseBody, true);
 
-        if (!is_null($decodedResponseBody) && isset($decodedResponseBody['error']['message']['value'])) {
+        if (null !== $decodedResponseBody && isset($decodedResponseBody['error']['message']['value'])) {
             $errorMessage = $decodedResponseBody['error']['message']['value'];
         } else {
             $errorMessage = $responseBody;
@@ -420,7 +430,7 @@ class Connection
 
         $this->checkWhetherRateLimitHasBeenReached($response, $errorMessage);
 
-        throw new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode());
+        return new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode(), $exception);
     }
 
     /**
@@ -471,6 +481,28 @@ class Connection
     public function setAdministrationId($administrationId)
     {
         $this->administrationId = $administrationId;
+    }
+
+    /**
+     * @param int|string $administrationId
+     *
+     * @return static
+     */
+    public function withAdministrationId($administrationId)
+    {
+        $clone = clone $this;
+        $clone->administrationId = $administrationId;
+        return $clone;
+    }
+
+    /**
+     * @return static
+     */
+    public function withoutAdministrationId()
+    {
+        $clone = clone $this;
+        $clone->administrationId = null;
+        return $clone;
     }
 
     /**

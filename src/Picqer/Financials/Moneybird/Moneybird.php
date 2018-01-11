@@ -15,6 +15,7 @@ use Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry;
 use Picqer\Financials\Moneybird\Entities\Identity;
 use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
+use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Product;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
@@ -22,7 +23,7 @@ use Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\ReceiptDetail;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
-use Picqer\Financials\Moneybird\Entities\Note;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
@@ -63,7 +64,9 @@ class Moneybird
      */
     public function administration($attributes = [])
     {
-        return new Administration($this->connection, $attributes);
+        return new Administration(
+            $this->connection->withoutAdministrationId(),
+            $attributes);
     }
 
     /**
@@ -270,6 +273,15 @@ class Moneybird
     public function recurringSalesInvoice($attributes = [])
     {
         return new RecurringSalesInvoice($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField
+     */
+    public function recurringSalesInvoiceCustomField($attributes = [])
+    {
+        return new RecurringSalesInvoiceCustomField($this->connection, $attributes);
     }
 
     /**

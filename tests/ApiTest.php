@@ -1,5 +1,8 @@
 <?php
 
+use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Moneybird;
+
 /**
  * Class ApiTest
  *
@@ -28,15 +31,15 @@ class ApiTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->connection = $this->getMockBuilder(\Picqer\Financials\Moneybird\Connection::class)->getMock();
+        $this->connection = $this->getMockBuilder(Connection::class)->getMock();
         $this->connection->setTesting(true);
         $this->mockedConnection = $this->connection;
-        $this->client = new \Picqer\Financials\Moneybird\Moneybird($this->connection);
+        $this->client = new Moneybird($this->connection);
     }
 
     public function testConnectionIsProperlyMocked()
     {
-        $this->assertInstanceOf(\Picqer\Financials\Moneybird\Connection::class, $this->connection);
+        $this->assertInstanceOf(Connection::class, $this->connection);
     }
 
     public function testTestModeIsProperlySet()
@@ -58,6 +61,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $this->connection->setAdministrationId($administrationId);
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testFindAllWebHooksTriggersHttpGet()
     {
         $attributes = [
@@ -72,6 +78,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $webHook->get();
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testStoreWebHookTriggersHttpPost()
     {
         $attributes = [
@@ -86,6 +95,9 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $webHook->save();
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testFinancialMutationLinkToBooking()
     {
         $financialMutationId = 1;

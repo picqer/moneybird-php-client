@@ -59,7 +59,7 @@ abstract class Model
 
     /**
      * Model constructor.
-     * @param Connection $connection
+     * @param \Picqer\Financials\Moneybird\Connection $connection
      * @param array $attributes
      */
     public function __construct(Connection $connection, array $attributes = [ ])
@@ -72,7 +72,7 @@ abstract class Model
     /**
      * Get the connection instance
      *
-     * @return Connection
+     * @return \Picqer\Financials\Moneybird\Connection
      */
     public function connection()
     {
@@ -124,7 +124,7 @@ abstract class Model
 
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     protected function isFillable($key)
@@ -134,8 +134,8 @@ abstract class Model
 
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      */
     protected function setAttribute($key, $value)
     {
@@ -144,7 +144,8 @@ abstract class Model
 
 
     /**
-     * @param $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -152,17 +153,19 @@ abstract class Model
         if (isset( $this->attributes[$key] )) {
             return $this->attributes[$key];
         }
+
+        return null;
     }
 
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      */
     public function __set($key, $value)
     {
         if ($this->isFillable($key)) {
-            return $this->setAttribute($key, $value);
+            $this->setAttribute($key, $value);
         }
     }
 
@@ -202,6 +205,11 @@ abstract class Model
         }
     }
 
+    /**
+     * @param bool $useAttributesAppend
+     *
+     * @return array
+     */
     private function getArrayWithNestedObjects($useAttributesAppend = true)
     {
         $result = [];
@@ -247,7 +255,9 @@ abstract class Model
 
     /**
      * Create a new object with the response from the API
+     *
      * @param $response
+     *
      * @return static
      */
     public function makeFromResponse($response)
@@ -260,7 +270,9 @@ abstract class Model
 
     /**
      * Recreate this object with the response from the API
+     *
      * @param $response
+     *
      * @return $this
      */
     public function selfFromResponse($response)
@@ -279,6 +291,7 @@ abstract class Model
         {
             if (isset($response[$key])) {
                 $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
+                /** @var \Picqer\Financials\Moneybird\Model $instaniatedEntity */
                 $instaniatedEntity = new $entityName($this->connection);
                 $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
             }
@@ -289,6 +302,7 @@ abstract class Model
 
     /**
      * @param $result
+     *
      * @return array
      */
     public function collectionFromResult($result)
@@ -301,7 +315,7 @@ abstract class Model
 
         $collection = [ ];
         foreach ($result as $r) {
-            $collection[] = static::makeFromResponse($r);
+            $collection[] = $this->makeFromResponse($r);
         }
 
         return $collection;
@@ -349,12 +363,13 @@ abstract class Model
     /**
      * Determine if an attribute exists on the model
      *
-     * @param $name
+     * @param string $name
+     *
      * @return bool
      */
     public function __isset($name)
     {
-        return (isset($this->attributes[$name]) && !is_null($this->attributes[$name]));
+        return (isset($this->attributes[$name]) && null !== $this->attributes[$name]);
     }
 
 }

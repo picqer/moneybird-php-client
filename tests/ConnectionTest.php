@@ -4,6 +4,8 @@ use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
+use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -33,7 +35,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->container = [];
         $history = Middleware::history($this->container);
 
-        $connection = new \Picqer\Financials\Moneybird\Connection();
+        $connection = new Connection();
         $connection->insertMiddleWare($history);
         if(count($additionalMiddlewares) > 0){
             foreach($additionalMiddlewares as $additionalMiddleware){
@@ -64,22 +66,28 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         return $this->container[$requestNumber]['request'];
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientIncludesAuthenticationHeader()
     {
         $connection = $this->getConnectionForTesting();
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer();
         $this->assertEquals('Bearer testAccessToken', $request->getHeaderLine('Authorization'));
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientIncludesJsonHeaders()
     {
         $connection = $this->getConnectionForTesting();
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer();
@@ -87,12 +95,15 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('application/json', $request->getHeaderLine('Content-Type'));
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientTriesToGetAccessTokenWhenNoneGiven()
     {
         $connection = $this->getConnectionForTesting();
         $connection->setAccessToken(null);
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer();
@@ -105,18 +116,24 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientContinuesWithRequestAfterGettingAccessTokenWhenNoneGiven()
     {
         $connection = $this->getConnectionForTesting();
         $connection->setAccessToken(null);
 
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         $contact->get();
 
         $request = $this->getRequestFromHistoryContainer(1);
         $this->assertEquals('GET', $request->getMethod());
     }
 
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
     public function testClientDetectsApiRateLimit()
     {
         $responseStatusCode = 429;
@@ -130,7 +147,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         );
 
         $connection = $this->getConnectionForTesting($additionalMiddlewares);
-        $contact = new \Picqer\Financials\Moneybird\Entities\Contact($connection);
+        $contact = new Contact($connection);
         try {
             $contact->get();
         } catch(TooManyRequestsException $exception){
@@ -151,10 +168,6 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
                         return $response->withHeader($header, $value);
                     }
                 );
-
-                $request = $request->withHeader($header, $value);
-
-                return $handler($request, $options);
             };
         };
     }

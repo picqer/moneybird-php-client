@@ -6,8 +6,12 @@
  */
 trait Storable {
 
+    use BaseTrait;
+
     /**
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function save()
     {
@@ -22,6 +26,8 @@ trait Storable {
 
     /**
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function insert()
     {
@@ -32,6 +38,8 @@ trait Storable {
 
     /**
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function update()
     {

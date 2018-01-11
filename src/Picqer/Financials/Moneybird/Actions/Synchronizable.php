@@ -6,9 +6,14 @@
  */
 trait Synchronizable
 {
+    use BaseTrait;
 
     /**
+     * @param array $filters
+     *
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function listVersions(array $filters = [])
     {
@@ -32,6 +37,8 @@ trait Synchronizable
     /**
      * @param array $ids
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function getVersions(array $ids)
     {

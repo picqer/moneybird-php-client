@@ -15,15 +15,18 @@ use GuzzleHttp\Psr7\Request;
  */
 trait PrivateDownloadable
 {
-    
+    use BaseTrait;
+
     /**
      * Download invoice as PDF
      *
      * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function download()
     {
-        $connection = $this->connection;
+        $connection = $this->connection();
         $client = $connection->connect();
         
         $headers = [

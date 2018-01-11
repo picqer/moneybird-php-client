@@ -54,6 +54,7 @@ class FinancialMutation extends Model {
      * @param string $paymentBatchIdentifier
      *
      * @return int
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
     {

@@ -6,9 +6,12 @@
  */
 trait FindAll
 {
+    use BaseTrait;
 
     /**
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function get()
     {
@@ -19,6 +22,8 @@ trait FindAll
 
     /**
      * @return mixed
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function getAll()
     {

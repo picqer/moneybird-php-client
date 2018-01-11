@@ -117,14 +117,17 @@ class SalesInvoice extends Model {
             ]
         ]));
 
-	return $this;
+        return $this;
     }
 
     /**
      * Find SalesInvoice by invoice_id
      *
-     * @param $invoiceId
+     * @param string|int $invoiceId
+     *
      * @return static
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function findByInvoiceId($invoiceId)
     {
@@ -154,7 +157,7 @@ class SalesInvoice extends Model {
             $salesInvoicePayment->jsonWithNamespace()
         );
 
-	return $this;
+        return $this;
     }
 
     /**
@@ -170,20 +173,22 @@ class SalesInvoice extends Model {
             $note->jsonWithNamespace()
         );
 
-	return $this;
+        return $this;
     }
 
-	/**
-	 * Create a credit invoice based on the current invoice.
-	 *
-	 * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
-	 */
-	public function duplicateToCreditInvoice()
-	{
-		$response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
-			json_encode([])	// No body needed for this call. The patch method however needs one.
-		);
+    /**
+     * Create a credit invoice based on the current invoice.
+     *
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function duplicateToCreditInvoice()
+    {
+        $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
+            json_encode([])	// No body needed for this call. The patch method however needs one.
+        );
 
-		return $this->makeFromResponse($response);
-	}
+        return $this->makeFromResponse($response);
+    }
 }
