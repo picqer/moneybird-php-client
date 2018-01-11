@@ -62,7 +62,9 @@ class Moneybird
      */
     public function administration($attributes = [])
     {
-        return new Administration($this->connection, $attributes);
+        return new Administration(
+            $this->connection->withoutAdministrationId(),
+            $attributes);
     }
 
     /**
