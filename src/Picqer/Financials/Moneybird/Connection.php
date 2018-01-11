@@ -192,7 +192,7 @@ class Connection
 
             return $json;
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -211,7 +211,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -229,7 +229,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -246,7 +246,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -402,15 +402,22 @@ class Connection
      *
      * @param Exception $exception
      *
-     * @throws ApiException | TooManyRequestsException
+     * @return \Picqer\Financials\Moneybird\Exceptions\ApiException
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException
      */
     private function parseExceptionForErrorMessages(Exception $exception)
     {
         if (!$exception instanceof BadResponseException) {
-            throw new ApiException($exception->getMessage());
+            return new ApiException($exception->getMessage(), 0, $exception);
         }
 
         $response = $exception->getResponse();
+
+        if (null === $response) {
+            return new ApiException('Response is NULL.', 0, $exception);
+        }
+
         Psr7\rewind_body($response);
         $responseBody = $response->getBody()->getContents();
         $decodedResponseBody = json_decode($responseBody, true);
@@ -423,7 +430,7 @@ class Connection
 
         $this->checkWhetherRateLimitHasBeenReached($response, $errorMessage);
 
-        throw new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode());
+        return new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode(), $exception);
     }
 
     /**
