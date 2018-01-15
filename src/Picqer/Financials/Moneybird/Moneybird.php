@@ -12,6 +12,7 @@ use Picqer\Financials\Moneybird\Entities\FinancialStatement;
 use Picqer\Financials\Moneybird\Entities\GeneralDocument;
 use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
 use Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry;
+use Picqer\Financials\Moneybird\Entities\ReceiptPayment;
 use Picqer\Financials\Moneybird\Entities\Identity;
 use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
@@ -264,6 +265,16 @@ class Moneybird
     public function receiptDetail($attributes = [])
     {
         return new ReceiptDetail($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return ReceiptPayment
+     */
+    public function receiptPayment($attributes = [])
+    {
+        return new ReceiptPayment($this->connection, $attributes);
     }
 
     /**
