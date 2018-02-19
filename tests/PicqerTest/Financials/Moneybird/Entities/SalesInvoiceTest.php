@@ -1,6 +1,7 @@
 <?php
 namespace PicqerTest\Financials\Moneybird\Entities;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
@@ -30,6 +31,23 @@ class SalesInvoiceTest extends TestCase {
 
         $this->salesInvoice = new SalesInvoice($this->connection->reveal());
     }
+
+    public function testSendInvoiceThrowsExceptionWhenNonOptionsPassed() {
+
+        try {
+            $this->salesInvoice->sendInvoice(false);
+            self::fail('Should have thrown exception');
+        } catch (InvalidArgumentException $e) {
+        }
+
+        try {
+            $this->salesInvoice->sendInvoice(new \stdClass());
+            self::fail('Should have thrown exception');
+        } catch (InvalidArgumentException $e) {
+        }
+    }
+
+
 
     public function testSendWithoutArguments() {
         $this->connection->patch(new AnyValueToken(), json_encode([

@@ -1,5 +1,6 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
+use InvalidArgumentException;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
@@ -102,12 +103,12 @@ class SalesInvoice extends Model {
     /**
      * Instruct Moneybird to send the invoice to the contact
      *
-     * @param string $deliveryMethodOrOptions
+     * @param string|SendInvoiceOptions $deliveryMethodOrOptions
      *
      * @return $this
      * @throws ApiException
      */
-    public function sendInvoice($deliveryMethodOrOptions = 'Email')
+    public function sendInvoice($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
     {
         if (is_string($deliveryMethodOrOptions)) {
             $options = new SendInvoiceOptions($deliveryMethodOrOptions);
@@ -115,6 +116,11 @@ class SalesInvoice extends Model {
             $options = $deliveryMethodOrOptions;
         }
         unset($deliveryMethodOrOptions);
+
+        if (!$options instanceof SendInvoiceOptions) {
+            $options = is_object($options) ? get_class($options) : gettype($options);
+            throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
+        }
 
         $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
             'sales_invoice_sending' => $options->jsonSerialize()
