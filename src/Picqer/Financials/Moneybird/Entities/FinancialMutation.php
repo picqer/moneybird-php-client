@@ -38,6 +38,7 @@ class FinancialMutation extends Model {
         'processed_at',
         'payments',
         'ledger_account_bookings',
+        'account_servicer_transaction_id',
     ];
 
     /**
