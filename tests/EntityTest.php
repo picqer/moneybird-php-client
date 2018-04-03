@@ -18,6 +18,8 @@ use Picqer\Financials\Moneybird\Entities\Product;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\Receipt;
+use Picqer\Financials\Moneybird\Entities\ReceiptDetail;
+use Picqer\Financials\Moneybird\Entities\ReceiptPayment;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
@@ -127,7 +129,12 @@ class EntityTest extends \PHPUnit_Framework_TestCase
 
     public function testReceiptDetailEntity()
     {
-        $this->performEntityTest(\Picqer\Financials\Moneybird\Entities\ReceiptDetail::class);
+        $this->performEntityTest(ReceiptDetail::class);
+    }
+
+    public function testReceiptPaymentEntity()
+    {
+        $this->performEntityTest(ReceiptPayment::class);
     }
 
     public function testRecurringSalesInvoiceEntity()

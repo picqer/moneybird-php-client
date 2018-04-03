@@ -4,6 +4,7 @@ use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -63,4 +64,28 @@ class Receipt extends Model {
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
+
+    /**
+     * Register a payment for the current purchase invoice
+     *
+     * @param ReceiptPayment $receiptPayment (payment_date and price are required)
+     * @return $this
+     * @throws ApiException
+     */
+    public function registerPayment(ReceiptPayment $receiptPayment)
+    {
+        if  (! isset($receiptPayment->payment_date)) {
+            throw new ApiException('Required [payment_date] is missing');
+        }
+
+        if  (! isset($receiptPayment->price)) {
+            throw new ApiException('Required [price] is missing');
+        }
+
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
+            $receiptPayment->jsonWithNamespace()
+        );
+
+        return $this;
+    }
 }
