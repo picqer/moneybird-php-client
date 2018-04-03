@@ -21,15 +21,17 @@ trait FindAll
     }
 
     /**
+     * @param array $params
+     * @param bool $fetchAll
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    public function getAll()
+    public function getAll($params = [], $fetchAll = true)
     {
-        $result = $this->connection()->get($this->getEndpoint(), [], true);
+        $result = $this->connection()->get($this->getEndpoint(), $params, $fetchAll);
 
         return $this->collectionFromResult($result);
     }
-
+    
 }
