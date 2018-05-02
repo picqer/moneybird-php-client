@@ -25,9 +25,9 @@ trait FindAll
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    public function getAll()
+    public function getAll($params = [])
     {
-        $result = $this->connection()->get($this->getEndpoint(), [], true);
+        $result = $this->connection()->get($this->getEndpoint(), $params, true);
 
         return $this->collectionFromResult($result);
     }
