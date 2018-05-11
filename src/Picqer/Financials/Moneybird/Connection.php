@@ -60,6 +60,11 @@ class Connection
     /**
      * @var
      */
+    private $refreshToken;
+
+    /**
+     * @var
+     */
     private $redirectUrl;
 
     /**
@@ -253,7 +258,7 @@ class Connection
     /**
      * @return string
      */
-    private function getAuthUrl()
+    public function getAuthUrl()
     {
         return $this->authUrl . '?' . http_build_query(array(
             'client_id' => $this->clientId,
@@ -367,6 +372,14 @@ class Connection
     }
 
     /**
+     * @return mixed
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    /**
      * @throws ApiException
      */
     private function acquireAccessToken()
@@ -389,6 +402,7 @@ class Connection
 
             if (json_last_error() === JSON_ERROR_NONE) {
                 $this->accessToken = array_key_exists('access_token', $body) ? $body['access_token'] : null;
+                $this->refreshToken = array_key_exists('refresh_token', $body) ? $body['refresh_token'] : null;
             } else {
                 throw new ApiException('Could not acquire tokens, json decode failed. Got response: ' . $response->getBody()->getContents());
             }
