@@ -1,5 +1,6 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
+use InvalidArgumentException;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
@@ -7,6 +8,7 @@ use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
+use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
@@ -101,20 +103,27 @@ class SalesInvoice extends Model {
     /**
      * Instruct Moneybird to send the invoice to the contact
      *
-     * @param string $deliveryMethod Email/Post/Manual are allowed types
+     * @param string|SendInvoiceOptions $deliveryMethodOrOptions
+     *
      * @return $this
      * @throws ApiException
      */
-    public function sendInvoice($deliveryMethod = 'Email')
+    public function sendInvoice($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
     {
-        if (!in_array($deliveryMethod, ['Email', 'Post', 'Manual'])) {
-            throw new ApiException('Invalid delivery method for sending invoice');
+        if (is_string($deliveryMethodOrOptions)) {
+            $options = new SendInvoiceOptions($deliveryMethodOrOptions);
+        } else {
+            $options = $deliveryMethodOrOptions;
+        }
+        unset($deliveryMethodOrOptions);
+
+        if (!$options instanceof SendInvoiceOptions) {
+            $options = is_object($options) ? get_class($options) : gettype($options);
+            throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
         }
 
         $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
-            'sales_invoice_sending' => [
-                'delivery_method' => $deliveryMethod
-            ]
+            'sales_invoice_sending' => $options->jsonSerialize()
         ]));
 
         return $this;
