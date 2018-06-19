@@ -9,6 +9,8 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class FinancialMutation
  * @package Picqer\Financials\Moneybird\Entities
+ *
+ * @property  LedgerAccountBooking[] $ledger_account_bookings
  */
 class FinancialMutation extends Model {
 
@@ -47,6 +49,16 @@ class FinancialMutation extends Model {
     protected $endpoint = 'financial_mutations';
 
     /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'ledger_account_bookings' => [
+            'entity' => 'LedgerAccountBooking',
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
+
+    /**
      * @param string $bookingType
      * @param string | int $bookingId
      * @param string | float $priceBase
@@ -79,5 +91,10 @@ class FinancialMutation extends Model {
         );
 
         return $this->connection->patch($this->endpoint . '/' . $this->id . '/link_booking', json_encode($parameters));
+    }
+
+    public function unlinkLedgerAccountBooking(LedgerAccountBooking $ledgerAccountBooking)
+    {
+        return $this->connection->delete($this->endpoint . '/' . $this->id . '/unlink_booking/ledger_account_booking/' . $ledgerAccountBooking->id);
     }
 }
