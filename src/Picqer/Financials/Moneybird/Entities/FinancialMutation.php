@@ -93,8 +93,4 @@ class FinancialMutation extends Model {
         return $this->connection->patch($this->endpoint . '/' . $this->id . '/link_booking', json_encode($parameters));
     }
 
-    public function unlinkLedgerAccountBooking(LedgerAccountBooking $ledgerAccountBooking)
-    {
-        return $this->connection->delete($this->endpoint . '/' . $this->id . '/unlink_booking/ledger_account_booking/' . $ledgerAccountBooking->id);
-    }
 }
