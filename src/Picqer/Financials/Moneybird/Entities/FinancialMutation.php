@@ -17,6 +17,31 @@ class FinancialMutation extends Model {
     use FindAll, Filterable, Synchronizable;
 
     /**
+     * @see https://developer.moneybird.com/api/financial_mutations/#patch_financial_mutations_id_link_booking
+     *
+     * @var array
+     */
+    private static $allowedBookingTypesToLinkToFinancialMutation = [
+        'Document',
+        'LedgerAccount',
+        'NewPurchaseInvoice',
+        'NewReceipt',
+        'PaymentTransactionBatch',
+        'SalesInvoice',
+    ];
+
+    /**
+     * @see https://developer.moneybird.com/api/financial_mutations/#delete_financial_mutations_id_unlink_booking
+     *
+     * @var array
+     */
+    private static $allowedBookingTypesToUnlinkFromFinancialMutation = [
+
+        'ledger_account_booking',
+        'payment',
+    ];
+
+    /**
      * @var array
      */
     protected $fillable = [
@@ -71,8 +96,8 @@ class FinancialMutation extends Model {
      */
     public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
     {
-        if (!in_array($bookingType, ['SalesInvoice', 'Document', 'LedgerAccount', 'PaymentTransactionBatch', 'NewPurchaseInvoice', 'NewReceipt'])) {
-            throw new ApiException('Invalid booking type to link FinancialMutation');
+        if (!in_array($bookingType, self::$allowedBookingTypesToLinkToFinancialMutation)) {
+            throw new ApiException('Invalid booking type to link FinancialMutation, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToLinkToFinancialMutation));
         }
         if (!is_numeric($bookingId)) {
             throw new ApiException('Invalid Booking identifier to link FinancialMutation');
@@ -91,6 +116,30 @@ class FinancialMutation extends Model {
         );
 
         return $this->connection->patch($this->endpoint . '/' . $this->id . '/link_booking', json_encode($parameters));
+    }
+
+    /**
+     * @param string $bookingType
+     * @param string | int $bookingId
+     *
+     * @return array
+     * @throws ApiException
+     */
+    public function unlinkBooking($bookingType, $bookingId)
+    {
+        if (!in_array($bookingType, self::$allowedBookingTypesToUnlinkFromFinancialMutation)) {
+            throw new ApiException('Invalid booking type to unlink, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToUnlinkFromFinancialMutation));
+        }
+        if (!is_numeric($bookingId)) {
+            throw new ApiException('Invalid Booking identifier to unlink');
+        }
+
+        $parameters = [
+            'booking_type' => $bookingType,
+            'booking_id' => $bookingId,
+        ];
+
+        return $this->connection->delete($this->endpoint . '/' . $this->id . '/unlink_booking', json_encode($parameters));
     }
 
 }
