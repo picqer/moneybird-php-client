@@ -97,10 +97,10 @@ class FinancialMutation extends Model {
     public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
     {
         if (!in_array($bookingType, self::$allowedBookingTypesToLinkToFinancialMutation, true)) {
-            throw new ApiException('Invalid booking type to link FinancialMutation, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToLinkToFinancialMutation));
+            throw new ApiException('Invalid booking type to link to FinancialMutation, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToLinkToFinancialMutation));
         }
         if (!is_numeric($bookingId)) {
-            throw new ApiException('Invalid Booking identifier to link FinancialMutation');
+            throw new ApiException('Invalid Booking identifier to link to FinancialMutation');
         }
 
         //Filter out potential NULL values
@@ -125,13 +125,13 @@ class FinancialMutation extends Model {
      * @return array
      * @throws ApiException
      */
-    public function unlinkBooking($bookingType, $bookingId)
+    public function unlinkFromBooking($bookingType, $bookingId)
     {
         if (!in_array($bookingType, self::$allowedBookingTypesToUnlinkFromFinancialMutation, true)) {
-            throw new ApiException('Invalid booking type to unlink, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToUnlinkFromFinancialMutation));
+            throw new ApiException('Invalid booking type to unlink from FinancialMutation, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToUnlinkFromFinancialMutation));
         }
         if (!is_numeric($bookingId)) {
-            throw new ApiException('Invalid Booking identifier to unlink');
+            throw new ApiException('Invalid Booking identifier to unlink from FinancialMutation');
         }
 
         $parameters = [
