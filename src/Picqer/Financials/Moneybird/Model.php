@@ -256,11 +256,11 @@ abstract class Model
     /**
      * Create a new object with the response from the API
      *
-     * @param $response
+     * @param array $response
      *
      * @return static
      */
-    public function makeFromResponse($response)
+    public function makeFromResponse(array $response)
     {
         $entity = new static($this->connection);
         $entity->selfFromResponse($response);
@@ -271,11 +271,11 @@ abstract class Model
     /**
      * Recreate this object with the response from the API
      *
-     * @param $response
+     * @param array $response
      *
      * @return $this
      */
-    public function selfFromResponse($response)
+    public function selfFromResponse(array $response)
     {
         $this->fill($response);
 
@@ -305,7 +305,7 @@ abstract class Model
      *
      * @return array
      */
-    public function collectionFromResult($result)
+    public function collectionFromResult(array $result)
     {
         // If we have one result which is not an assoc array, make it the first element of an array for the
         // collectionFromResult function so we always return a collection from filter

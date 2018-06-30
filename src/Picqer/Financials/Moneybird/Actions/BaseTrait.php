@@ -26,7 +26,7 @@ trait BaseTrait
      *
      * @see \Picqer\Financials\Moneybird\Model::collectionFromResult()
      */
-    abstract protected function collectionFromResult($result);
+    abstract protected function collectionFromResult(array $result);
 
     /**
      * Create a new object with the response from the API
@@ -37,6 +37,6 @@ trait BaseTrait
      *
      * @see \Picqer\Financials\Moneybird\Model::makeFromResponse()
      */
-    abstract protected function makeFromResponse($response);
+    abstract protected function makeFromResponse(array $response);
 
 }
