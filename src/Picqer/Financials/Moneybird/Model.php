@@ -129,7 +129,7 @@ abstract class Model
      */
     protected function isFillable($key)
     {
-        return in_array($key, $this->fillable);
+        return in_array($key, $this->fillable, true);
     }
 
 

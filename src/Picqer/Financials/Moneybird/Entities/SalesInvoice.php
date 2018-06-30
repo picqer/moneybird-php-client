@@ -15,6 +15,9 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class SalesInvoice
  * @package Picqer\Financials\Moneybird\Entities
+ *
+ * @property string $id
+ * @property Contact $contact
  */
 class SalesInvoice extends Model {
 

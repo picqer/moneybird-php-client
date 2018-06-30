@@ -12,6 +12,9 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class Contact
  * @package Picqer\Financials\Moneybird
+ *
+ * @property string $id
+ * @property ContactCustomField[] $custom_fields
  */
 class Contact extends Model
 {
