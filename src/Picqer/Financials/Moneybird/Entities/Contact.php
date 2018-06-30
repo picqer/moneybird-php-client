@@ -76,7 +76,7 @@ class Contact extends Model
      */
     protected $multipleNestedEntities = [
         'custom_fields' => [
-            'entity' => 'ContactCustomField',
+            'entity' => ContactCustomField::class,
             'type' => self::NESTING_TYPE_NESTED_OBJECTS,
         ],
     ];

@@ -67,11 +67,11 @@ class RecurringSalesInvoice extends Model {
      */
     protected $multipleNestedEntities = [
         'details' => [
-            'entity' => 'RecurringSalesInvoiceDetail',
+            'entity' => RecurringSalesInvoiceDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'custom_fields' => [
-            'entity' => 'RecurringSalesInvoiceCustomField',
+            'entity' => RecurringSalesInvoiceCustomField::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

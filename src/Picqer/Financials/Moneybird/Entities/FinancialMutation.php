@@ -53,7 +53,7 @@ class FinancialMutation extends Model {
      */
     protected $multipleNestedEntities = [
         'ledger_account_bookings' => [
-            'entity' => 'LedgerAccountBooking',
+            'entity' => LedgerAccountBooking::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

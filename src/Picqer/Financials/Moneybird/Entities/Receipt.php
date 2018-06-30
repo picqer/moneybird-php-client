@@ -60,7 +60,7 @@ class Receipt extends Model {
      */
     protected $multipleNestedEntities = [
         'details' => [
-            'entity' => 'ReceiptDetail',
+            'entity' => ReceiptDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

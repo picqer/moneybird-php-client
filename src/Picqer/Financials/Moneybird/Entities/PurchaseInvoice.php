@@ -62,7 +62,7 @@ class PurchaseInvoice extends Model
      * @var array
      */
     protected $singleNestedEntities = [
-        'contact' => 'Contact'
+        'contact' => Contact::class,
     ];
 
     /**
@@ -70,7 +70,7 @@ class PurchaseInvoice extends Model
      */
     protected $multipleNestedEntities = [
         'details' => [
-            'entity' => 'PurchaseInvoiceDetail',
+            'entity' => PurchaseInvoiceDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

@@ -43,7 +43,7 @@ class GeneralJournalDocument extends Model {
      */
     protected $multipleNestedEntities = [
         'general_journal_document_entries' => [
-            'entity' => 'GeneralJournalDocumentEntry',
+            'entity' => GeneralJournalDocumentEntry::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

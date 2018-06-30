@@ -282,7 +282,7 @@ abstract class Model
         foreach ($this->getSingleNestedEntities() as $key => $value)
         {
             if (isset($response[$key])) {
-                $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
+                $entityName = $value;
                 $this->$key = new $entityName($this->connection, $response[$key]);
             }
         }
@@ -290,10 +290,10 @@ abstract class Model
         foreach ($this->getMultipleNestedEntities() as $key => $value)
         {
             if (isset($response[$key])) {
-                $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
-                /** @var \Picqer\Financials\Moneybird\Model $instaniatedEntity */
-                $instaniatedEntity = new $entityName($this->connection);
-                $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
+                $entityName =  $value['entity'];
+                /** @var self $instantiatedEntity */
+                $instantiatedEntity = new $entityName($this->connection);
+                $this->$key = $instantiatedEntity->collectionFromResult($response[$key]);
             }
         }
 
@@ -301,7 +301,7 @@ abstract class Model
     }
 
     /**
-     * @param $result
+     * @param array $result
      *
      * @return array
      */

@@ -81,15 +81,15 @@ class Estimate extends Model
      */
     protected $multipleNestedEntities = [
         'custom_fields' => [
-            'entity' => 'SalesInvoiceCustomField',
+            'entity' => SalesInvoiceCustomField::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'details' => [
-            'entity' => 'SalesInvoiceDetail',
+            'entity' => SalesInvoiceDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'notes' => [
-            'entity' => 'Note',
+            'entity' => Note::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
