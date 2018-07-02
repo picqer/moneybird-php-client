@@ -207,6 +207,8 @@ class SalesInvoice extends Model {
      * @param string $file
      *
      * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function addAttachment($file)
     {

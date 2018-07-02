@@ -184,7 +184,7 @@ class Connection
      * @return \GuzzleHttp\Psr7\Request
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    private function createRequest2($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    private function createRequestNoJson($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
     {
         // If access token is not set or token has expired, acquire new token
         if (empty($this->accessToken)) {
@@ -293,7 +293,7 @@ class Connection
     public function upload($url, $options)
     {
         try {
-            $request = $this->createRequest2('POST', $this->formatUrl($url, 'post'), null);
+            $request = $this->createRequestNoJson('POST', $this->formatUrl($url, 'post'), null);
 
             $response = $this->client()->send($request, $options);
 
