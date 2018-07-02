@@ -200,4 +200,25 @@ class SalesInvoice extends Model {
 
         return $this->makeFromResponse($response);
     }
+
+    /**
+     * Add Attachment to this invoice
+     *
+     * @param string $file
+     *
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+     */
+    public function addAttachment($file)
+    {
+        $this->connection()->upload($this->endpoint . '/' . $this->id . '/attachments', [
+            'multipart' => [
+                [
+                    'name' => 'file',
+                    'contents' => fopen($file, 'r'),
+                ],
+            ]
+        ]);
+
+        return $this;
+    }
 }

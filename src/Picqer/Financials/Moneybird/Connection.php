@@ -175,6 +175,35 @@ class Connection
     }
 
     /**
+     * @param string $method
+     * @param $endpoint
+     * @param null $body
+     * @param array $params
+     * @param array $headers
+     *
+     * @return \GuzzleHttp\Psr7\Request
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    private function createRequest2($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    {
+        // If access token is not set or token has expired, acquire new token
+        if (empty($this->accessToken)) {
+            $this->acquireAccessToken();
+        }
+        // If we have a token, sign the request
+        if (! empty($this->accessToken)) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+        // Create param string
+        if (!empty($params)) {
+            $endpoint .= '?' . http_build_query($params);
+        }
+        // Create the request
+        $request = new Request($method, $endpoint, $headers, $body);
+        return $request;
+    }
+
+    /**
      * @param string $url
      * @param array $params
      * @param bool $fetchAll
@@ -252,6 +281,25 @@ class Connection
             return $this->parseResponse($response);
         } catch (Exception $e) {
             throw $this->parseExceptionForErrorMessages($e);
+        }
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @return mixed
+     * @throws ApiException
+     */
+    public function upload($url, $options)
+    {
+        try {
+            $request = $this->createRequest2('POST', $this->formatUrl($url, 'post'), null);
+
+            $response = $this->client()->send($request, $options);
+
+            return $this->parseResponse($response);
+        } catch (Exception $e) {
+            $this->parseExceptionForErrorMessages($e);
         }
     }
 
