@@ -240,13 +240,14 @@ class Connection
 
     /**
      * @param string $url
+     * @param string $body
      * @return mixed
      * @throws ApiException
      */
-    public function delete($url)
+    public function delete($url, $body)
     {
         try {
-            $request = $this->createRequest('DELETE', $this->formatUrl($url, 'delete'));
+            $request = $this->createRequest('DELETE', $this->formatUrl($url, 'delete'), $body);
             $response = $this->client()->send($request);
 
             return $this->parseResponse($response);

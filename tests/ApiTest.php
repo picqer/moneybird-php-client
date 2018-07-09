@@ -120,4 +120,28 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $financialMutation->id = $financialMutationId;
         $this->assertEquals($httpResponseCode, $financialMutation->linkToBooking($bookingType, $bookingId, $priceBase));
     }
+
+    /**
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function testFinancialMutationUnlinkFromBooking()
+    {
+        $financialMutationId = 1;
+        $bookingType = 'ledger_account_booking';
+        $bookingId = 100;
+        $parameters = [
+            'booking_type' => $bookingType,
+            'booking_id' => $bookingId,
+        ];
+        $response = [];
+
+        $this->mockedConnection->expects($this->once())
+            ->method('delete')
+            ->with('financial_mutations/' . $financialMutationId . '/unlink_booking', json_encode($parameters))
+            ->will($this->returnValue($response));
+
+        $financialMutation = $this->client->financialMutation();
+        $financialMutation->id = $financialMutationId;
+        $this->assertEquals($response, $financialMutation->unlinkFromBooking($bookingType, $bookingId));
+    }
 }
