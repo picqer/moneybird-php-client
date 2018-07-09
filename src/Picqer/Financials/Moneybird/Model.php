@@ -129,7 +129,7 @@ abstract class Model
      */
     protected function isFillable($key)
     {
-        return in_array($key, $this->fillable);
+        return in_array($key, $this->fillable, true);
     }
 
 
@@ -256,11 +256,11 @@ abstract class Model
     /**
      * Create a new object with the response from the API
      *
-     * @param $response
+     * @param array $response
      *
      * @return static
      */
-    public function makeFromResponse($response)
+    public function makeFromResponse(array $response)
     {
         $entity = new static($this->connection);
         $entity->selfFromResponse($response);
@@ -271,18 +271,18 @@ abstract class Model
     /**
      * Recreate this object with the response from the API
      *
-     * @param $response
+     * @param array $response
      *
      * @return $this
      */
-    public function selfFromResponse($response)
+    public function selfFromResponse(array $response)
     {
         $this->fill($response);
 
         foreach ($this->getSingleNestedEntities() as $key => $value)
         {
             if (isset($response[$key])) {
-                $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value;
+                $entityName = $value;
                 $this->$key = new $entityName($this->connection, $response[$key]);
             }
         }
@@ -290,10 +290,10 @@ abstract class Model
         foreach ($this->getMultipleNestedEntities() as $key => $value)
         {
             if (isset($response[$key])) {
-                $entityName = 'Picqer\Financials\Moneybird\Entities\\' . $value['entity'];
-                /** @var \Picqer\Financials\Moneybird\Model $instaniatedEntity */
-                $instaniatedEntity = new $entityName($this->connection);
-                $this->$key = $instaniatedEntity->collectionFromResult($response[$key]);
+                $entityName =  $value['entity'];
+                /** @var self $instantiatedEntity */
+                $instantiatedEntity = new $entityName($this->connection);
+                $this->$key = $instantiatedEntity->collectionFromResult($response[$key]);
             }
         }
 
@@ -301,11 +301,11 @@ abstract class Model
     }
 
     /**
-     * @param $result
+     * @param array $result
      *
      * @return array
      */
-    public function collectionFromResult($result)
+    public function collectionFromResult(array $result)
     {
         // If we have one result which is not an assoc array, make it the first element of an array for the
         // collectionFromResult function so we always return a collection from filter

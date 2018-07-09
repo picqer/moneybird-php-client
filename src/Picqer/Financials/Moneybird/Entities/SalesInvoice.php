@@ -15,6 +15,9 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class SalesInvoice
  * @package Picqer\Financials\Moneybird\Entities
+ *
+ * @property string $id
+ * @property Contact $contact
  */
 class SalesInvoice extends Model {
 
@@ -75,7 +78,7 @@ class SalesInvoice extends Model {
      * @var array
      */
     protected $singleNestedEntities = [
-        'contact' => 'Contact'
+        'contact' => Contact::class,
     ];
 
     /**
@@ -83,19 +86,19 @@ class SalesInvoice extends Model {
      */
     protected $multipleNestedEntities = [
         'custom_fields' => [
-            'entity' => 'SalesInvoiceCustomField',
+            'entity' => SalesInvoiceCustomField::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'details' => [
-            'entity' => 'SalesInvoiceDetail',
+            'entity' => SalesInvoiceDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'payments' => [
-            'entity' => 'SalesInvoicePayment',
+            'entity' => SalesInvoicePayment::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'notes' => [
-            'entity' => 'Note',
+            'entity' => Note::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

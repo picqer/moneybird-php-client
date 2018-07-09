@@ -40,7 +40,7 @@ class FinancialStatement extends Model {
      */
     protected $multipleNestedEntities = [
         'financial_mutations' => [
-            'entity' => 'FinancialMutation',
+            'entity' => FinancialMutation::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

@@ -12,6 +12,9 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class Contact
  * @package Picqer\Financials\Moneybird
+ *
+ * @property string $id
+ * @property ContactCustomField[] $custom_fields
  */
 class Contact extends Model
 {
@@ -76,7 +79,7 @@ class Contact extends Model
      */
     protected $multipleNestedEntities = [
         'custom_fields' => [
-            'entity' => 'ContactCustomField',
+            'entity' => ContactCustomField::class,
             'type' => self::NESTING_TYPE_NESTED_OBJECTS,
         ],
     ];
