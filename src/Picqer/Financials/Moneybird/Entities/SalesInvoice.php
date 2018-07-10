@@ -204,19 +204,23 @@ class SalesInvoice extends Model {
     /**
      * Add Attachment to this invoice
      *
-     * @param string $file
+     * You can use fopen('/path/to/file', 'r') in $resource.
+     *
+     * @param string $filename The filename of the attachment
+     * @param resource $contents A StreamInterface/resource/string, @see http://docs.guzzlephp.org/en/stable/request-options.html?highlight=multipart#multipart
      *
      * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    public function addAttachment($file)
+    public function addAttachment($filename, $contents)
     {
         $this->connection()->upload($this->endpoint . '/' . $this->id . '/attachments', [
             'multipart' => [
                 [
                     'name' => 'file',
-                    'contents' => fopen($file, 'r'),
+                    'contents' => $contents,
+                    'filename' => $filename,
                 ],
             ]
         ]);
