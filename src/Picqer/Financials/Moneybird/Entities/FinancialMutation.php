@@ -37,8 +37,8 @@ class FinancialMutation extends Model {
      */
     private static $allowedBookingTypesToUnlinkFromFinancialMutation = [
 
-        'ledger_account_booking',
-        'payment',
+        'LedgerAccountBooking',
+        'Payment',
     ];
 
     /**

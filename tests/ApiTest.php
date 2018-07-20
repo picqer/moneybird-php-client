@@ -127,7 +127,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
     public function testFinancialMutationUnlinkFromBooking()
     {
         $financialMutationId = 1;
-        $bookingType = 'ledger_account_booking';
+        $bookingType = 'LedgerAccountBooking';
         $bookingId = 100;
         $parameters = [
             'booking_type' => $bookingType,
