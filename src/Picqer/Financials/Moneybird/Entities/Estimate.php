@@ -64,6 +64,7 @@ class Estimate extends Model
         'custom_fields',
         'notes',
         'attachments',
+        'public_view_code',
     ];
 
     /**
@@ -75,7 +76,7 @@ class Estimate extends Model
      * @var string
      */
     protected $namespace = 'estimate';
-    
+
     /**
      * @var array
      */
