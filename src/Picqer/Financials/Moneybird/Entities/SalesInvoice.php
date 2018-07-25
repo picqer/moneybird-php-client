@@ -62,6 +62,7 @@ class SalesInvoice extends Model {
         'notes',
         'attachments',
         'version',
+        'public_view_code',
     ];
 
     /**
