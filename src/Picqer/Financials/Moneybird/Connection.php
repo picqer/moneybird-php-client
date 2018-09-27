@@ -273,7 +273,7 @@ class Connection
      * @return mixed
      * @throws ApiException
      */
-    public function delete($url, $body)
+    public function delete($url, $body = null)
     {
         try {
             $request = $this->createRequest('DELETE', $this->formatUrl($url, 'delete'), $body);
