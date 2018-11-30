@@ -21,6 +21,7 @@ class LedgerAccount extends Model {
         'id',
         'name',
         'account_type',
+        'account_id',
         'parent_id',
         'created_at',
         'updated_at',
