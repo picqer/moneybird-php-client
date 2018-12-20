@@ -231,4 +231,48 @@ class SalesInvoice extends Model {
 
         return $this;
     }
+
+    /**
+     * Pauses the sales invoice. The automatic workflow steps will not be executed while the sales invoice is paused.
+     *
+     * @return boolean
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function pauseWorkflow()
+    {
+        try {
+            $this->connection()->post($this->endpoint . '/' . $this->id . '/pause', json_encode([]));
+        } catch (ApiException $exception) {
+            if (strpos($exception->getMessage(), "The sales_invoice is already paused") !== false) {
+                return true; // Everything is fine since the sales invoice was already paused we don't need an error.
+            }
+
+            throw $exception;
+        }
+
+        return true;
+    }
+
+    /**
+     * Resumes the sales invoice. The automatic workflow steps will execute again after resuming.
+     *
+     * @return boolean
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function resumeWorkflow()
+    {
+        try {
+            $this->connection()->post($this->endpoint . '/' . $this->id . '/resume', json_encode([]));
+        } catch (ApiException $exception) {
+            if (strpos($exception->getMessage(), "The sales_invoice isn't paused") !== false) {
+                return true; // Everything is fine since the sales invoice wasn't paused we don't need an error.
+            }
+
+            throw $exception;
+        }
+
+        return true;
+    }
 }
