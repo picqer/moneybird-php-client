@@ -235,7 +235,7 @@ class SalesInvoice extends Model {
     /**
      * Pauses the sales invoice. The automatic workflow steps will not be executed while the sales invoice is paused.
      *
-     * @return boolean
+     * @return bool
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
@@ -257,7 +257,7 @@ class SalesInvoice extends Model {
     /**
      * Resumes the sales invoice. The automatic workflow steps will execute again after resuming.
      *
-     * @return boolean
+     * @return bool
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
