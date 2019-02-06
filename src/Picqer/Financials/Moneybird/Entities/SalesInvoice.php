@@ -38,6 +38,7 @@ class SalesInvoice extends Model {
         'state',
         'invoice_date',
         'due_date',
+        'first_due_interval',
         'payment_conditions',
         'reference',
         'language',
