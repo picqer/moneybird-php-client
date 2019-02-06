@@ -19,6 +19,7 @@ class Webhook extends Model {
     protected $fillable = [
         'id',
         'url',
+        'events',
         'last_http_status',
         'last_http_body',
     ];
