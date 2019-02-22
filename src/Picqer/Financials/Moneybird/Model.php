@@ -9,6 +9,7 @@ abstract class Model
 
     const NESTING_TYPE_ARRAY_OF_OBJECTS = 0;
     const NESTING_TYPE_NESTED_OBJECTS = 1;
+    const JSON_OPTIONS = JSON_FORCE_OBJECT;
 
     /**
      * @var Connection
@@ -190,7 +191,7 @@ abstract class Model
     {
         $array = $this->getArrayWithNestedObjects();
 
-        return json_encode($array, JSON_FORCE_OBJECT);
+        return json_encode($array, static::JSON_OPTIONS);
     }
 
     /**
@@ -199,7 +200,7 @@ abstract class Model
     public function jsonWithNamespace()
     {
         if ($this->namespace !== '') {
-            return json_encode([$this->namespace => $this->getArrayWithNestedObjects()], JSON_FORCE_OBJECT);
+            return json_encode([$this->namespace => $this->getArrayWithNestedObjects()], static::JSON_OPTIONS);
         } else {
             return $this->json();
         }
