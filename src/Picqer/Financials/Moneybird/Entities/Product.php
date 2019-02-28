@@ -22,6 +22,7 @@ class Product extends Model {
         'id',
         'description',
         'price',
+        'currency',
         'frequency',
         'frequency_type',
         'tax_rate_id',
