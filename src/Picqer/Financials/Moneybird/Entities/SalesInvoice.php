@@ -1,6 +1,5 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
-use InvalidArgumentException;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
@@ -8,16 +7,47 @@ use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
-use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class SalesInvoice
  * @package Picqer\Financials\Moneybird\Entities
- *
- * @property string $id
+ * @property int | string $id
+ * @property int | string $contact_id
  * @property Contact $contact
+ * @property int | string $invoice_id
+ * @property string $invoice_sequence_id
+ * @property int | string $workflow_id
+ * @property int | string $document_style_id
+ * @property int | string $identity_id
+ * @property string $state
+ * @property string $invoice_date
+ * @property string $payment_conditions
+ * @property string $reference
+ * @property string $language
+ * @property string $currency
+ * @property bool $prices_are_incl_tax
+ * @property string $discount
+ * @property string $original_sales_invoice_id
+ * @property string $paid_at
+ * @property string $sent_at
+ * @property string $created_at
+ * @property string $updated_at
+ * @property SalesInvoiceDetail[] $details
+ * @property SalesInvoicePayment[] $payments
+ * @property string $total_paid
+ * @property string $total_unpaid
+ * @property string $total_price_excl_tax
+ * @property string $total_price_excl_tax_base
+ * @property string $total_price_incl_tax
+ * @property string $total_price_incl_tax_base
+ * @property string $url
+ * @property SalesInvoiceCustomField[] $custom_fields
+ * @property Note[] $notes
+ * @property GeneralDocument[] $attachments
+ * @property string $version
+ *
  */
 class SalesInvoice extends Model {
 
@@ -38,7 +68,6 @@ class SalesInvoice extends Model {
         'state',
         'invoice_date',
         'due_date',
-        'first_due_interval',
         'payment_conditions',
         'reference',
         'language',
@@ -63,7 +92,6 @@ class SalesInvoice extends Model {
         'notes',
         'attachments',
         'version',
-        'public_view_code',
     ];
 
     /**
@@ -80,7 +108,7 @@ class SalesInvoice extends Model {
      * @var array
      */
     protected $singleNestedEntities = [
-        'contact' => Contact::class,
+        'contact' => 'Contact'
     ];
 
     /**
@@ -88,19 +116,19 @@ class SalesInvoice extends Model {
      */
     protected $multipleNestedEntities = [
         'custom_fields' => [
-            'entity' => SalesInvoiceCustomField::class,
+            'entity' => 'SalesInvoiceCustomField',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'details' => [
-            'entity' => SalesInvoiceDetail::class,
+            'entity' => 'SalesInvoiceDetail',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'payments' => [
-            'entity' => SalesInvoicePayment::class,
+            'entity' => 'SalesInvoicePayment',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
         'notes' => [
-            'entity' => Note::class,
+            'entity' => 'Note',
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
@@ -108,40 +136,30 @@ class SalesInvoice extends Model {
     /**
      * Instruct Moneybird to send the invoice to the contact
      *
-     * @param string|SendInvoiceOptions $deliveryMethodOrOptions
-     *
+     * @param string $deliveryMethod Email/Post/Manual are allowed types
      * @return $this
      * @throws ApiException
      */
-    public function sendInvoice($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
+    public function sendInvoice($deliveryMethod = 'Email')
     {
-        if (is_string($deliveryMethodOrOptions)) {
-            $options = new SendInvoiceOptions($deliveryMethodOrOptions);
-        } else {
-            $options = $deliveryMethodOrOptions;
-        }
-        unset($deliveryMethodOrOptions);
-
-        if (!$options instanceof SendInvoiceOptions) {
-            $options = is_object($options) ? get_class($options) : gettype($options);
-            throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
+        if (!in_array($deliveryMethod, ['Email', 'Post', 'Manual'])) {
+            throw new ApiException('Invalid delivery method for sending invoice');
         }
 
         $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
-            'sales_invoice_sending' => $options->jsonSerialize()
+            'sales_invoice_sending' => [
+                'delivery_method' => $deliveryMethod
+            ]
         ]));
-
-        return $this;
+	    
+	return $this;
     }
 
     /**
      * Find SalesInvoice by invoice_id
      *
-     * @param string|int $invoiceId
-     *
+     * @param $invoiceId
      * @return static
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function findByInvoiceId($invoiceId)
     {
@@ -167,11 +185,11 @@ class SalesInvoice extends Model {
             throw new ApiException('Required [price] is missing');
         }
 
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
+        $this->connection()->patch($this->endpoint . '/' . $this->id . '/register_payment',
             $salesInvoicePayment->jsonWithNamespace()
         );
-
-        return $this;
+	    
+	return $this;
     }
 
     /**
@@ -186,94 +204,21 @@ class SalesInvoice extends Model {
         $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
             $note->jsonWithNamespace()
         );
-
-        return $this;
+	    
+	return $this;
     }
 
-    /**
-     * Create a credit invoice based on the current invoice.
-     *
-     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
-    public function duplicateToCreditInvoice()
-    {
-        $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
-            json_encode([])	// No body needed for this call. The patch method however needs one.
-        );
+	/**
+	 * Create a credit invoice based on the current invoice.
+	 *
+	 * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+	 */
+	public function duplicateToCreditInvoice()
+	{
+		$response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
+			json_encode([])	// No body needed for this call. The patch method however needs one.
+		);
 
-        return $this->makeFromResponse($response);
-    }
-
-    /**
-     * Add Attachment to this invoice
-     *
-     * You can use fopen('/path/to/file', 'r') in $resource.
-     *
-     * @param string $filename The filename of the attachment
-     * @param resource $contents A StreamInterface/resource/string, @see http://docs.guzzlephp.org/en/stable/request-options.html?highlight=multipart#multipart
-     *
-     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
-    public function addAttachment($filename, $contents)
-    {
-        $this->connection()->upload($this->endpoint . '/' . $this->id . '/attachments', [
-            'multipart' => [
-                [
-                    'name' => 'file',
-                    'contents' => $contents,
-                    'filename' => $filename,
-                ],
-            ]
-        ]);
-
-        return $this;
-    }
-
-    /**
-     * Pauses the sales invoice. The automatic workflow steps will not be executed while the sales invoice is paused.
-     *
-     * @return bool
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
-    public function pauseWorkflow()
-    {
-        try {
-            $this->connection()->post($this->endpoint . '/' . $this->id . '/pause', json_encode([]));
-        } catch (ApiException $exception) {
-            if (strpos($exception->getMessage(), "The sales_invoice is already paused") !== false) {
-                return true; // Everything is fine since the sales invoice was already paused we don't need an error.
-            }
-
-            throw $exception;
-        }
-
-        return true;
-    }
-
-    /**
-     * Resumes the sales invoice. The automatic workflow steps will execute again after resuming.
-     *
-     * @return bool
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
-    public function resumeWorkflow()
-    {
-        try {
-            $this->connection()->post($this->endpoint . '/' . $this->id . '/resume', json_encode([]));
-        } catch (ApiException $exception) {
-            if (strpos($exception->getMessage(), "The sales_invoice isn't paused") !== false) {
-                return true; // Everything is fine since the sales invoice wasn't paused we don't need an error.
-            }
-
-            throw $exception;
-        }
-
-        return true;
-    }
+		return $this->makeFromResponse($response);
+	}
 }
