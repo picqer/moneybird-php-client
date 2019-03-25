@@ -105,9 +105,9 @@ abstract class Model
      * Fill the entity from an array
      *
      * @param array $attributes
-     * @param bool $first_initialize
+     * @param boolean $first_initialize
      */
-    protected function fill(array $attributes, bool $first_initialize)
+    protected function fill(array $attributes, boolean $first_initialize)
     {
         if($first_initialize) {
             $this->enableFirstInitialize();
@@ -181,7 +181,7 @@ abstract class Model
                 $from = $this->attributes[$key];
             }
 
-            
+
             $this->attribute_changes[$key] = [
                 'from' => $from,
                 'to' => $value
