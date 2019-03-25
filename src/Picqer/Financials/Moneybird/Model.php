@@ -175,8 +175,15 @@ abstract class Model
     protected function setAttribute($key, $value)
     {
         if(!isset($this->attribute_changes[$key])) {
+            $from = null;
+
+            if(isset($this->attributes[$key])) {
+                $from = $this->attributes[$key];
+            }
+
+            
             $this->attribute_changes[$key] = [
-                'from' => $this->attributes[$key],
+                'from' => $from,
                 'to' => $value
             ];
         } else {
