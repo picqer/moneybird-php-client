@@ -21,6 +21,16 @@ abstract class Model
     protected $attributes = [ ];
 
     /**
+     * @var array The model's changed attributes
+     */
+    protected $attribute_changes = [ ];
+
+    /**
+     * @var bool Register the intilized state of this model for dirty attributes registration
+     */
+    protected $initializing = false;
+
+    /**
      * @var array The model's fillable attributes
      */
     protected $fillable = [ ];
@@ -65,7 +75,7 @@ abstract class Model
     public function __construct(Connection $connection, array $attributes = [ ])
     {
         $this->connection = $connection;
-        $this->fill($attributes);
+        $this->fill($attributes, false);
     }
 
 
@@ -95,14 +105,39 @@ abstract class Model
      * Fill the entity from an array
      *
      * @param array $attributes
+     * @param bool $first_initialize
      */
-    protected function fill(array $attributes)
+    protected function fill(array $attributes, bool $first_initialize = false)
     {
+        if($first_initialize) {
+            $this->enableFirstInitialize();
+        }
+
         foreach ($this->fillableFromArray($attributes) as $key => $value) {
             if ($this->isFillable($key)) {
                 $this->setAttribute($key, $value);
             }
         }
+
+        if($first_initialize) {
+            $this->disableFirstInitialize();
+        }
+    }
+
+
+    /**
+     * Register the current model as initializing
+     */
+    protected function enableFirstInitialize() {
+        $this->initializing = true;
+    }
+
+
+    /**
+     * Register the current model as initialized
+     */
+    protected function disableFirstInitialize() {
+        $this->initializing = false;
     }
 
 
@@ -139,7 +174,59 @@ abstract class Model
      */
     protected function setAttribute($key, $value)
     {
+        if(!isset($this->attribute_changes[$key])) {
+            $this->attribute_changes[$key] = [
+                'from' => $this->attributes[$key],
+                'to' => $value
+            ];
+        } else {
+            $this->attribute_changes[$key]['to'] = $value;
+        }
+
         $this->attributes[$key] = $value;
+    }
+
+
+    /**
+     * All keys that are changed in this model
+     *
+     * @return array
+     */
+    public function getDirty() {
+        return array_keys($this->attribute_changes);
+    }
+
+
+    /**
+     * All changed keys with it values
+     *
+     * @return array
+     */
+    public function getDirtyValues() {
+        return $this->attribute_changes;
+    }
+
+
+    /**
+     * Check if the attribute is changed since the last save/update/create action
+     *
+     * @param $attributeName
+     * @return bool
+     */
+    public function isAttributeDirty($attributeName) {
+        if(in_array($attributeName, $this->attribute_changes)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Clear the changed/dirty attribute in this model
+     */
+    public function clearDirty() {
+        $this->attribute_changes = [];
     }
 
 
@@ -199,7 +286,9 @@ abstract class Model
     public function jsonWithNamespace()
     {
         if ($this->namespace !== '') {
-            return json_encode([$this->namespace => $this->getArrayWithNestedObjects()], JSON_FORCE_OBJECT);
+            return json_encode([
+                $this->namespace => $this->getArrayWithNestedObjects()
+            ], JSON_FORCE_OBJECT);
         } else {
             return $this->json();
         }
@@ -217,7 +306,10 @@ abstract class Model
 
         foreach ($this->attributes as $attributeName => $attributeValue) {
             if (! is_object($attributeValue)) {
-                $result[$attributeName] = $attributeValue;
+                //check if result is changed
+                if($this->isAttributeDirty($attributeName)) {
+                    $result[$attributeName] = $attributeValue;
+                }
             }
 
             if (array_key_exists($attributeName, $this->getSingleNestedEntities())) {
@@ -277,7 +369,7 @@ abstract class Model
      */
     public function selfFromResponse(array $response)
     {
-        $this->fill($response);
+        $this->fill($response, true);
 
         foreach ($this->getSingleNestedEntities() as $key => $value)
         {
@@ -345,10 +437,12 @@ abstract class Model
     public function __debugInfo()
     {
         $result = [];
+
         foreach ($this->fillable as $attribute)
         {
             $result[$attribute] = $this->$attribute;
         }
+
         return $result;
     }
 
