@@ -107,7 +107,7 @@ abstract class Model
      * @param array $attributes
      * @param bool $first_initialize
      */
-    protected function fill(array $attributes, bool $first_initialize = false)
+    protected function fill(array $attributes, bool $first_initialize)
     {
         if($first_initialize) {
             $this->enableFirstInitialize();
