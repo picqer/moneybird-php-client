@@ -205,6 +205,22 @@ class SalesInvoice extends Model {
 
         return $this->makeFromResponse($response);
     }
+    
+    /**
+     * Register a payment for a credit invoice.
+     *
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function registerPaymentForCreditInvoice()
+    {
+        $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/register_payment_creditinvoice',
+            json_encode([])	// No body needed for this call. The patch method however needs one.
+        );
+
+        return $this->makeFromResponse($response);
+    }
 
     /**
      * Add Attachment to this invoice
