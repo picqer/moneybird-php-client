@@ -1,10 +1,11 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class ReceiptDetail
- * @package Picqer\Financials\Moneybird\Entities
+ * Class ReceiptDetail.
  */
 class ReceiptDetail extends Model
 {

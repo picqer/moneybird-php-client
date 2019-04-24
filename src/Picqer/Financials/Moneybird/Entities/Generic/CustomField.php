@@ -1,10 +1,11 @@
-<?php namespace Picqer\Financials\Moneybird\Entities\Generic;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities\Generic;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class CustomField
- * @package Picqer\Financials\Moneybird\Entities\Generic
+ * Class CustomField.
  */
 abstract class CustomField extends Model
 {
@@ -13,6 +14,6 @@ abstract class CustomField extends Model
      */
     protected $fillable = [
         'id',
-        'value'
+        'value',
     ];
 }

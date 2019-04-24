@@ -1,28 +1,28 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
-use Picqer\Financials\Moneybird\Actions\Removable;
-use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Model;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\Synchronizable;
+use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Filterable;
+use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
-use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Contact
- * @package Picqer\Financials\Moneybird
+ * Class Contact.
  *
- * @property integer $id
+ * @property int $id
  * @property string $company_name
  * @property string $first_name
  * @property string $last_name
  */
 class Estimate extends Model
 {
-
     use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, PrivateDownloadable;
 
     /**
@@ -96,7 +96,7 @@ class Estimate extends Model
     ];
 
     /**
-     * Instruct Moneybird to send the estimate to the contact
+     * Instruct Moneybird to send the estimate to the contact.
      *
      * @param string|SendInvoiceOptions $deliveryMethodOrOptions
      *
@@ -112,16 +112,15 @@ class Estimate extends Model
         }
         unset($deliveryMethodOrOptions);
 
-        if (!$options instanceof SendInvoiceOptions) {
+        if (! $options instanceof SendInvoiceOptions) {
             $options = is_object($options) ? get_class($options) : gettype($options);
             throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
         }
 
         $this->connection->patch($this->endpoint . '/' . $this->id . '/send_estimate', json_encode([
-            'estimate_sending' => $options->jsonSerialize()
+            'estimate_sending' => $options->jsonSerialize(),
         ]));
 
         return $this;
     }
-
 }

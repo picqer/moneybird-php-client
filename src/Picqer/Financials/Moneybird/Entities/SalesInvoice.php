@@ -1,26 +1,27 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
-use Picqer\Financials\Moneybird\Actions\Filterable;
+use Picqer\Financials\Moneybird\Model;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
-use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Removable;
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
-use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
-use Picqer\Financials\Moneybird\Model;
+use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
+use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 
 /**
- * Class SalesInvoice
- * @package Picqer\Financials\Moneybird\Entities
+ * Class SalesInvoice.
  *
  * @property string $id
  * @property Contact $contact
  */
-class SalesInvoice extends Model {
-
+class SalesInvoice extends Model
+{
     use FindAll, FindOne, Storable, Removable, Filterable, PrivateDownloadable, Synchronizable;
 
     /**
@@ -106,7 +107,7 @@ class SalesInvoice extends Model {
     ];
 
     /**
-     * Instruct Moneybird to send the invoice to the contact
+     * Instruct Moneybird to send the invoice to the contact.
      *
      * @param string|SendInvoiceOptions $deliveryMethodOrOptions
      *
@@ -122,20 +123,20 @@ class SalesInvoice extends Model {
         }
         unset($deliveryMethodOrOptions);
 
-        if (!$options instanceof SendInvoiceOptions) {
+        if (! $options instanceof SendInvoiceOptions) {
             $options = is_object($options) ? get_class($options) : gettype($options);
             throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
         }
 
         $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
-            'sales_invoice_sending' => $options->jsonSerialize()
+            'sales_invoice_sending' => $options->jsonSerialize(),
         ]));
 
         return $this;
     }
 
     /**
-     * Find SalesInvoice by invoice_id
+     * Find SalesInvoice by invoice_id.
      *
      * @param string|int $invoiceId
      *
@@ -151,7 +152,7 @@ class SalesInvoice extends Model {
     }
 
     /**
-     * Register a payment for the current invoice
+     * Register a payment for the current invoice.
      *
      * @param SalesInvoicePayment $salesInvoicePayment (payment_date and price are required)
      * @return $this
@@ -159,11 +160,11 @@ class SalesInvoice extends Model {
      */
     public function registerPayment(SalesInvoicePayment $salesInvoicePayment)
     {
-        if  (! isset($salesInvoicePayment->payment_date)) {
+        if (! isset($salesInvoicePayment->payment_date)) {
             throw new ApiException('Required [payment_date] is missing');
         }
 
-        if  (! isset($salesInvoicePayment->price)) {
+        if (! isset($salesInvoicePayment->price)) {
             throw new ApiException('Required [price] is missing');
         }
 
@@ -173,9 +174,9 @@ class SalesInvoice extends Model {
 
         return $this;
     }
-    
+
     /**
-     * Delete a payment for the current invoice
+     * Delete a payment for the current invoice.
      *
      * @param SalesInvoicePayment $salesInvoicePayment (id is required)
      * @return $this
@@ -183,7 +184,7 @@ class SalesInvoice extends Model {
      */
     public function deletePayment(SalesInvoicePayment $salesInvoicePayment)
     {
-        if  (! isset($salesInvoicePayment->id)) {
+        if (! isset($salesInvoicePayment->id)) {
             throw new ApiException('Required [id] is missing');
         }
 
@@ -193,7 +194,7 @@ class SalesInvoice extends Model {
     }
 
     /**
-     * Add a note to the current invoice
+     * Add a note to the current invoice.
      *
      * @param Note $note
      * @return $this
@@ -223,7 +224,7 @@ class SalesInvoice extends Model {
 
         return $this->makeFromResponse($response);
     }
-    
+
     /**
      * Register a payment for a credit invoice.
      *
@@ -241,7 +242,7 @@ class SalesInvoice extends Model {
     }
 
     /**
-     * Add Attachment to this invoice
+     * Add Attachment to this invoice.
      *
      * You can use fopen('/path/to/file', 'r') in $resource.
      *
@@ -261,7 +262,7 @@ class SalesInvoice extends Model {
                     'contents' => $contents,
                     'filename' => $filename,
                 ],
-            ]
+            ],
         ]);
 
         return $this;
@@ -279,7 +280,7 @@ class SalesInvoice extends Model {
         try {
             $this->connection()->post($this->endpoint . '/' . $this->id . '/pause', json_encode([]));
         } catch (ApiException $exception) {
-            if (strpos($exception->getMessage(), "The sales_invoice is already paused") !== false) {
+            if (strpos($exception->getMessage(), 'The sales_invoice is already paused') !== false) {
                 return true; // Everything is fine since the sales invoice was already paused we don't need an error.
             }
 
