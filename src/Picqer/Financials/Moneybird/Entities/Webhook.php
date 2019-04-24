@@ -13,6 +13,8 @@ class Webhook extends Model {
 
     use FindAll, Storable, Removable;
 
+    const JSON_OPTIONS = 0;
+
     /**
      * @var array
      */

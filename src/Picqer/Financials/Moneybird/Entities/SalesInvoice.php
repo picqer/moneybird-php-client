@@ -173,6 +173,24 @@ class SalesInvoice extends Model {
 
         return $this;
     }
+    
+    /**
+     * Delete a payment for the current invoice
+     *
+     * @param SalesInvoicePayment $salesInvoicePayment (id is required)
+     * @return $this
+     * @throws ApiException
+     */
+    public function deletePayment(SalesInvoicePayment $salesInvoicePayment)
+    {
+        if  (! isset($salesInvoicePayment->id)) {
+            throw new ApiException('Required [id] is missing');
+        }
+
+        $this->connection()->delete($this->endpoint . '/' . $this->id . '/payments/' . $salesInvoicePayment->id);
+
+        return $this;
+    }
 
     /**
      * Add a note to the current invoice
@@ -200,6 +218,22 @@ class SalesInvoice extends Model {
     public function duplicateToCreditInvoice()
     {
         $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
+            json_encode([])	// No body needed for this call. The patch method however needs one.
+        );
+
+        return $this->makeFromResponse($response);
+    }
+    
+    /**
+     * Register a payment for a credit invoice.
+     *
+     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function registerPaymentForCreditInvoice()
+    {
+        $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/register_payment_creditinvoice',
             json_encode([])	// No body needed for this call. The patch method however needs one.
         );
 
