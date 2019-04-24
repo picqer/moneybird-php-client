@@ -1,15 +1,16 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
 
-use Picqer\Financials\Moneybird\Actions\Removable;
-use Picqer\Financials\Moneybird\Actions\Storable;
+namespace Picqer\Financials\Moneybird\Entities;
+
 use Picqer\Financials\Moneybird\Model;
+use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Removable;
 
 /**
- * Class FinancialStatement
- * @package Picqer\Financials\Moneybird\Entities
+ * Class FinancialStatement.
  */
-class FinancialStatement extends Model {
-
+class FinancialStatement extends Model
+{
     use Storable, Removable;
 
     /**

@@ -12,5 +12,4 @@ class TooManyRequestsException extends ApiException
      * @var int
      */
     public $retryAfterNumberOfSeconds;
-
 }

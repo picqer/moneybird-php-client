@@ -1,17 +1,18 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
 
+namespace Picqer\Financials\Moneybird\Entities;
+
+use Picqer\Financials\Moneybird\Model;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
-use Picqer\Financials\Moneybird\Model;
+use Picqer\Financials\Moneybird\Actions\Removable;
 
 /**
- * Class LedgerAccount
- * @package Picqer\Financials\Moneybird\Entities
+ * Class LedgerAccount.
  */
-class LedgerAccount extends Model {
-
+class LedgerAccount extends Model
+{
     use FindAll, FindOne, Storable, Removable;
 
     /**

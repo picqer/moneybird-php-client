@@ -1,11 +1,12 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class Storable
- * @package Picqer\Financials\Moneybird\Actions
+ * Class Storable.
  */
-trait Storable {
-
+trait Storable
+{
     use BaseTrait;
 
     /**
@@ -15,11 +16,9 @@ trait Storable {
      */
     public function save()
     {
-        if ($this->exists())
-        {
+        if ($this->exists()) {
             return $this->update();
-        } else
-        {
+        } else {
             return $this->insert();
         }
     }
@@ -50,5 +49,4 @@ trait Storable {
 
         return $this->selfFromResponse($result);
     }
-
 }

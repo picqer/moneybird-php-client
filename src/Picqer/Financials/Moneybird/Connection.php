@@ -1,19 +1,20 @@
-<?php namespace Picqer\Financials\Moneybird;
+<?php
+
+namespace Picqer\Financials\Moneybird;
 
 use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
-use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\BadResponseException;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 
 /**
- * Class Connection
- * @package Picqer\Financials\Moneybird
+ * Class Connection.
  */
 class Connection
 {
@@ -111,7 +112,7 @@ class Connection
     }
 
     /**
-     * Insert a Middleware for the Guzzle Client
+     * Insert a Middleware for the Guzzle Client.
      * @param $middleWare
      */
     public function insertMiddleWare($middleWare)
@@ -150,7 +151,7 @@ class Connection
         // Add default json headers to the request
         $headers = array_merge($headers, [
             'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ]);
 
         // If access token is not set or token has expired, acquire new token
@@ -164,7 +165,7 @@ class Connection
         }
 
         // Create param string
-        if (!empty($params)) {
+        if (! empty($params)) {
             $endpoint .= '?' . http_build_query($params);
         }
 
@@ -195,11 +196,12 @@ class Connection
             $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         }
         // Create param string
-        if (!empty($params)) {
+        if (! empty($params)) {
             $endpoint .= '?' . http_build_query($params);
         }
         // Create the request
         $request = new Request($method, $endpoint, $headers, $body);
+
         return $request;
     }
 
@@ -309,12 +311,12 @@ class Connection
      */
     public function getAuthUrl()
     {
-        return $this->authUrl . '?' . http_build_query(array(
+        return $this->authUrl . '?' . http_build_query([
             'client_id' => $this->clientId,
             'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
-            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank settings'
-        ));
+            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank settings',
+        ]);
     }
 
     /**
@@ -440,7 +442,7 @@ class Connection
                 'client_id' => $this->clientId,
                 'client_secret' => $this->clientSecret,
                 'code' => $this->authorizationCode,
-            ]
+            ],
         ];
 
         $response = $this->client()->post($this->getTokenUrl(), $body);
@@ -471,7 +473,7 @@ class Connection
      */
     private function parseExceptionForErrorMessages(Exception $exception)
     {
-        if (!$exception instanceof BadResponseException) {
+        if (! $exception instanceof BadResponseException) {
             return new ApiException($exception->getMessage(), 0, $exception);
         }
 
@@ -507,7 +509,7 @@ class Connection
     private function checkWhetherRateLimitHasBeenReached(ResponseInterface $response, $errorMessage)
     {
         $retryAfterHeaders = $response->getHeader('Retry-After');
-        if($response->getStatusCode() === 429 && count($retryAfterHeaders) > 0){
+        if ($response->getStatusCode() === 429 && count($retryAfterHeaders) > 0) {
             $exception = new TooManyRequestsException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode());
             $exception->retryAfterNumberOfSeconds = (int) current($retryAfterHeaders);
 
@@ -555,6 +557,7 @@ class Connection
     {
         $clone = clone $this;
         $clone->administrationId = $administrationId;
+
         return $clone;
     }
 
@@ -565,6 +568,7 @@ class Connection
     {
         $clone = clone $this;
         $clone->administrationId = null;
+
         return $clone;
     }
 
@@ -603,6 +607,4 @@ class Connection
     {
         $this->scopes = $scopes;
     }
-
 }
-
