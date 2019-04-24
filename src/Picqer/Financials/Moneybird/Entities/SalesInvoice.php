@@ -173,6 +173,24 @@ class SalesInvoice extends Model {
 
         return $this;
     }
+    
+    /**
+     * Delete a payment for the current invoice
+     *
+     * @param SalesInvoicePayment $salesInvoicePayment (id is required)
+     * @return $this
+     * @throws ApiException
+     */
+    public function deletePayment(SalesInvoicePayment $salesInvoicePayment)
+    {
+        if  (! isset($salesInvoicePayment->id)) {
+            throw new ApiException('Required [id] is missing');
+        }
+
+        $this->connection()->delete($this->endpoint . '/' . $this->id . '/payments/' . $salesInvoicePayment->id);
+
+        return $this;
+    }
 
     /**
      * Add a note to the current invoice
