@@ -128,9 +128,13 @@ class SalesInvoice extends Model
             throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
         }
 
-        $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
+        $response = $this->connection->patch($this->endpoint . '/' . $this->id . '/send_invoice', json_encode([
             'sales_invoice_sending' => $options->jsonSerialize(),
         ]));
+
+        if (is_array($response)) {
+            $this->selfFromResponse($response);
+        }
 
         return $this;
     }

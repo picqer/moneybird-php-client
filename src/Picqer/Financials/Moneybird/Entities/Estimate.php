@@ -117,9 +117,13 @@ class Estimate extends Model
             throw new InvalidArgumentException("Expected string or options instance. Received: '$options'");
         }
 
-        $this->connection->patch($this->endpoint . '/' . $this->id . '/send_estimate', json_encode([
+        $response = $this->connection->patch($this->endpoint . '/' . $this->id . '/send_estimate', json_encode([
             'estimate_sending' => $options->jsonSerialize(),
         ]));
+
+        if (is_array($response)) {
+            $this->selfFromResponse($response);
+        }
 
         return $this;
     }
