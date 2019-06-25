@@ -224,10 +224,10 @@ abstract class Model
                 $result[$attributeNameToUse] = [];
                 foreach ($attributeValue as $attributeEntity) {
                     $result[$attributeNameToUse][] = $attributeEntity->attributes;
+                }
 
-                    if ($multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS) {
-                        $result[$attributeNameToUse] = (object) $result[$attributeNameToUse];
-                    }
+                if ($multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS) {
+                    $result[$attributeNameToUse] = (object) $result[$attributeNameToUse];
                 }
 
                 if (
