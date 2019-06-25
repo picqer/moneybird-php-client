@@ -1,11 +1,12 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class FindOne
- * @package Picqer\Financials\Moneybird\Actions
+ * Class FindOne.
  */
-trait FindOne {
-
+trait FindOne
+{
     use BaseTrait;
 
     /**
@@ -21,5 +22,4 @@ trait FindOne {
 
         return $this->makeFromResponse($result);
     }
-
 }

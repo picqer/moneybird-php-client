@@ -1,17 +1,18 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class ContactCustomField
- * @package Picqer\Financials\Moneybird\Entities
+ * Class ContactCustomField.
  *
  * @property string $id
  * @property string $name
  * @property string $value
  */
-class ContactCustomField extends Model {
-
+class ContactCustomField extends Model
+{
     /**
      * @var array
      */
@@ -20,5 +21,4 @@ class ContactCustomField extends Model {
         'name',
         'value',
     ];
-
 }

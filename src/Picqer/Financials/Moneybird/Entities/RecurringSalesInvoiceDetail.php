@@ -1,10 +1,11 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Entities\Generic\InvoiceDetail;
 
 /**
- * Class RecurringSalesInvoiceDetail
- * @package Picqer\Financials\Moneybird\Entities
+ * Class RecurringSalesInvoiceDetail.
  */
 class RecurringSalesInvoiceDetail extends InvoiceDetail
 {

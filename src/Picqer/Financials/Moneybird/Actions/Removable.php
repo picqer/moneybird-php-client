@@ -1,11 +1,12 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class Removable
- * @package Picqer\Financials\Moneybird\Actions
+ * Class Removable.
  */
-trait Removable {
-
+trait Removable
+{
     use BaseTrait;
 
     /**
@@ -17,5 +18,4 @@ trait Removable {
     {
         return $this->connection()->delete($this->getEndpoint() . '/' . urlencode($this->id));
     }
-
 }

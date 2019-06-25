@@ -1,4 +1,6 @@
-<?php namespace Picqer\Financials\Moneybird\Exceptions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Exceptions;
 
 use Exception;
 

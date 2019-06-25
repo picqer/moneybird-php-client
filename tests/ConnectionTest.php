@@ -1,25 +1,24 @@
 <?php
 
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7;
-use Picqer\Financials\Moneybird\Connection;
-use Picqer\Financials\Moneybird\Entities\Contact;
-use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
+use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Promise\PromiseInterface;
+use Picqer\Financials\Moneybird\Connection;
+use GuzzleHttp\Exception\BadResponseException;
+use Picqer\Financials\Moneybird\Entities\Contact;
+use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
 
 /**
- * Class ConnectionTest
+ * Class ConnectionTest.
  *
  * Tests the connection for proper headers, authentication and other stuff
  */
 class ConnectionTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * Container to hold the Guzzle history (by reference)
+     * Container to hold the Guzzle history (by reference).
      *
      * @var array
      */
@@ -30,15 +29,15 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
      *
      * @return \Picqer\Financials\Moneybird\Connection
      */
-    private function getConnectionForTesting(array $additionalMiddlewares = array())
+    private function getConnectionForTesting(array $additionalMiddlewares = [])
     {
         $this->container = [];
         $history = Middleware::history($this->container);
 
         $connection = new Connection();
         $connection->insertMiddleWare($history);
-        if(count($additionalMiddlewares) > 0){
-            foreach($additionalMiddlewares as $additionalMiddleware){
+        if (count($additionalMiddlewares) > 0) {
+            foreach ($additionalMiddlewares as $additionalMiddleware) {
                 $connection->insertMiddleWare($additionalMiddleware);
             }
         }
@@ -141,16 +140,16 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $responseHeaderValue = 300;
 
         //Note that middlewares are processed 'LIFO': first the response header should be added, then an exception thrown
-        $additionalMiddlewares = array(
+        $additionalMiddlewares = [
             $this->getMiddleWareThatThrowsBadResponseException($responseStatusCode),
             $this->getMiddleWareThatAddsResponseHeader($responseHeaderName, $responseHeaderValue),
-        );
+        ];
 
         $connection = $this->getConnectionForTesting($additionalMiddlewares);
         $contact = new Contact($connection);
         try {
             $contact->get();
-        } catch(TooManyRequestsException $exception){
+        } catch (TooManyRequestsException $exception) {
             $this->assertEquals($responseStatusCode, $exception->getCode());
             $this->assertEquals($responseHeaderValue, $exception->retryAfterNumberOfSeconds);
         }
@@ -174,22 +173,21 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
 
     private function getMiddleWareThatThrowsBadResponseException($statusCode = null)
     {
-        return function (callable $handler) use($statusCode) {
+        return function (callable $handler) use ($statusCode) {
             return function (RequestInterface $request, array $options) use ($handler, $statusCode) {
                 /* @var PromiseInterface $promise */
                 $promise = $handler($request, $options);
 
                 return $promise->then(
-                    function (ResponseInterface $response) use($request, $statusCode)  {
-                        if(is_int($statusCode)) {
+                    function (ResponseInterface $response) use ($request, $statusCode) {
+                        if (is_int($statusCode)) {
                             $response = $response->withStatus($statusCode);
                         }
 
-                        throw new BadResponseException( 'DummyException as injected by: ' . __METHOD__, $request, $response);
+                        throw new BadResponseException('DummyException as injected by: ' . __METHOD__, $request, $response);
                     }
                 );
             };
         };
     }
-
 }
