@@ -227,7 +227,7 @@ abstract class Model
                 }
 
                 if ($multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS) {
-                    $result[$attributeNameToUse] = (object)$result[$attributeNameToUse];
+                    $result[$attributeNameToUse] = (object) $result[$attributeNameToUse];
                 }
 
                 if (
