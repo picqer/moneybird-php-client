@@ -73,8 +73,7 @@ class SalesInvoice extends Model
         'notes',
         'attachments',
         'events',
-        'tax_totals'
-
+        'tax_totals',
     ];
 
     /**
@@ -121,7 +120,7 @@ class SalesInvoice extends Model
         'tax_totals' => [
             'entity' => SalesInvoiceTaxTotal::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
-        ]
+        ],
     ];
 
     /**

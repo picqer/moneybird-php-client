@@ -17,6 +17,6 @@ class SalesInvoiceTaxTotal extends Model
         'taxable_amount',
         'taxable_amount_base',
         'tax_amount',
-        'tax_amount_base'
+        'tax_amount_base',
     ];
 }
