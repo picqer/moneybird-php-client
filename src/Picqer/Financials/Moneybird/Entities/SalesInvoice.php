@@ -29,42 +29,52 @@ class SalesInvoice extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
         'contact',
         'invoice_id',
         'invoice_sequence_id',
+        'recurring_sales_invoice_id',
         'workflow_id',
         'document_style_id',
         'identity_id',
+        'draft_id',
         'state',
         'invoice_date',
         'due_date',
         'first_due_interval',
         'payment_conditions',
+        'payment_reference',
         'reference',
         'language',
         'currency',
-        'prices_are_incl_tax',
         'discount',
         'original_sales_invoice_id',
+        'paused',
         'paid_at',
         'sent_at',
         'created_at',
         'updated_at',
+        'public_view_code',
+        'version',
         'details',
         'payments',
         'total_paid',
         'total_unpaid',
+        'total_unpaid_base',
+        'prices_are_incl_tax',
         'total_price_excl_tax',
         'total_price_excl_tax_base',
         'total_price_incl_tax',
         'total_price_incl_tax_base',
+        'total_discount',
         'url',
         'custom_fields',
         'notes',
         'attachments',
-        'version',
-        'public_view_code',
+        'events',
+        'tax_totals'
+
     ];
 
     /**
@@ -104,6 +114,14 @@ class SalesInvoice extends Model
             'entity' => Note::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
+        'events' => [
+            'entity' => SalesInvoiceEvent::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'tax_totals' => [
+            'entity' => SalesInvoiceTaxTotal::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ]
     ];
 
     /**
