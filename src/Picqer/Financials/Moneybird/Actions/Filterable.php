@@ -1,8 +1,9 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class Filterable
- * @package Picqer\Financials\Moneybird\Actions
+ * Class Filterable.
  */
 trait Filterable
 {
@@ -17,7 +18,7 @@ trait Filterable
     {
         $filterList = [];
         foreach ($filters as $key => $value) {
-            $filterList[] = $key .':' . $value;
+            $filterList[] = $key . ':' . $value;
         }
 
         $result = $this->connection()->get($this->getEndpoint(), ['filter' => implode(',', $filterList)]);
@@ -35,12 +36,11 @@ trait Filterable
     {
         $filterList = [];
         foreach ($filters as $key => $value) {
-            $filterList[] = $key .':' . $value;
+            $filterList[] = $key . ':' . $value;
         }
 
         $result = $this->connection()->get($this->getEndpoint(), ['filter' => implode(',', $filterList)], true);
 
         return $this->collectionFromResult($result);
     }
-
 }

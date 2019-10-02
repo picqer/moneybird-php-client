@@ -1,8 +1,9 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class Synchronizable
- * @package Picqer\Financials\Moneybird\Actions
+ * Class Synchronizable.
  */
 trait Synchronizable
 {
@@ -19,11 +20,10 @@ trait Synchronizable
     {
         $filter = [];
 
-        if ( ! empty($filters))
-        {
+        if (! empty($filters)) {
             $filterList = [];
             foreach ($filters as $key => $value) {
-                $filterList[] = $key .':' . $value;
+                $filterList[] = $key . ':' . $value;
             }
 
             $filter = ['filter' => implode(',', $filterList)];
@@ -42,8 +42,8 @@ trait Synchronizable
      */
     public function getVersions(array $ids)
     {
-        $result = $this->connection()->post($this->getEndpoint() .'/synchronization', json_encode([
-            'ids' => $ids
+        $result = $this->connection()->post($this->getEndpoint() . '/synchronization', json_encode([
+            'ids' => $ids,
         ]));
 
         return $this->collectionFromResult($result);

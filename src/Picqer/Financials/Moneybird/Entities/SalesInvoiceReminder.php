@@ -1,13 +1,14 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class SalesInvoiceReminder
- * @package Picqer\Financials\Moneybird\Entities
+ * Class SalesInvoiceReminder.
  */
-class SalesInvoiceReminder extends Model {
-
+class SalesInvoiceReminder extends Model
+{
     /**
      * @var array
      */
@@ -49,7 +50,7 @@ class SalesInvoiceReminder extends Model {
         unset($aReminder['sales_invoices']);
 
         $this->connection->post($this->endpoint . '/send_reminders', json_encode([
-            'sales_invoice_reminders' => [$aReminder]
+            'sales_invoice_reminders' => [$aReminder],
         ]));
     }
 }

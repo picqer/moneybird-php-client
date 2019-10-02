@@ -1,12 +1,12 @@
-<?php namespace Picqer\Financials\Moneybird;
+<?php
+
+namespace Picqer\Financials\Moneybird;
 
 /**
- * Class Model
- * @package Picqer\Financials\Moneybird
+ * Class Model.
  */
 abstract class Model
 {
-
     const NESTING_TYPE_ARRAY_OF_OBJECTS = 0;
     const NESTING_TYPE_NESTED_OBJECTS = 1;
     const JSON_OPTIONS = JSON_FORCE_OBJECT;
@@ -19,7 +19,7 @@ abstract class Model
     /**
      * @var array The model's attributes
      */
-    protected $attributes = [ ];
+    protected $attributes = [];
 
     /**
      * @var array The model's changed attributes
@@ -34,7 +34,7 @@ abstract class Model
     /**
      * @var array The model's fillable attributes
      */
-    protected $fillable = [ ];
+    protected $fillable = [];
 
     /**
      * @var string The URL endpoint of this model
@@ -45,7 +45,6 @@ abstract class Model
      * @var string Name of the primary key for this model
      */
     protected $primaryKey = 'id';
-
 
     /**
      * @var string Namespace of the model (for POST and PATCH requests)
@@ -59,7 +58,7 @@ abstract class Model
 
     /**
      * Array containing the name of the attribute that contains nested objects as key and an array with the entity name
-     * and json representation type
+     * and json representation type.
      *
      * JSON representation of an array of objects (NESTING_TYPE_ARRAY_OF_OBJECTS) : [ {}, {} ]
      * JSON representation of nested objects (NESTING_TYPE_NESTED_OBJECTS): { "0": {}, "1": {} }
@@ -73,15 +72,14 @@ abstract class Model
      * @param \Picqer\Financials\Moneybird\Connection $connection
      * @param array $attributes
      */
-    public function __construct(Connection $connection, array $attributes = [ ])
+    public function __construct(Connection $connection, array $attributes = [])
     {
         $this->connection = $connection;
         $this->fill($attributes, false);
     }
 
-
     /**
-     * Get the connection instance
+     * Get the connection instance.
      *
      * @return \Picqer\Financials\Moneybird\Connection
      */
@@ -90,9 +88,8 @@ abstract class Model
         return $this->connection;
     }
 
-
     /**
-     * Get the model's attributes
+     * Get the model's attributes.
      *
      * @return array
      */
@@ -101,9 +98,8 @@ abstract class Model
         return $this->attributes;
     }
 
-
     /**
-     * Fill the entity from an array
+     * Fill the entity from an array.
      *
      * @param array $attributes
      * @param boolean $first_initialize
@@ -141,9 +137,8 @@ abstract class Model
         $this->initializing = false;
     }
 
-
     /**
-     * Get the fillable attributes of an array
+     * Get the fillable attributes of an array.
      *
      * @param array $attributes
      *
@@ -158,7 +153,6 @@ abstract class Model
         return $attributes;
     }
 
-
     /**
      * @param string $key
      * @return bool
@@ -167,7 +161,6 @@ abstract class Model
     {
         return in_array($key, $this->fillable, true);
     }
-
 
     /**
      * @param string $key
@@ -193,7 +186,6 @@ abstract class Model
 
         $this->attributes[$key] = $value;
     }
-
 
     /**
      * All keys that are changed in this model
@@ -245,13 +237,12 @@ abstract class Model
      */
     public function __get($key)
     {
-        if (isset( $this->attributes[$key] )) {
+        if (isset($this->attributes[$key])) {
             return $this->attributes[$key];
         }
 
         return null;
     }
-
 
     /**
      * @param string $key
@@ -264,19 +255,17 @@ abstract class Model
         }
     }
 
-
     /**
      * @return bool
      */
     public function exists()
     {
-        if ( ! array_key_exists($this->primaryKey, $this->attributes)) {
+        if (! array_key_exists($this->primaryKey, $this->attributes)) {
             return false;
         }
 
-        return ! empty( $this->attributes[$this->primaryKey] );
+        return ! empty($this->attributes[$this->primaryKey]);
     }
-
 
     /**
      * @return string
@@ -332,10 +321,10 @@ abstract class Model
                 $result[$attributeNameToUse] = [];
                 foreach ($attributeValue as $attributeEntity) {
                     $result[$attributeNameToUse][] = $attributeEntity->attributes;
+                }
 
-                    if ($multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS) {
-                        $result[$attributeNameToUse] = (object)$result[$attributeNameToUse];
-                    }
+                if ($multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS) {
+                    $result[$attributeNameToUse] = (object) $result[$attributeNameToUse];
                 }
 
                 if (
@@ -350,9 +339,8 @@ abstract class Model
         return $result;
     }
 
-
     /**
-     * Create a new object with the response from the API
+     * Create a new object with the response from the API.
      *
      * @param array $response
      *
@@ -367,7 +355,7 @@ abstract class Model
     }
 
     /**
-     * Recreate this object with the response from the API
+     * Recreate this object with the response from the API.
      *
      * @param array $response
      *
@@ -377,18 +365,16 @@ abstract class Model
     {
         $this->fill($response, true);
 
-        foreach ($this->getSingleNestedEntities() as $key => $value)
-        {
+        foreach ($this->getSingleNestedEntities() as $key => $value) {
             if (isset($response[$key])) {
                 $entityName = $value;
                 $this->$key = new $entityName($this->connection, $response[$key]);
             }
         }
 
-        foreach ($this->getMultipleNestedEntities() as $key => $value)
-        {
+        foreach ($this->getMultipleNestedEntities() as $key => $value) {
             if (isset($response[$key])) {
-                $entityName =  $value['entity'];
+                $entityName = $value['entity'];
                 /** @var self $instantiatedEntity */
                 $instantiatedEntity = new $entityName($this->connection);
                 $this->$key = $instantiatedEntity->collectionFromResult($response[$key]);
@@ -408,10 +394,10 @@ abstract class Model
         // If we have one result which is not an assoc array, make it the first element of an array for the
         // collectionFromResult function so we always return a collection from filter
         if ((bool) count(array_filter(array_keys($result), 'is_string'))) {
-            $result = [ $result ];
+            $result = [$result];
         }
 
-        $collection = [ ];
+        $collection = [];
         foreach ($result as $r) {
             $collection[] = $this->makeFromResponse($r);
         }
@@ -436,16 +422,15 @@ abstract class Model
     }
 
     /**
-     * Make var_dump and print_r look pretty
+     * Make var_dump and print_r look pretty.
      *
      * @return array
      */
     public function __debugInfo()
     {
         $result = [];
-
-        foreach ($this->fillable as $attribute)
-        {
+      
+        foreach ($this->fillable as $attribute) {
             $result[$attribute] = $this->$attribute;
         }
 
@@ -461,7 +446,7 @@ abstract class Model
     }
 
     /**
-     * Determine if an attribute exists on the model
+     * Determine if an attribute exists on the model.
      *
      * @param string $name
      *
@@ -469,7 +454,6 @@ abstract class Model
      */
     public function __isset($name)
     {
-        return (isset($this->attributes[$name]) && null !== $this->attributes[$name]);
+        return isset($this->attributes[$name]) && null !== $this->attributes[$name];
     }
-
 }

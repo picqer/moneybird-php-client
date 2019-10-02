@@ -1,13 +1,14 @@
-<?php namespace Picqer\Financials\Moneybird\Entities\Generic;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities\Generic;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class InvoicePayment
- * @package Picqer\Financials\Moneybird\Entities\Generic
+ * Class InvoicePayment.
  */
-abstract class InvoicePayment extends Model {
-
+abstract class InvoicePayment extends Model
+{
     /**
      * @var array
      */

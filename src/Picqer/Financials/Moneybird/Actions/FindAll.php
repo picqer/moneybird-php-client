@@ -1,8 +1,9 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class FindAll
- * @package Picqer\Financials\Moneybird\Actions
+ * Class FindAll.
  */
 trait FindAll
 {
@@ -10,7 +11,7 @@ trait FindAll
 
     /**
      * @param array $params
-     * 
+     *
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
@@ -24,7 +25,7 @@ trait FindAll
 
     /**
      * @param array $params
-     * 
+     *
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
@@ -35,5 +36,4 @@ trait FindAll
 
         return $this->collectionFromResult($result);
     }
-
 }

@@ -1,14 +1,11 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
 
-use Picqer\Financials\Moneybird\Actions\FindAll;
-use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\Removable;
-use Picqer\Financials\Moneybird\Actions\Storable;
+namespace Picqer\Financials\Moneybird\Entities;
+
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class LedgerAccountBooking
- * @package Picqer\Financials\Moneybird\Entities
+ * Class LedgerAccountBooking.
  *
  * @property string $id
  * @property string $administration_id
@@ -18,8 +15,8 @@ use Picqer\Financials\Moneybird\Model;
  * @property string $created_at
  * @property string $updated_at
  */
-class LedgerAccountBooking extends Model {
-
+class LedgerAccountBooking extends Model
+{
     /**
      * @var array
      */
@@ -32,5 +29,4 @@ class LedgerAccountBooking extends Model {
         'created_at',
         'updated_at',
     ];
-
 }
