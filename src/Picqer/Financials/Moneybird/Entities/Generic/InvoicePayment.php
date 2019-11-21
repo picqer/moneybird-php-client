@@ -24,6 +24,7 @@ abstract class InvoicePayment extends Model
         'payment_date',
         'credit_invoice_id',
         'financial_mutation_id',
+        'transaction_identifier',
         'created_at',
         'updated_at',
     ];
