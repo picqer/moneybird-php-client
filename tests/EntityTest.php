@@ -23,10 +23,12 @@ use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\FinancialAccount;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
 use Picqer\Financials\Moneybird\Entities\FinancialMutation;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceEvent;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceTaxTotal;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
 use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
@@ -161,6 +163,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $this->performEntityTest(SalesInvoiceDetail::class);
     }
 
+    public function testSalesInvoiceEventEntity()
+    {
+        $this->performEntityTest(SalesInvoiceEvent::class);
+    }
+
     public function testSalesInvoicePaymentEntity()
     {
         $this->performEntityTest(SalesInvoicePayment::class);
@@ -169,6 +176,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     public function testSalesInvoiceReminderEntity()
     {
         $this->performEntityTest(SalesInvoiceReminder::class);
+    }
+
+    public function testSalesInvoiceTaxTotalEntity()
+    {
+        $this->performEntityTest(SalesInvoiceTaxTotal::class);
     }
 
     public function testNoteEntity()
