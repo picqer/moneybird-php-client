@@ -224,6 +224,15 @@ class Moneybird
 
     /**
      * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\Project
+     */
+    public function project($attributes = [])
+    {
+        return new Project($this->connection, $attributes);
+    }
+    
+    /**
+     * @param array $attributes
      * @return \Picqer\Financials\Moneybird\Entities\PurchaseInvoice
      */
     public function purchaseInvoice($attributes = [])
