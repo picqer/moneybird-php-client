@@ -5,6 +5,7 @@ namespace Picqer\Financials\Moneybird;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\Product;
+use Picqer\Financials\Moneybird\Entities\Project;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\Webhook;
