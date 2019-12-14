@@ -293,6 +293,23 @@ class Connection
      * @return mixed
      * @throws ApiException
      */
+    public function download($url, $options = [])
+    {
+        try {
+            $request = $this->createRequestNoJson('GET', $this->formatUrl($url, 'get'), null);
+
+            return $this->client()->send($request, $options);
+        } catch (Exception $e) {
+            $this->parseExceptionForErrorMessages($e);
+        }
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @return mixed
+     * @throws ApiException
+     */
     public function upload($url, $options)
     {
         try {
