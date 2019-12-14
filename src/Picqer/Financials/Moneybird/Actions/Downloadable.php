@@ -4,10 +4,6 @@ namespace Picqer\Financials\Moneybird\Actions;
 
 /**
  * Class Downloadable.
- *
- * This download as PDF method is a private API method. It is currently
- * officially unsupported, but serves a purpose until Moneybird updates
- * their API to provide PDF files.
  */
 trait Downloadable
 {
