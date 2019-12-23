@@ -3,15 +3,15 @@
 namespace Picqer\Financials\Moneybird;
 
 use Exception;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\BadResponseException;
-use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Connection.

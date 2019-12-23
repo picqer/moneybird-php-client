@@ -18,7 +18,7 @@ trait Downloadable
      */
     public function download()
     {
-        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id). '/download_pdf');
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_pdf');
 
         return $response->getBody()->getContents();
     }
