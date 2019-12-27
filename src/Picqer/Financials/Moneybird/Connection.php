@@ -3,15 +3,15 @@
 namespace Picqer\Financials\Moneybird;
 
 use Exception;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\BadResponseException;
-use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Connection.
@@ -284,6 +284,23 @@ class Connection
             return $this->parseResponse($response);
         } catch (Exception $e) {
             throw $this->parseExceptionForErrorMessages($e);
+        }
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @return mixed
+     * @throws ApiException
+     */
+    public function download($url, $options = [])
+    {
+        try {
+            $request = $this->createRequestNoJson('GET', $this->formatUrl($url, 'get'), null);
+
+            return $this->client()->send($request, $options);
+        } catch (Exception $e) {
+            $this->parseExceptionForErrorMessages($e);
         }
     }
 
