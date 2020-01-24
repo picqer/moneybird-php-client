@@ -112,7 +112,7 @@ class Connection
     }
 
     /**
-     * Insert a custom Guzzle client
+     * Insert a custom Guzzle client.
      *
      * @param Client $client
      */
