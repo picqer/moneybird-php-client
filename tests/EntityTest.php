@@ -8,6 +8,9 @@ use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\Webhook;
 use Picqer\Financials\Moneybird\Entities\Estimate;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\Identity;
 use Picqer\Financials\Moneybird\Entities\Workflow;
 use Picqer\Financials\Moneybird\Entities\CustomField;
@@ -71,6 +74,21 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     public function testEstimateEntity()
     {
         $this->performEntityTest(Estimate::class);
+    }
+
+    public function testExternalSalesInvoice()
+    {
+        $this->performEntityTest(ExternalSalesInvoice::class);
+    }
+
+    public function testExternalSalesInvoiceDetail()
+    {
+        $this->performEntityTest(ExternalSalesInvoiceDetail::class);
+    }
+
+    public function testExternalSalesInvoicePayment()
+    {
+        $this->performEntityTest(ExternalSalesInvoicePayment::class);
     }
 
     public function testFinancialAccountEntity()
