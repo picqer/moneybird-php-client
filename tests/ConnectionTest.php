@@ -1,14 +1,14 @@
 <?php
 
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Middleware;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Promise\PromiseInterface;
-use Picqer\Financials\Moneybird\Connection;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Psr7;
+use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class ConnectionTest.

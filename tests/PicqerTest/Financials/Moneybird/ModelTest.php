@@ -3,12 +3,12 @@
 namespace PicqerTest\Financials\Moneybird\Entities;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
 use Picqer\Financials\Moneybird\Connection;
-use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Contact;
-use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
+use Picqer\Financials\Moneybird\Entities\Note;
+use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Prophecy\Prophecy\ObjectProphecy;
 
 class ModelTest extends TestCase
 {
@@ -95,6 +95,7 @@ class ModelTest extends TestCase
             $this->assertInstanceOf(ContactCustomField::class, $customContactField);
         }
     }
+
     public function testRegisterAttributesAsDirty()
     {
         $invoice = new SalesInvoice($this->connection->reveal());
@@ -104,7 +105,7 @@ class ModelTest extends TestCase
         $dummyResponse = [
             'id' => $id,
             'invoice_date' => $invoice_date,
-            'ignoredAttribute' => 'ignoredValue'
+            'ignoredAttribute' => 'ignoredValue',
         ];
 
         $invoice = $invoice->makeFromResponse($dummyResponse);

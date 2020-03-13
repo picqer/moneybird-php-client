@@ -27,8 +27,8 @@ trait Attachment
      */
     public function addAttachment($filename, $contents)
     {
-        if (!isset($this->id)) {
-            throw new ApiException("This method can only be used on existing records.");
+        if (! isset($this->id)) {
+            throw new ApiException('This method can only be used on existing records.');
         }
 
         $this->connection()->upload($this->getEndpoint() . '/' . urlencode($this->id) . '/' . $this->attachmentPath, [

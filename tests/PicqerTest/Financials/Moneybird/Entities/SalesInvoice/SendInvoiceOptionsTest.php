@@ -3,8 +3,8 @@
 namespace PicqerTest\Financials\Moneybird\Entities\SalesInvoice;
 
 use DateTime;
-use JsonSerializable;
 use InvalidArgumentException;
+use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 
