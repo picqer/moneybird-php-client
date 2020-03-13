@@ -112,7 +112,18 @@ class Connection
     }
 
     /**
+     * Insert a custom Guzzle client.
+     *
+     * @param Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
      * Insert a Middleware for the Guzzle Client.
+     *
      * @param $middleWare
      */
     public function insertMiddleWare($middleWare)
@@ -121,8 +132,9 @@ class Connection
     }
 
     /**
-     * @return Client
      * @throws ApiException
+     *
+     * @return Client
      */
     public function connect()
     {
