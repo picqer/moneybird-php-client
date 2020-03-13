@@ -4,10 +4,10 @@ namespace PicqerTest\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Argument\Token\AnyValueToken;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Prophecy\Argument\Token\AnyValueToken;
+use Prophecy\Prophecy\ObjectProphecy;
 
 class SalesInvoiceTest extends TestCase
 {

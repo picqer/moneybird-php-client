@@ -24,7 +24,7 @@ abstract class Model
     /**
      * @var array The model's changed attributes
      */
-    protected $attribute_changes = [ ];
+    protected $attribute_changes = [];
 
     /**
      * @var bool Register the intilized state of this model for dirty attributes registration
@@ -102,11 +102,11 @@ abstract class Model
      * Fill the entity from an array.
      *
      * @param array $attributes
-     * @param boolean $first_initialize
+     * @param bool $first_initialize
      */
     protected function fill(array $attributes, $first_initialize)
     {
-        if($first_initialize) {
+        if ($first_initialize) {
             $this->enableFirstInitialize();
         }
 
@@ -116,24 +116,24 @@ abstract class Model
             }
         }
 
-        if($first_initialize) {
+        if ($first_initialize) {
             $this->disableFirstInitialize();
         }
     }
 
-
     /**
-     * Register the current model as initializing
+     * Register the current model as initializing.
      */
-    protected function enableFirstInitialize() {
+    protected function enableFirstInitialize()
+    {
         $this->initializing = true;
     }
 
-
     /**
-     * Register the current model as initialized
+     * Register the current model as initialized.
      */
-    protected function disableFirstInitialize() {
+    protected function disableFirstInitialize()
+    {
         $this->initializing = false;
     }
 
@@ -168,17 +168,16 @@ abstract class Model
      */
     protected function setAttribute($key, $value)
     {
-        if(!isset($this->attribute_changes[$key])) {
+        if (! isset($this->attribute_changes[$key])) {
             $from = null;
 
-            if(isset($this->attributes[$key])) {
+            if (isset($this->attributes[$key])) {
                 $from = $this->attributes[$key];
             }
 
-
             $this->attribute_changes[$key] = [
                 'from' => $from,
-                'to' => $value
+                'to' => $value,
             ];
         } else {
             $this->attribute_changes[$key]['to'] = $value;
@@ -188,47 +187,47 @@ abstract class Model
     }
 
     /**
-     * All keys that are changed in this model
+     * All keys that are changed in this model.
      *
      * @return array
      */
-    public function getDirty() {
+    public function getDirty()
+    {
         return array_keys($this->attribute_changes);
     }
 
-
     /**
-     * All changed keys with it values
+     * All changed keys with it values.
      *
      * @return array
      */
-    public function getDirtyValues() {
+    public function getDirtyValues()
+    {
         return $this->attribute_changes;
     }
 
-
     /**
-     * Check if the attribute is changed since the last save/update/create action
+     * Check if the attribute is changed since the last save/update/create action.
      *
      * @param $attributeName
      * @return bool
      */
-    public function isAttributeDirty($attributeName) {
-        if(in_array($attributeName, $this->attribute_changes)) {
+    public function isAttributeDirty($attributeName)
+    {
+        if (in_array($attributeName, $this->attribute_changes)) {
             return true;
         }
 
         return false;
     }
 
-
     /**
-     * Clear the changed/dirty attribute in this model
+     * Clear the changed/dirty attribute in this model.
      */
-    public function clearDirty() {
+    public function clearDirty()
+    {
         $this->attribute_changes = [];
     }
-
 
     /**
      * @param string $key
@@ -302,7 +301,7 @@ abstract class Model
         foreach ($this->attributes as $attributeName => $attributeValue) {
             if (! is_object($attributeValue)) {
                 //check if result is changed
-                if($this->isAttributeDirty($attributeName)) {
+                if ($this->isAttributeDirty($attributeName)) {
                     $result[$attributeName] = $attributeValue;
                 }
             }
@@ -429,7 +428,7 @@ abstract class Model
     public function __debugInfo()
     {
         $result = [];
-      
+
         foreach ($this->fillable as $attribute) {
             $result[$attribute] = $this->$attribute;
         }

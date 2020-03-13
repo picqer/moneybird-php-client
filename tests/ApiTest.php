@@ -1,7 +1,7 @@
 <?php
 
-use Picqer\Financials\Moneybird\Moneybird;
 use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Moneybird;
 
 /**
  * Class ApiTest.
