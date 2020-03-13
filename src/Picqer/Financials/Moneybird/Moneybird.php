@@ -2,6 +2,9 @@
 
 namespace Picqer\Financials\Moneybird;
 
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\Product;
@@ -122,6 +125,33 @@ class Moneybird
     public function estimate($attributes = [])
     {
         return new Estimate($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ExternalSalesInvoice
+     */
+    public function externalSalesInvoice($attributes = [])
+    {
+        return new ExternalSalesInvoice($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ExternalSalesInvoiceDetail
+     */
+    public function externalSalesInvoiceDetail($attributes = [])
+    {
+        return new ExternalSalesInvoiceDetail($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ExternalSalesInvoicePayment
+     */
+    public function externalSalesInvoicePayment($attributes = [])
+    {
+        return new ExternalSalesInvoicePayment($this->connection, $attributes);
     }
 
     /**
