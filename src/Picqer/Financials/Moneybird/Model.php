@@ -214,7 +214,7 @@ abstract class Model
      */
     public function isAttributeDirty($attributeName)
     {
-        if (in_array($attributeName, $this->attribute_changes)) {
+        if (array_key_exists($attributeName, $this->attribute_changes)) {
             return true;
         }
 

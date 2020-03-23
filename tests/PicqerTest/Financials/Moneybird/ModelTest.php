@@ -114,6 +114,9 @@ class ModelTest extends TestCase
         $this->assertEquals('id', $invoice->getDirty()[0]);
         $this->assertEquals('invoice_date', $invoice->getDirty()[1]);
         $this->assertEquals(2, count($invoice->getDirty()));
+        $this->assertTrue($invoice->isAttributeDirty('id'));
+        $this->assertTrue($invoice->isAttributeDirty('invoice_date'));
+        $this->assertFalse($invoice->isAttributeDirty('unknown_key'));
 
         //check if the getDirtyValues from is null (new object)
         $this->assertEquals(null, $invoice->getDirtyValues()['invoice_date']['from']);
