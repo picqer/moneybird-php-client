@@ -312,7 +312,7 @@ class Connection
 
             return $this->client()->send($request, $options);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
@@ -331,7 +331,7 @@ class Connection
 
             return $this->parseResponse($response);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+            throw $this->parseExceptionForErrorMessages($e);
         }
     }
 
