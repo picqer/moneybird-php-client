@@ -526,7 +526,7 @@ class Connection
 
         return new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode(), $exception);
     }
-
+    
     /**
      * @param ResponseInterface $response
      * @param string $errorMessage
@@ -537,10 +537,10 @@ class Connection
      */
     private function checkWhetherRateLimitHasBeenReached(ResponseInterface $response, $errorMessage)
     {
-        $retryAfterHeaders = $response->getHeader('Retry-After');
-        if ($response->getStatusCode() === 429 && count($retryAfterHeaders) > 0) {
+        $rateLimitRemainingHeaders = $response->getHeader('RateLimit-Remaining');
+        if ($response->getStatusCode() === 429 && count($rateLimitRemainingHeaders) > 0) {
             $exception = new TooManyRequestsException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode());
-            $exception->retryAfterNumberOfSeconds = (int) current($retryAfterHeaders);
+            $exception->retryAfterNumberOfSeconds = (int) current($rateLimitRemainingHeaders);
 
             throw $exception;
         }
