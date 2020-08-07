@@ -69,6 +69,8 @@ class SalesInvoice extends Model
         'total_price_incl_tax',
         'total_price_incl_tax_base',
         'total_discount',
+        'marked_dubious_on',
+        'marked_uncollectible_on',
         'url',
         'custom_fields',
         'notes',
