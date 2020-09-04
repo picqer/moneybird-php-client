@@ -127,4 +127,20 @@ class Estimate extends Model
 
         return $this;
     }
+    
+    /**
+     * Add a note to the current estimate.
+     *
+     * @param Note $note
+     * @return $this
+     * @throws ApiException
+     */
+    private function addNote(Note $note)
+    {
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
+            $note->jsonWithNamespace()
+        );
+
+        return $this;
+    }
 }
