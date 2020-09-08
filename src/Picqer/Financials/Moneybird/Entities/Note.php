@@ -1,17 +1,19 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Note
- * @package Picqer\Financials\Moneybird\Entities
+ * Class Note.
  *
  * @property string $id
  * @property string $note
- * @property boolean $todo
+ * @property bool $todo
  * @property string $assignee_id
  */
-class Note extends Model {
+class Note extends Model
+{
     /**
      * @var array
      */

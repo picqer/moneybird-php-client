@@ -1,4 +1,6 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
@@ -8,11 +10,10 @@ use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Product
- * @package Picqer\Financials\Moneybird\Entities
+ * Class Product.
  */
-class Product extends Model {
-
+class Product extends Model
+{
     use Search, FindAll, FindOne, Storable, Removable;
 
     /**

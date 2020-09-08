@@ -6,6 +6,9 @@ use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\CustomField;
 use Picqer\Financials\Moneybird\Entities\DocumentStyle;
 use Picqer\Financials\Moneybird\Entities\Estimate;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\FinancialAccount;
 use Picqer\Financials\Moneybird\Entities\FinancialMutation;
 use Picqer\Financials\Moneybird\Entities\GeneralDocument;
@@ -25,8 +28,10 @@ use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceEvent;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceTaxTotal;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
 use Picqer\Financials\Moneybird\Entities\Webhook;
@@ -34,14 +39,13 @@ use Picqer\Financials\Moneybird\Entities\Workflow;
 use Picqer\Financials\Moneybird\Moneybird;
 
 /**
- * Class EntityTest
+ * Class EntityTest.
  *
  * Tests all entities to ensure entities have no PHP parse errors and have
  * at least the properties we need to use the entity
  */
 class EntityTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testAdministrationEntity()
     {
         $this->performEntityTest(Administration::class);
@@ -70,6 +74,21 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     public function testEstimateEntity()
     {
         $this->performEntityTest(Estimate::class);
+    }
+
+    public function testExternalSalesInvoice()
+    {
+        $this->performEntityTest(ExternalSalesInvoice::class);
+    }
+
+    public function testExternalSalesInvoiceDetail()
+    {
+        $this->performEntityTest(ExternalSalesInvoiceDetail::class);
+    }
+
+    public function testExternalSalesInvoicePayment()
+    {
+        $this->performEntityTest(ExternalSalesInvoicePayment::class);
     }
 
     public function testFinancialAccountEntity()
@@ -162,6 +181,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $this->performEntityTest(SalesInvoiceDetail::class);
     }
 
+    public function testSalesInvoiceEventEntity()
+    {
+        $this->performEntityTest(SalesInvoiceEvent::class);
+    }
+
     public function testSalesInvoicePaymentEntity()
     {
         $this->performEntityTest(SalesInvoicePayment::class);
@@ -170,6 +194,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     public function testSalesInvoiceReminderEntity()
     {
         $this->performEntityTest(SalesInvoiceReminder::class);
+    }
+
+    public function testSalesInvoiceTaxTotalEntity()
+    {
+        $this->performEntityTest(SalesInvoiceTaxTotal::class);
     }
 
     public function testNoteEntity()
@@ -215,5 +244,4 @@ class EntityTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($reflectionClass->hasProperty('endpoint'));
         $this->assertEquals('Picqer\Financials\Moneybird\Entities', $reflectionClass->getNamespaceName());
     }
-
 }

@@ -1,14 +1,15 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class TaxRate
- * @package Picqer\Financials\Moneybird\Entities
+ * Class TaxRate.
  */
-class TaxRate extends Model {
-
+class TaxRate extends Model
+{
     use FindAll;
 
     /**

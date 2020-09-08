@@ -1,10 +1,11 @@
-<?php namespace Picqer\Financials\Moneybird\Entities\Generic;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities\Generic;
 
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class InvoiceDetail
- * @package Picqer\Financials\Moneybird\Entities\Generic
+ * Class InvoiceDetail.
  */
 abstract class InvoiceDetail extends Model
 {
@@ -26,6 +27,6 @@ abstract class InvoiceDetail extends Model
         'created_at',
         'updated_at',
         'product_id',
-        '_destroy'
+        '_destroy',
     ];
 }

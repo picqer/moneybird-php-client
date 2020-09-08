@@ -12,7 +12,7 @@ $clientSecret = '';
 $administrationId = '';
 
 /**
- * Function to retrieve persisted data for the example
+ * Function to retrieve persisted data for the example.
  * @param string $key
  * @return null|string
  */
@@ -22,11 +22,12 @@ function getValue($key)
     if (array_key_exists($key, $storage)) {
         return $storage[$key];
     }
+
     return null;
 }
 
 /**
- * Function to persist some data for the example
+ * Function to persist some data for the example.
  * @param string $key
  * @param string $value
  */
@@ -39,7 +40,7 @@ function setValue($key, $value)
 
 /**
  * Function to authorize with Moneybird, this redirects to Moneybird login promt and retrieves authorization code
- * to set up requests for oAuth tokens
+ * to set up requests for oAuth tokens.
  *
  * @param string $redirectUrl
  * @param string $clientId
@@ -55,7 +56,7 @@ function authorize($redirectUrl, $clientId, $clientSecret)
 }
 
 /**
- * Function to connect to Moneybird, this creates the client and automatically retrieves oAuth tokens if needed
+ * Function to connect to Moneybird, this creates the client and automatically retrieves oAuth tokens if needed.
  *
  * @param string $redirectUrl
  * @param string $clientId

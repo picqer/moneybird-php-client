@@ -1,4 +1,5 @@
 <?php
+
 namespace PicqerTest\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
@@ -8,8 +9,8 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Prophecy\Argument\Token\AnyValueToken;
 use Prophecy\Prophecy\ObjectProphecy;
 
-class SalesInvoiceTest extends TestCase {
-
+class SalesInvoiceTest extends TestCase
+{
     /** @var SalesInvoice */
     private $salesInvoice;
     /** @var ObjectProphecy */
@@ -19,21 +20,22 @@ class SalesInvoiceTest extends TestCase {
     /** @var array */
     private $optionsJson;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
 
         $this->connection = $this->prophesize(Connection::class);
         $this->options = $this->prophesize(SalesInvoice\SendInvoiceOptions::class);
         $this->optionsJson = [
-            'my-key' => 'my value'
+            'my-key' => 'my value',
         ];
         $this->options->jsonSerialize()->willReturn($this->optionsJson);
 
         $this->salesInvoice = new SalesInvoice($this->connection->reveal());
     }
 
-    public function testSendInvoiceThrowsExceptionWhenNonOptionsPassed() {
-
+    public function testSendInvoiceThrowsExceptionWhenNonOptionsPassed()
+    {
         try {
             $this->salesInvoice->sendInvoice(false);
             self::fail('Should have thrown exception');
@@ -47,32 +49,32 @@ class SalesInvoiceTest extends TestCase {
         }
     }
 
-
-
-    public function testSendWithoutArguments() {
+    public function testSendWithoutArguments()
+    {
         $this->connection->patch(new AnyValueToken(), json_encode([
             'sales_invoice_sending' => [
-                'delivery_method' => SalesInvoice\SendInvoiceOptions::METHOD_EMAIL
-            ]
+                'delivery_method' => SalesInvoice\SendInvoiceOptions::METHOD_EMAIL,
+            ],
         ]))->shouldBeCalled();
 
         $this->salesInvoice->sendInvoice();
     }
 
-    public function testSendWithMethodAsString() {
-
+    public function testSendWithMethodAsString()
+    {
         $this->connection->patch(new AnyValueToken(), json_encode([
             'sales_invoice_sending' => [
-                'delivery_method' => SalesInvoice\SendInvoiceOptions::METHOD_EMAIL
-            ]
+                'delivery_method' => SalesInvoice\SendInvoiceOptions::METHOD_EMAIL,
+            ],
         ]))->shouldBeCalled();
 
         $this->salesInvoice->sendInvoice(SalesInvoice\SendInvoiceOptions::METHOD_EMAIL);
     }
 
-    public function testSendWithOptionsObject() {
+    public function testSendWithOptionsObject()
+    {
         $this->connection->patch(new AnyValueToken(), json_encode([
-            'sales_invoice_sending' => $this->optionsJson
+            'sales_invoice_sending' => $this->optionsJson,
         ]))->shouldBeCalled();
 
         $this->salesInvoice->sendInvoice($this->options->reveal());

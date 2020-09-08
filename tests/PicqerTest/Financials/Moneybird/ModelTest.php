@@ -1,22 +1,22 @@
 <?php
+
 namespace PicqerTest\Financials\Moneybird\Entities;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
-use Prophecy\Argument\Token\AnyValueToken;
 use Prophecy\Prophecy\ObjectProphecy;
 
-class ModelTest extends TestCase {
-
+class ModelTest extends TestCase
+{
     /** @var ObjectProphecy */
     private $connection;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
 
         $this->connection = $this->prophesize(Connection::class);
@@ -33,7 +33,7 @@ class ModelTest extends TestCase {
             'id' => $id,
             'note' => $noteText,
             'todo' => $isToDo,
-            'fakePropertyThatShouldNotBePopulated' => ' ignoredValue'
+            'fakePropertyThatShouldNotBePopulated' => ' ignoredValue',
         ];
 
         $note = $note->makeFromResponse($dummyResponse);
@@ -54,8 +54,8 @@ class ModelTest extends TestCase {
         $dummyResponse = [
             'id' => $salesInvoiceId,
             'contact' => [
-                'id' =>$contactId
-            ]
+                'id' =>$contactId,
+            ],
         ];
 
         $salesInvoice = $salesInvoice->makeFromResponse($dummyResponse);
@@ -80,18 +80,18 @@ class ModelTest extends TestCase {
                 'id' => 2,
                 'name' => 'dummyCustomFieldName2',
                 'value' => 'dummyCustomFieldName2',
-            ]
+            ],
         ];
         $dummyResponse = [
             'id' => $id,
-            'custom_fields' => $dummyCustomFields
+            'custom_fields' => $dummyCustomFields,
         ];
 
         $contact = $contact->makeFromResponse($dummyResponse);
 
         $this->assertEquals($id, $contact->id);
         $this->assertCount(count($dummyCustomFields), $contact->custom_fields);
-        foreach($contact->custom_fields as $customContactField){
+        foreach ($contact->custom_fields as $customContactField) {
             $this->assertInstanceOf(ContactCustomField::class, $customContactField);
         }
     }
@@ -105,7 +105,7 @@ class ModelTest extends TestCase {
         $dummyResponse = [
             'id' => $id,
             'invoice_date' => $invoice_date,
-            'ignoredAttribute' => 'ignoredValue'
+            'ignoredAttribute' => 'ignoredValue',
         ];
 
         $invoice = $invoice->makeFromResponse($dummyResponse);
@@ -114,6 +114,9 @@ class ModelTest extends TestCase {
         $this->assertEquals('id', $invoice->getDirty()[0]);
         $this->assertEquals('invoice_date', $invoice->getDirty()[1]);
         $this->assertEquals(2, count($invoice->getDirty()));
+        $this->assertTrue($invoice->isAttributeDirty('id'));
+        $this->assertTrue($invoice->isAttributeDirty('invoice_date'));
+        $this->assertFalse($invoice->isAttributeDirty('unknown_key'));
 
         //check if the getDirtyValues from is null (new object)
         $this->assertEquals(null, $invoice->getDirtyValues()['invoice_date']['from']);
@@ -123,5 +126,4 @@ class ModelTest extends TestCase {
         $this->assertEquals($id, $invoice->getDirtyValues()['id']['to']);
         $this->assertEquals($invoice_date, $invoice->getDirtyValues()['invoice_date']['to']);
     }
-
 }

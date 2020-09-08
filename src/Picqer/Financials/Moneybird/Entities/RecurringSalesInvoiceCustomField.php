@@ -1,8 +1,9 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 /**
- * Class RecurringSalesInvoiceCustomField
- * @package Picqer\Financials\Moneybird\Entities
+ * Class RecurringSalesInvoiceCustomField.
  */
 class RecurringSalesInvoiceCustomField extends Generic\CustomField
 {

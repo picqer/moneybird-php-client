@@ -4,7 +4,7 @@ use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Moneybird;
 
 /**
- * Class ApiTest
+ * Class ApiTest.
  *
  * Sets up a mocked Connection object. Each test case:
  *  - indicates what the mocked Connection object should expect when interacting with the Client / Entities
@@ -23,7 +23,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
     private $connection;
 
     /**
-     * Same as self::$connection, only differently typed to enable autocompletion in IDE
+     * Same as self::$connection, only differently typed to enable autocompletion in IDE.
      *
      * @var \PHPUnit_Framework_MockObject_MockObject
      */

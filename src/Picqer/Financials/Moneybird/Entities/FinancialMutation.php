@@ -1,4 +1,6 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
@@ -7,13 +9,12 @@ use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class FinancialMutation
- * @package Picqer\Financials\Moneybird\Entities
+ * Class FinancialMutation.
  *
  * @property  LedgerAccountBooking[] $ledger_account_bookings
  */
-class FinancialMutation extends Model {
-
+class FinancialMutation extends Model
+{
     use FindAll, Filterable, Synchronizable;
 
     /**
@@ -96,23 +97,23 @@ class FinancialMutation extends Model {
      */
     public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
     {
-        if (!in_array($bookingType, self::$allowedBookingTypesToLinkToFinancialMutation, true)) {
+        if (! in_array($bookingType, self::$allowedBookingTypesToLinkToFinancialMutation, true)) {
             throw new ApiException('Invalid booking type to link to FinancialMutation, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToLinkToFinancialMutation));
         }
-        if (!is_numeric($bookingId)) {
+        if (! is_numeric($bookingId)) {
             throw new ApiException('Invalid Booking identifier to link to FinancialMutation');
         }
 
         //Filter out potential NULL values
         $parameters = array_filter(
-            array(
+            [
                 'booking_type' => $bookingType,
                 'booking_id' => $bookingId,
                 'price_base' => $priceBase,
                 'price' => $price,
                 'description' => $description,
                 'payment_batch_identifier' => $paymentBatchIdentifier,
-            )
+            ]
         );
 
         return $this->connection->patch($this->endpoint . '/' . $this->id . '/link_booking', json_encode($parameters));
@@ -127,10 +128,10 @@ class FinancialMutation extends Model {
      */
     public function unlinkFromBooking($bookingType, $bookingId)
     {
-        if (!in_array($bookingType, self::$allowedBookingTypesToUnlinkFromFinancialMutation, true)) {
+        if (! in_array($bookingType, self::$allowedBookingTypesToUnlinkFromFinancialMutation, true)) {
             throw new ApiException('Invalid booking type to unlink from FinancialMutation, allowed booking types: ' . implode(', ', self::$allowedBookingTypesToUnlinkFromFinancialMutation));
         }
-        if (!is_numeric($bookingId)) {
+        if (! is_numeric($bookingId)) {
             throw new ApiException('Invalid Booking identifier to unlink from FinancialMutation');
         }
 
@@ -141,5 +142,4 @@ class FinancialMutation extends Model {
 
         return $this->connection->delete($this->endpoint . '/' . $this->id . '/unlink_booking', json_encode($parameters));
     }
-
 }

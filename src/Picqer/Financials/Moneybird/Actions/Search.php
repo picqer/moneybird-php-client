@@ -1,12 +1,12 @@
-<?php namespace Picqer\Financials\Moneybird\Actions;
+<?php
+
+namespace Picqer\Financials\Moneybird\Actions;
 
 /**
- * Class FindAll
- * @package Picqer\Financials\Moneybird\Actions
+ * Class FindAll.
  */
 trait Search
 {
-
     /**
      * @return mixed
      */

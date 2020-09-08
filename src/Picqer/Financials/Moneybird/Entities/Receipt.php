@@ -1,6 +1,9 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
+
+namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\Noteable;
+use Picqer\Financials\Moneybird\Actions\Attachment
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
@@ -9,12 +12,11 @@ use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Receipt
- * @package Picqer\Financials\Moneybird\Entities
+ * Class Receipt.
  */
-class Receipt extends Model {
-
-    use FindAll, FindOne, Storable, Removable, Noteable;
+class Receipt extends Model
+{
+    use FindAll, FindOne, Storable, Removable, Attachment, Noteable;
 
     /**
      * @var array
@@ -67,7 +69,7 @@ class Receipt extends Model {
     ];
 
     /**
-     * Register a payment for the current purchase invoice
+     * Register a payment for the current purchase invoice.
      *
      * @param ReceiptPayment $receiptPayment (payment_date and price are required)
      * @return $this
@@ -75,11 +77,11 @@ class Receipt extends Model {
      */
     public function registerPayment(ReceiptPayment $receiptPayment)
     {
-        if  (! isset($receiptPayment->payment_date)) {
+        if (! isset($receiptPayment->payment_date)) {
             throw new ApiException('Required [payment_date] is missing');
         }
 
-        if  (! isset($receiptPayment->price)) {
+        if (! isset($receiptPayment->price)) {
             throw new ApiException('Required [price] is missing');
         }
 

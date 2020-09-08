@@ -1,4 +1,5 @@
 <?php
+
 namespace PicqerTest\Financials\Moneybird\Entities\SalesInvoice;
 
 use DateTime;
@@ -7,16 +8,17 @@ use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 
-class SendInvoiceOptionsTest extends TestCase {
-
+class SendInvoiceOptionsTest extends TestCase
+{
     private $validMethods = [
         SendInvoiceOptions::METHOD_EMAIL,
         SendInvoiceOptions::METHOD_SIMPLER_INVOICING,
         SendInvoiceOptions::METHOD_POST,
-        SendInvoiceOptions::METHOD_MANUAL
+        SendInvoiceOptions::METHOD_MANUAL,
     ];
 
-    public function testConstructorArguments() {
+    public function testConstructorArguments()
+    {
         $options =
             new SendInvoiceOptions(SendInvoiceOptions::METHOD_POST, 'my-email@foo.com', 'my message');
         self::assertEquals(SendInvoiceOptions::METHOD_POST, $options->getMethod());
@@ -24,17 +26,18 @@ class SendInvoiceOptionsTest extends TestCase {
         self::assertEquals('my message', $options->getEmailMessage());
     }
 
-    public function testDefaultMethodIsEmail() {
+    public function testDefaultMethodIsEmail()
+    {
         $options = new SendInvoiceOptions();
         self::assertEquals(SendInvoiceOptions::METHOD_EMAIL, $options->getMethod());
     }
 
-    public function testMethodIsValidated() {
+    public function testMethodIsValidated()
+    {
         try {
             new SendInvoiceOptions('some-invalid-method');
             self::fail('Should have thrown exception');
         } catch (InvalidArgumentException $e) {
-
             foreach ($this->validMethods as $validMethod) {
                 self::assertContains($validMethod, $e->getMessage());
             }
@@ -43,13 +46,14 @@ class SendInvoiceOptionsTest extends TestCase {
         }
     }
 
-
-    public function testIsSerializable() {
+    public function testIsSerializable()
+    {
         $options = new SendInvoiceOptions();
         self::assertInstanceOf(JsonSerializable::class, $options);
     }
 
-    public function testSerializes() {
+    public function testSerializes()
+    {
         $options = new SendInvoiceOptions(null, 'test@foo.com', 'my message');
         $options->setDeliverUbl(true);
         $options->setMergeable(true);
@@ -64,7 +68,8 @@ class SendInvoiceOptionsTest extends TestCase {
         self::assertEquals('2018-01-01', $json['invoice_date']);
     }
 
-    public function testOmitsNullValues() {
+    public function testOmitsNullValues()
+    {
         $options = new SendInvoiceOptions(null, 'test@foo.com');
 
         $json = $options->jsonSerialize();
@@ -73,14 +78,15 @@ class SendInvoiceOptionsTest extends TestCase {
 
         $omittedKeys = [
             'sending_scheduled', 'email_message', 'invoice_date',
-            'mergeable'
+            'mergeable',
         ];
         foreach ($omittedKeys as $key) {
             self::assertArrayNotHasKey($key, $json);
         }
     }
 
-    public function testGetSetEmailAddress() {
+    public function testGetSetEmailAddress()
+    {
         $options = new SendInvoiceOptions();
         self::assertNull($options->getEmailAddress());
 
@@ -88,7 +94,8 @@ class SendInvoiceOptionsTest extends TestCase {
         self::assertEquals('foo@bar.com', $options->getEmailAddress());
     }
 
-    public function testGetSetEmailMessage() {
+    public function testGetSetEmailMessage()
+    {
         $options = new SendInvoiceOptions();
         self::assertNull($options->getEmailAddress());
 
@@ -96,7 +103,8 @@ class SendInvoiceOptionsTest extends TestCase {
         self::assertEquals('my message', $options->getEmailMessage());
     }
 
-    public function testGetSetSchedule() {
+    public function testGetSetSchedule()
+    {
         $options = new SendInvoiceOptions();
         self::assertFalse($options->isScheduled());
         self::assertNull($options->getScheduleDate());
@@ -108,7 +116,8 @@ class SendInvoiceOptionsTest extends TestCase {
         self::assertTrue($options->isScheduled());
     }
 
-    public function testGetSetDeliverUbl() {
+    public function testGetSetDeliverUbl()
+    {
         $options = new SendInvoiceOptions();
         self::assertNull($options->getDeliverUbl());
 
@@ -116,7 +125,8 @@ class SendInvoiceOptionsTest extends TestCase {
         self::assertTrue($options->getDeliverUbl());
     }
 
-    public function testGetSetMethod() {
+    public function testGetSetMethod()
+    {
         $options = new SendInvoiceOptions();
 
         foreach ($this->validMethods as $method) {
@@ -125,7 +135,8 @@ class SendInvoiceOptionsTest extends TestCase {
         }
     }
 
-    public function testGetSetMergeable() {
+    public function testGetSetMergeable()
+    {
         $options = new SendInvoiceOptions();
         self::assertNull($options->getMergeable());
 

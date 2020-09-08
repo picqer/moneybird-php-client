@@ -1,18 +1,19 @@
-<?php namespace Picqer\Financials\Moneybird\Entities;
+<?php
 
+namespace Picqer\Financials\Moneybird\Entities;
+
+use Picqer\Financials\Moneybird\Actions\FindAll;
+use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Search;
 use Picqer\Financials\Moneybird\Actions\Storable;
-use Picqer\Financials\Moneybird\Actions\FindAll;
-use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Contact
- * @package Picqer\Financials\Moneybird
+ * Class Contact.
  *
  * @property string $id
  * @property ContactCustomField[] $custom_fields
@@ -64,7 +65,7 @@ class Contact extends Model
         'updated_at',
         'notes',
         'custom_fields',
-        'version'
+        'version',
     ];
 
     /**
@@ -93,10 +94,10 @@ class Contact extends Model
      * @return static
      * @throws ApiException
      */
-    public function findByCustomerId($customerId) {
+    public function findByCustomerId($customerId)
+    {
         $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
 
         return $this->makeFromResponse($result);
     }
-
 }

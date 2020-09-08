@@ -5,8 +5,8 @@ namespace Picqer\Financials\Moneybird\Entities;
 use Picqer\Financials\Moneybird\Entities\Generic\InvoicePayment;
 
 /**
- * Class SalesInvoicePayment.
+ * Class ExternalSalesInvoicePayment.
  */
-class PurchaseInvoicePayment extends InvoicePayment
+class ExternalSalesInvoicePayment extends InvoicePayment
 {
 }

@@ -4,7 +4,6 @@ namespace Picqer\Financials\Moneybird\Actions;
 
 trait BaseTrait
 {
-
     /**
      * @return \Picqer\Financials\Moneybird\Connection
      *
@@ -29,7 +28,7 @@ trait BaseTrait
     abstract protected function collectionFromResult(array $result);
 
     /**
-     * Create a new object with the response from the API
+     * Create a new object with the response from the API.
      *
      * @param $response
      *
@@ -38,5 +37,4 @@ trait BaseTrait
      * @see \Picqer\Financials\Moneybird\Model::makeFromResponse()
      */
     abstract protected function makeFromResponse(array $response);
-
 }
