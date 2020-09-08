@@ -2,7 +2,6 @@
 
 namespace Picqer\Financials\Moneybird\Actions;
 
-use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 

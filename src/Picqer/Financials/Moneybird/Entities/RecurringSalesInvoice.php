@@ -14,7 +14,7 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class RecurringSalesInvoice.
  */
-class RecurringSalesInvoice extends Model 
+class RecurringSalesInvoice extends Model
 {
     use FindAll, FindOne, Storable, Removable, Filterable, Synchronizable, Noteable;
 
