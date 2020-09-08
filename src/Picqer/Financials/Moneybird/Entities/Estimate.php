@@ -1,5 +1,6 @@
 <?php namespace Picqer\Financials\Moneybird\Entities;
 
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use InvalidArgumentException;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
@@ -23,7 +24,7 @@ use Picqer\Financials\Moneybird\Model;
 class Estimate extends Model
 {
 
-    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, PrivateDownloadable;
+    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, PrivateDownloadable, Noteable;
 
     /**
      * @var array

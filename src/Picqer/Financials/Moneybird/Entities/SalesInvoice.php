@@ -4,6 +4,7 @@ use InvalidArgumentException;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
@@ -21,7 +22,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class SalesInvoice extends Model {
 
-    use FindAll, FindOne, Storable, Removable, Filterable, PrivateDownloadable, Synchronizable;
+    use FindAll, FindOne, Storable, Removable, Filterable, PrivateDownloadable, Synchronizable, Noteable;
 
     /**
      * @var array
@@ -169,22 +170,6 @@ class SalesInvoice extends Model {
 
         $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
             $salesInvoicePayment->jsonWithNamespace()
-        );
-
-        return $this;
-    }
-
-    /**
-     * Add a note to the current invoice
-     *
-     * @param Note $note
-     * @return $this
-     * @throws ApiException
-     */
-    public function addNote(Note $note)
-    {
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
-            $note->jsonWithNamespace()
         );
 
         return $this;
