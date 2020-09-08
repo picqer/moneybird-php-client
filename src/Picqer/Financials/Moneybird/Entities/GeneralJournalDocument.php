@@ -12,9 +12,9 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class GeneralJournalDocument.
  */
-class GeneralJournalDocument extends Model 
+class GeneralJournalDocument extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Noteable
+    use FindAll, FindOne, Storable, Removable, Noteable;
 
     /**
      * @var array
