@@ -8,6 +8,7 @@ use Picqer\Financials\Moneybird\Actions\Downloadable;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
@@ -23,7 +24,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class SalesInvoice extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment;
+    use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment, Noteable;
 
     /**
      * @var array
@@ -213,22 +214,6 @@ class SalesInvoice extends Model
         }
 
         $this->connection()->delete($this->endpoint . '/' . $this->id . '/payments/' . $salesInvoicePayment->id);
-
-        return $this;
-    }
-
-    /**
-     * Add a note to the current invoice.
-     *
-     * @param Note $note
-     * @return $this
-     * @throws ApiException
-     */
-    public function addNote(Note $note)
-    {
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
-            $note->jsonWithNamespace()
-        );
 
         return $this;
     }
