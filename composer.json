@@ -27,5 +27,8 @@
     "psr-4": {
       "Picqer\\Financials\\Moneybird\\": "src/Picqer/Financials/Moneybird"
     }
+  },
+  "scripts": {
+     "test": "vendor/bin/phpunit" 
   }
 }
