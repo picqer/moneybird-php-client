@@ -31,12 +31,14 @@ class Estimate extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
         'contact',
         'estimate_id',
         'workflow_id',
         'document_style_id',
         'identity_id',
+        'draft_id',
         'state',
         'estimate_date',
         'due_date',
@@ -54,6 +56,8 @@ class Estimate extends Model
         'archived_at',
         'created_at',
         'updated_at',
+        'public_view_code',
+        'version',
         'pre_text',
         'post_text',
         'details',
@@ -61,11 +65,13 @@ class Estimate extends Model
         'total_price_excl_tax_base',
         'total_price_incl_tax',
         'total_price_incl_tax_base',
+        'total_discount',
         'url',
         'custom_fields',
         'notes',
         'attachments',
-        'public_view_code',
+        'events',
+        'tax_totals',
     ];
 
     /**
@@ -92,6 +98,14 @@ class Estimate extends Model
         ],
         'notes' => [
             'entity' => Note::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'events' => [
+            'entity' => EstimateEvent::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'tax_totals' => [
+            'entity' => EstimateTaxTotal::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];
@@ -125,22 +139,6 @@ class Estimate extends Model
         if (is_array($response)) {
             $this->selfFromResponse($response);
         }
-
-        return $this;
-    }
-    
-    /**
-     * Add a note to the current estimate.
-     *
-     * @param Note $note
-     * @return $this
-     * @throws ApiException
-     */
-    private function addNote(Note $note)
-    {
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
-            $note->jsonWithNamespace()
-        );
 
         return $this;
     }
