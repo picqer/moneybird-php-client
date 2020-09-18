@@ -37,6 +37,7 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
+use Picqer\Financials\Moneybird\Entities\TimeEntry;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
 use Picqer\Financials\Moneybird\Entities\Webhook;
 use Picqer\Financials\Moneybird\Entities\Workflow;
@@ -386,6 +387,15 @@ class Moneybird
     public function taxRate($attributes = [])
     {
         return new TaxRate($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\TimeEntry
+     */
+    public function timeEntry($attributes = [])
+    {
+        return new TimeEntry($this->connection, $attributes);
     }
 
     /**
