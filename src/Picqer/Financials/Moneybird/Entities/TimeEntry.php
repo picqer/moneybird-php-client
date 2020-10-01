@@ -31,4 +31,9 @@ class TimeEntry extends Model
      * @var string
      */
     protected $endpoint = 'time_entries';
+
+    /**
+     * @var string
+     */
+    protected $namespace = 'time_entry';
 }
