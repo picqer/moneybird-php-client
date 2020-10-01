@@ -16,6 +16,7 @@ class TimeEntry extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'user_id',
         'started_at',
         'ended_at',
