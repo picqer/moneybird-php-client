@@ -344,7 +344,7 @@ class Connection
             'client_id' => $this->clientId,
             'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
-            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank settings',
+            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank time_entries settings',
         ]);
     }
 
