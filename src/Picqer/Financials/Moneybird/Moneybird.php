@@ -39,6 +39,7 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TimeEntry;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
+use Picqer\Financials\Moneybird\Entities\User;
 use Picqer\Financials\Moneybird\Entities\Webhook;
 use Picqer\Financials\Moneybird\Entities\Workflow;
 
@@ -405,6 +406,15 @@ class Moneybird
     public function typelessDocument($attributes = [])
     {
         return new TypelessDocument($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\User
+     */
+    public function user($attributes = [])
+    {
+        return new User($this->connection, $attributes);
     }
 
     /**

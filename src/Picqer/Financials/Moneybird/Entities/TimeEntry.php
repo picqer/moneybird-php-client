@@ -16,6 +16,7 @@ class TimeEntry extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'user_id',
         'started_at',
         'ended_at',
@@ -31,4 +32,9 @@ class TimeEntry extends Model
      * @var string
      */
     protected $endpoint = 'time_entries';
+
+    /**
+     * @var string
+     */
+    protected $namespace = 'time_entry';
 }
