@@ -293,4 +293,32 @@ class SalesInvoice extends Model
 
         return true;
     }
+
+    /**
+     * Download as UBL.
+     *
+     * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function downloadUBL()
+    {
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_ubl');
+
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * Download as Packaging slip.
+     *
+     * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function downloadPackageSlip()
+    {
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_packing_slip_pdf');
+
+        return $response->getBody()->getContents();
+    }
 }
