@@ -25,13 +25,6 @@ class User extends Model
         'language',
         'time_zone',
         'permissions',
-        'sales_invoices',
-        'documents',
-        'estimates',
-        'bank',
-        'settings',
-        'ownership',
-        'time_entries',
     ];
 
     /**
