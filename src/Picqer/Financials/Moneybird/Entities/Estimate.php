@@ -128,7 +128,7 @@ class Estimate extends Model
 
         return $this;
     }
-    
+
     /**
      * Add a note to the current estimate.
      *
