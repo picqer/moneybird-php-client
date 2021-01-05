@@ -526,7 +526,7 @@ class Connection
 
         return new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode(), $exception);
     }
-    
+
     /**
      * @param ResponseInterface $response
      * @param string $errorMessage
