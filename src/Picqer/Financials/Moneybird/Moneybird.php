@@ -22,6 +22,7 @@ use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Product;
+use Picqer\Financials\Moneybird\Entities\Project;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment;
@@ -252,6 +253,15 @@ class Moneybird
     public function product($attributes = [])
     {
         return new Product($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\Project
+     */
+    public function project($attributes = [])
+    {
+        return new Project($this->connection, $attributes);
     }
 
     /**
