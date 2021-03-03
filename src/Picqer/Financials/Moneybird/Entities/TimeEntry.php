@@ -47,6 +47,6 @@ class TimeEntry extends Model
     protected $singleNestedEntities = [
         'user' => User::class,
         'project' => Project::class,
-        'detail' => SalesInvoiceDetail::class
+        'detail' => SalesInvoiceDetail::class,
     ];
 }
