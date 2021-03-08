@@ -17,6 +17,7 @@ class FinancialStatement extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'financial_account_id',
         'reference',
         'official_date',
