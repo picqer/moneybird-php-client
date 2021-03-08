@@ -4,6 +4,7 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
@@ -13,7 +14,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class GeneralJournalDocument extends Model
 {
-    use FindAll, FindOne, Storable, Removable;
+    use FindAll, FindOne, Storable, Removable, Noteable;
 
     /**
      * @var array

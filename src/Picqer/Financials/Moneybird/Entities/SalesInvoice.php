@@ -8,6 +8,7 @@ use Picqer\Financials\Moneybird\Actions\Downloadable;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
@@ -23,7 +24,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class SalesInvoice extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment;
+    use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment, Noteable;
 
     /**
      * @var array
@@ -69,6 +70,8 @@ class SalesInvoice extends Model
         'total_price_incl_tax',
         'total_price_incl_tax_base',
         'total_discount',
+        'marked_dubious_on',
+        'marked_uncollectible_on',
         'url',
         'custom_fields',
         'notes',
@@ -216,22 +219,6 @@ class SalesInvoice extends Model
     }
 
     /**
-     * Add a note to the current invoice.
-     *
-     * @param Note $note
-     * @return $this
-     * @throws ApiException
-     */
-    public function addNote(Note $note)
-    {
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
-            $note->jsonWithNamespace()
-        );
-
-        return $this;
-    }
-
-    /**
      * Create a credit invoice based on the current invoice.
      *
      * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
@@ -305,5 +292,33 @@ class SalesInvoice extends Model
         }
 
         return true;
+    }
+
+    /**
+     * Download as UBL.
+     *
+     * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function downloadUBL()
+    {
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_ubl');
+
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * Download as Packaging slip.
+     *
+     * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function downloadPackageSlip()
+    {
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_packing_slip_pdf');
+
+        return $response->getBody()->getContents();
     }
 }

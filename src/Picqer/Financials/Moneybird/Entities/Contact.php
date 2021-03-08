@@ -4,6 +4,7 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Search;
 use Picqer\Financials\Moneybird\Actions\Storable;
@@ -19,7 +20,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class Contact extends Model
 {
-    use Search, FindAll, FindOne, Storable, Removable, Synchronizable;
+    use Search, FindAll, FindOne, Storable, Removable, Synchronizable, Noteable;
 
     /**
      * @var array
@@ -98,21 +99,5 @@ class Contact extends Model
         $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
 
         return $this->makeFromResponse($result);
-    }
-
-    /**
-     * Add a note to the current contact.
-     *
-     * @param Note $note
-     * @return $this
-     * @throws ApiException
-     */
-    public function addNote(Note $note)
-    {
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
-            $note->jsonWithNamespace()
-        );
-
-        return $this;
     }
 }

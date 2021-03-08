@@ -16,8 +16,8 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
-    "guzzlehttp/guzzle": "~6.0|7.*",
+    "php": ">=5.6.0",
+    "guzzlehttp/guzzle": "^6.3.1|^7.0",
     "ext-json": "*"
   },
   "require-dev": {
@@ -27,5 +27,8 @@
     "psr-4": {
       "Picqer\\Financials\\Moneybird\\": "src/Picqer/Financials/Moneybird"
     }
+  },
+  "scripts": {
+     "test": "vendor/bin/phpunit" 
   }
 }
