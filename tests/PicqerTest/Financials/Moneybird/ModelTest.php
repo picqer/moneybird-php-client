@@ -8,14 +8,17 @@ use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 
 class ModelTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ObjectProphecy */
     private $connection;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

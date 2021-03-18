@@ -1,6 +1,6 @@
 # moneybird-php-client
 
-[![Build Status](https://travis-ci.org/picqer/moneybird-php-client.svg?branch=master)](https://travis-ci.org/picqer/moneybird-php-client)
+![Run phpunit](https://github.com/picqer/moneybird-php-client/workflows/Run%20phpunit/badge.svg)
 
 PHP Client for Moneybird V2
 
