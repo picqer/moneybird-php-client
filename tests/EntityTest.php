@@ -18,6 +18,7 @@ use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
 use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Product;
+use Picqer\Financials\Moneybird\Entities\Project;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\Receipt;
@@ -131,6 +132,11 @@ class EntityTest extends \PHPUnit_Framework_TestCase
     public function testProductEntity()
     {
         $this->performEntityTest(Product::class);
+    }
+
+    public function testProjectEntity()
+    {
+        $this->performEntityTest(Project::class);
     }
 
     public function testPurchaseInvoiceEntity()

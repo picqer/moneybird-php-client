@@ -18,12 +18,15 @@ class TimeEntry extends Model
     protected $fillable = [
         'id',
         'user_id',
+        'user',
         'started_at',
         'ended_at',
         'paused_duration',
         'contact_id',
         'project_id',
+        'project',
         'detail_id',
+        'detail',
         'description',
         'billable',
     ];
@@ -37,4 +40,13 @@ class TimeEntry extends Model
      * @var string
      */
     protected $namespace = 'time_entry';
+
+    /**
+     * @var array
+     */
+    protected $singleNestedEntities = [
+        'user' => User::class,
+        'project' => Project::class,
+        'detail' => SalesInvoiceDetail::class,
+    ];
 }
