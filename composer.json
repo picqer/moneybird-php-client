@@ -18,6 +18,7 @@
   "require": {
     "php": ">=5.6.0",
     "guzzlehttp/guzzle": "^6.3.1|^7.0",
+    "psr/http-client": "^1.0",
     "ext-json": "*"
   },
   "require-dev": {
