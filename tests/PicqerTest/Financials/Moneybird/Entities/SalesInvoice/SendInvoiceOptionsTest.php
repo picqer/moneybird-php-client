@@ -39,10 +39,11 @@ class SendInvoiceOptionsTest extends TestCase
             self::fail('Should have thrown exception');
         } catch (InvalidArgumentException $e) {
             foreach ($this->validMethods as $validMethod) {
-                self::assertContains($validMethod, $e->getMessage());
+                self::assertStringContainsString($validMethod, $e->getMessage());
             }
 
-            self::assertContains('some-invalid-method', $e->getMessage(), 'Did not provide which value is invalid');
+            self::assertStringContainsString('some-invalid-method', $e->getMessage(),
+                'Did not provide which value is invalid');
         }
     }
 

@@ -158,7 +158,7 @@ class Connection
      * @return \GuzzleHttp\Psr7\Request
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    private function createRequest($method = 'GET', $endpoint = '', $body = null, array $params = [], array $headers = [])
     {
         // Add default json headers to the request
         $headers = array_merge($headers, [
@@ -197,7 +197,7 @@ class Connection
      * @return \GuzzleHttp\Psr7\Request
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    private function createRequestNoJson($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    private function createRequestNoJson($method = 'GET', $endpoint = '', $body = null, array $params = [], array $headers = [])
     {
         // If access token is not set or token has expired, acquire new token
         if (empty($this->accessToken)) {

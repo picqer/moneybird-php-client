@@ -73,6 +73,7 @@ class SalesInvoice extends Model
         'marked_dubious_on',
         'marked_uncollectible_on',
         'url',
+        'payment_url',
         'custom_fields',
         'notes',
         'attachments',
