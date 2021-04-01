@@ -4,13 +4,16 @@ namespace PicqerTest\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Argument\Token\AnyValueToken;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Prophecy\Argument\Token\AnyValueToken;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 
 class SalesInvoiceTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var SalesInvoice */
     private $salesInvoice;
     /** @var ObjectProphecy */
@@ -20,7 +23,7 @@ class SalesInvoiceTest extends TestCase
     /** @var array */
     private $optionsJson;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -40,12 +43,14 @@ class SalesInvoiceTest extends TestCase
             $this->salesInvoice->sendInvoice(false);
             self::fail('Should have thrown exception');
         } catch (InvalidArgumentException $e) {
+            $this->addToAssertionCount(1);
         }
 
         try {
             $this->salesInvoice->sendInvoice(new \stdClass());
             self::fail('Should have thrown exception');
         } catch (InvalidArgumentException $e) {
+            $this->addToAssertionCount(1);
         }
     }
 

@@ -1,6 +1,6 @@
 # moneybird-php-client
 
-[![Build Status](https://travis-ci.org/picqer/moneybird-php-client.svg?branch=master)](https://travis-ci.org/picqer/moneybird-php-client)
+![Run phpunit](https://github.com/picqer/moneybird-php-client/workflows/Run%20phpunit/badge.svg)
 
 PHP Client for Moneybird V2
 
@@ -81,7 +81,7 @@ $moneybird = new \Picqer\Financials\Moneybird\Moneybird($connection);
 
 // Example: Get administrations and set the first result as active administration
 $administrations = $moneybird->administration()->getAll();
-$connection->setAdministrationId($administrations[0]['id']);
+$connection->setAdministrationId($administrations[0]->id);
 
 // Example: Fetch list of salesinvoices 
 $salesInvoices = $moneybird->salesInvoice()->get();

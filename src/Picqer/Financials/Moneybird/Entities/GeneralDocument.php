@@ -2,19 +2,20 @@
 
 namespace Picqer\Financials\Moneybird\Entities;
 
-use Picqer\Financials\Moneybird\Model;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
+use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
+use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class GeneralDocument.
  */
 class GeneralDocument extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Synchronizable;
+    use FindAll, FindOne, Storable, Removable, Synchronizable, Noteable;
 
     /**
      * @var array

@@ -3,16 +3,18 @@
 namespace Picqer\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
-use Picqer\Financials\Moneybird\Model;
+use Picqer\Financials\Moneybird\Actions\Attachment;
+use Picqer\Financials\Moneybird\Actions\Downloadable;
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
-use Picqer\Financials\Moneybird\Actions\Filterable;
+use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
-use Picqer\Financials\Moneybird\Exceptions\ApiException;
-use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class SalesInvoice.
@@ -22,7 +24,7 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
  */
 class SalesInvoice extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Filterable, PrivateDownloadable, Synchronizable;
+    use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment, Noteable;
 
     /**
      * @var array
@@ -68,7 +70,10 @@ class SalesInvoice extends Model
         'total_price_incl_tax',
         'total_price_incl_tax_base',
         'total_discount',
+        'marked_dubious_on',
+        'marked_uncollectible_on',
         'url',
+        'payment_url',
         'custom_fields',
         'notes',
         'attachments',
@@ -215,22 +220,6 @@ class SalesInvoice extends Model
     }
 
     /**
-     * Add a note to the current invoice.
-     *
-     * @param Note $note
-     * @return $this
-     * @throws ApiException
-     */
-    public function addNote(Note $note)
-    {
-        $this->connection()->post($this->endpoint . '/' . $this->id . '/notes',
-            $note->jsonWithNamespace()
-        );
-
-        return $this;
-    }
-
-    /**
      * Create a credit invoice based on the current invoice.
      *
      * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
@@ -260,33 +249,6 @@ class SalesInvoice extends Model
         );
 
         return $this->makeFromResponse($response);
-    }
-
-    /**
-     * Add Attachment to this invoice.
-     *
-     * You can use fopen('/path/to/file', 'r') in $resource.
-     *
-     * @param string $filename The filename of the attachment
-     * @param resource $contents A StreamInterface/resource/string, @see http://docs.guzzlephp.org/en/stable/request-options.html?highlight=multipart#multipart
-     *
-     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
-    public function addAttachment($filename, $contents)
-    {
-        $this->connection()->upload($this->endpoint . '/' . $this->id . '/attachments', [
-            'multipart' => [
-                [
-                    'name' => 'file',
-                    'contents' => $contents,
-                    'filename' => $filename,
-                ],
-            ],
-        ]);
-
-        return $this;
     }
 
     /**
@@ -331,5 +293,33 @@ class SalesInvoice extends Model
         }
 
         return true;
+    }
+
+    /**
+     * Download as UBL.
+     *
+     * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function downloadUBL()
+    {
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_ubl');
+
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * Download as Packaging slip.
+     *
+     * @return string PDF file data
+     *
+     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     */
+    public function downloadPackageSlip()
+    {
+        $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_packing_slip_pdf');
+
+        return $response->getBody()->getContents();
     }
 }

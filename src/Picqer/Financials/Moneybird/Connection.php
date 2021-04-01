@@ -3,15 +3,15 @@
 namespace Picqer\Financials\Moneybird;
 
 use Exception;
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\BadResponseException;
-use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Connection.
@@ -112,7 +112,18 @@ class Connection
     }
 
     /**
+     * Insert a custom Guzzle client.
+     *
+     * @param Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
      * Insert a Middleware for the Guzzle Client.
+     *
      * @param $middleWare
      */
     public function insertMiddleWare($middleWare)
@@ -121,8 +132,9 @@ class Connection
     }
 
     /**
-     * @return Client
      * @throws ApiException
+     *
+     * @return Client
      */
     public function connect()
     {
@@ -146,7 +158,7 @@ class Connection
      * @return \GuzzleHttp\Psr7\Request
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    private function createRequest($method = 'GET', $endpoint = '', $body = null, array $params = [], array $headers = [])
     {
         // Add default json headers to the request
         $headers = array_merge($headers, [
@@ -185,7 +197,7 @@ class Connection
      * @return \GuzzleHttp\Psr7\Request
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
-    private function createRequestNoJson($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    private function createRequestNoJson($method = 'GET', $endpoint = '', $body = null, array $params = [], array $headers = [])
     {
         // If access token is not set or token has expired, acquire new token
         if (empty($this->accessToken)) {
@@ -293,6 +305,23 @@ class Connection
      * @return mixed
      * @throws ApiException
      */
+    public function download($url, $options = [])
+    {
+        try {
+            $request = $this->createRequestNoJson('GET', $this->formatUrl($url, 'get'), null);
+
+            return $this->client()->send($request, $options);
+        } catch (Exception $e) {
+            $this->parseExceptionForErrorMessages($e);
+        }
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @return mixed
+     * @throws ApiException
+     */
     public function upload($url, $options)
     {
         try {
@@ -315,7 +344,7 @@ class Connection
             'client_id' => $this->clientId,
             'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
-            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank settings',
+            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank time_entries settings',
         ]);
     }
 

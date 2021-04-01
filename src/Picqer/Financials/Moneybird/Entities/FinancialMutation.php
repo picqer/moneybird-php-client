@@ -2,11 +2,11 @@
 
 namespace Picqer\Financials\Moneybird\Entities;
 
-use Picqer\Financials\Moneybird\Model;
-use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\Filterable;
+use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class FinancialMutation.

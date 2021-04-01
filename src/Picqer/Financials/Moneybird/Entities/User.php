@@ -6,9 +6,9 @@ use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class TaxRate.
+ * Class User.
  */
-class TaxRate extends Model
+class User extends Model
 {
     use FindAll;
 
@@ -18,16 +18,17 @@ class TaxRate extends Model
     protected $fillable = [
         'id',
         'name',
-        'percentage',
-        'tax_rate_type',
-        'show_tax',
-        'active',
         'created_at',
         'updated_at',
+        'email',
+        'email_validated',
+        'language',
+        'time_zone',
+        'permissions',
     ];
 
     /**
      * @var string
      */
-    protected $endpoint = 'tax_rates';
+    protected $endpoint = 'users';
 }

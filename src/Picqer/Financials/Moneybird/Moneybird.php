@@ -2,41 +2,47 @@
 
 namespace Picqer\Financials\Moneybird;
 
-use Picqer\Financials\Moneybird\Entities\Note;
+use Picqer\Financials\Moneybird\Entities\Administration;
 use Picqer\Financials\Moneybird\Entities\Contact;
-use Picqer\Financials\Moneybird\Entities\Product;
-use Picqer\Financials\Moneybird\Entities\Receipt;
-use Picqer\Financials\Moneybird\Entities\TaxRate;
-use Picqer\Financials\Moneybird\Entities\Webhook;
-use Picqer\Financials\Moneybird\Entities\Estimate;
-use Picqer\Financials\Moneybird\Entities\Identity;
-use Picqer\Financials\Moneybird\Entities\Workflow;
+use Picqer\Financials\Moneybird\Entities\ContactCustomField;
 use Picqer\Financials\Moneybird\Entities\CustomField;
-use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\DocumentStyle;
+use Picqer\Financials\Moneybird\Entities\Estimate;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\ExternalSalesInvoicePayment;
+use Picqer\Financials\Moneybird\Entities\FinancialAccount;
+use Picqer\Financials\Moneybird\Entities\FinancialMutation;
+use Picqer\Financials\Moneybird\Entities\FinancialStatement;
+use Picqer\Financials\Moneybird\Entities\GeneralDocument;
+use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
+use Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry;
+use Picqer\Financials\Moneybird\Entities\Identity;
 use Picqer\Financials\Moneybird\Entities\ImportMapping;
 use Picqer\Financials\Moneybird\Entities\LedgerAccount;
-use Picqer\Financials\Moneybird\Entities\ReceiptDetail;
-use Picqer\Financials\Moneybird\Entities\Administration;
-use Picqer\Financials\Moneybird\Entities\ReceiptPayment;
-use Picqer\Financials\Moneybird\Entities\GeneralDocument;
+use Picqer\Financials\Moneybird\Entities\Note;
+use Picqer\Financials\Moneybird\Entities\Product;
+use Picqer\Financials\Moneybird\Entities\Project;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
-use Picqer\Financials\Moneybird\Entities\FinancialAccount;
-use Picqer\Financials\Moneybird\Entities\TypelessDocument;
-use Picqer\Financials\Moneybird\Entities\FinancialMutation;
-use Picqer\Financials\Moneybird\Entities\ContactCustomField;
-use Picqer\Financials\Moneybird\Entities\FinancialStatement;
+use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment;
+use Picqer\Financials\Moneybird\Entities\Receipt;
+use Picqer\Financials\Moneybird\Entities\ReceiptDetail;
+use Picqer\Financials\Moneybird\Entities\ReceiptPayment;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField;
+use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
+use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
-use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
-use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoice;
-use Picqer\Financials\Moneybird\Entities\GeneralJournalDocument;
-use Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment;
-use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
-use Picqer\Financials\Moneybird\Entities\GeneralJournalDocumentEntry;
-use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceDetail;
-use Picqer\Financials\Moneybird\Entities\RecurringSalesInvoiceCustomField;
+use Picqer\Financials\Moneybird\Entities\TaxRate;
+use Picqer\Financials\Moneybird\Entities\TimeEntry;
+use Picqer\Financials\Moneybird\Entities\TypelessDocument;
+use Picqer\Financials\Moneybird\Entities\User;
+use Picqer\Financials\Moneybird\Entities\Webhook;
+use Picqer\Financials\Moneybird\Entities\Workflow;
 
 /**
  * Class Moneybird.
@@ -122,6 +128,33 @@ class Moneybird
     public function estimate($attributes = [])
     {
         return new Estimate($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ExternalSalesInvoice
+     */
+    public function externalSalesInvoice($attributes = [])
+    {
+        return new ExternalSalesInvoice($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ExternalSalesInvoiceDetail
+     */
+    public function externalSalesInvoiceDetail($attributes = [])
+    {
+        return new ExternalSalesInvoiceDetail($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ExternalSalesInvoicePayment
+     */
+    public function externalSalesInvoicePayment($attributes = [])
+    {
+        return new ExternalSalesInvoicePayment($this->connection, $attributes);
     }
 
     /**
@@ -220,6 +253,15 @@ class Moneybird
     public function product($attributes = [])
     {
         return new Product($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\Project
+     */
+    public function project($attributes = [])
+    {
+        return new Project($this->connection, $attributes);
     }
 
     /**
@@ -360,11 +402,29 @@ class Moneybird
 
     /**
      * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\TimeEntry
+     */
+    public function timeEntry($attributes = [])
+    {
+        return new TimeEntry($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
      * @return \Picqer\Financials\Moneybird\Entities\TypelessDocument
      */
     public function typelessDocument($attributes = [])
     {
         return new TypelessDocument($this->connection, $attributes);
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\User
+     */
+    public function user($attributes = [])
+    {
+        return new User($this->connection, $attributes);
     }
 
     /**

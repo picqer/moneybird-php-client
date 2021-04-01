@@ -9,9 +9,9 @@ use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Identity.
+ * Class Project.
  */
-class Identity extends Model
+class Project extends Model
 {
     use FindAll, FindOne, Storable, Removable;
 
@@ -20,29 +20,12 @@ class Identity extends Model
      */
     protected $fillable = [
         'id',
-        'company_name',
-        'city',
-        'country',
-        'zipcode',
-        'address1',
-        'address2',
-        'email',
-        'phone',
-        'bank_account_name',
-        'bank_account_number',
-        'bank_account_bic',
-        'custom_fields',
-        'created_at',
-        'updated_at',
+        'name',
+        'state',
     ];
 
     /**
      * @var string
      */
-    protected $endpoint = 'identities';
-
-    /**
-     * @var string
-     */
-    protected $namespace = 'identity';
+    protected $endpoint = 'projects';
 }

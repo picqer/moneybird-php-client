@@ -1,21 +1,25 @@
 <?php
 
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Middleware;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Promise\PromiseInterface;
-use Picqer\Financials\Moneybird\Connection;
+namespace Picqer\Tests;
+
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Promise\PromiseInterface;
+use GuzzleHttp\Psr7;
+use PHPUnit\Framework\TestCase;
+use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class ConnectionTest.
  *
  * Tests the connection for proper headers, authentication and other stuff
  */
-class ConnectionTest extends \PHPUnit_Framework_TestCase
+class ConnectionTest extends TestCase
 {
     /**
      * Container to hold the Guzzle history (by reference).
@@ -27,7 +31,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @param callable[] $additionalMiddlewares
      *
-     * @return \Picqer\Financials\Moneybird\Connection
+     * @return Connection
      */
     private function getConnectionForTesting(array $additionalMiddlewares = [])
     {
@@ -66,7 +70,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     * @throws ApiException
      */
     public function testClientIncludesAuthenticationHeader()
     {
@@ -80,7 +84,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     * @throws ApiException
      */
     public function testClientIncludesJsonHeaders()
     {
@@ -95,7 +99,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     * @throws ApiException
      */
     public function testClientTriesToGetAccessTokenWhenNoneGiven()
     {
@@ -116,7 +120,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     * @throws ApiException
      */
     public function testClientContinuesWithRequestAfterGettingAccessTokenWhenNoneGiven()
     {
@@ -131,7 +135,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
+     * @throws ApiException
      */
     public function testClientDetectsApiRateLimit()
     {

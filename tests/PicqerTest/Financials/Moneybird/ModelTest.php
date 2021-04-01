@@ -3,19 +3,22 @@
 namespace PicqerTest\Financials\Moneybird\Entities;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
 use Picqer\Financials\Moneybird\Connection;
-use Picqer\Financials\Moneybird\Entities\Note;
 use Picqer\Financials\Moneybird\Entities\Contact;
-use Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
+use Picqer\Financials\Moneybird\Entities\Note;
+use Picqer\Financials\Moneybird\Entities\SalesInvoice;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 
 class ModelTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ObjectProphecy */
     private $connection;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -94,5 +97,36 @@ class ModelTest extends TestCase
         foreach ($contact->custom_fields as $customContactField) {
             $this->assertInstanceOf(ContactCustomField::class, $customContactField);
         }
+    }
+
+    public function testRegisterAttributesAsDirty()
+    {
+        $invoice = new SalesInvoice($this->connection->reveal());
+
+        $id = 1;
+        $invoice_date = '2019-01-01';
+        $dummyResponse = [
+            'id' => $id,
+            'invoice_date' => $invoice_date,
+            'ignoredAttribute' => 'ignoredValue',
+        ];
+
+        $invoice = $invoice->makeFromResponse($dummyResponse);
+
+        //check if the correct dirty values are set
+        $this->assertEquals('id', $invoice->getDirty()[0]);
+        $this->assertEquals('invoice_date', $invoice->getDirty()[1]);
+        $this->assertEquals(2, count($invoice->getDirty()));
+        $this->assertTrue($invoice->isAttributeDirty('id'));
+        $this->assertTrue($invoice->isAttributeDirty('invoice_date'));
+        $this->assertFalse($invoice->isAttributeDirty('unknown_key'));
+
+        //check if the getDirtyValues from is null (new object)
+        $this->assertEquals(null, $invoice->getDirtyValues()['invoice_date']['from']);
+        $this->assertEquals(null, $invoice->getDirtyValues()['id']['from']);
+
+        //check if the getDirtyValues from is filled with the new value (new object)
+        $this->assertEquals($id, $invoice->getDirtyValues()['id']['to']);
+        $this->assertEquals($invoice_date, $invoice->getDirtyValues()['invoice_date']['to']);
     }
 }

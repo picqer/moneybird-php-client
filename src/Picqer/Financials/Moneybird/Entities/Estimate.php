@@ -3,15 +3,16 @@
 namespace Picqer\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
-use Picqer\Financials\Moneybird\Model;
+use Picqer\Financials\Moneybird\Actions\Downloadable;
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
-use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
-use Picqer\Financials\Moneybird\Actions\Filterable;
+use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
-use Picqer\Financials\Moneybird\Actions\PrivateDownloadable;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
+use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class Contact.
@@ -23,19 +24,21 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
  */
 class Estimate extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, PrivateDownloadable;
+    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, Downloadable, Noteable;
 
     /**
      * @var array
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
         'contact',
         'estimate_id',
         'workflow_id',
         'document_style_id',
         'identity_id',
+        'draft_id',
         'state',
         'estimate_date',
         'due_date',
@@ -53,6 +56,8 @@ class Estimate extends Model
         'archived_at',
         'created_at',
         'updated_at',
+        'public_view_code',
+        'version',
         'pre_text',
         'post_text',
         'details',
@@ -60,11 +65,13 @@ class Estimate extends Model
         'total_price_excl_tax_base',
         'total_price_incl_tax',
         'total_price_incl_tax_base',
+        'total_discount',
         'url',
         'custom_fields',
         'notes',
         'attachments',
-        'public_view_code',
+        'events',
+        'tax_totals',
     ];
 
     /**
@@ -91,6 +98,14 @@ class Estimate extends Model
         ],
         'notes' => [
             'entity' => Note::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'events' => [
+            'entity' => EstimateEvent::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+        'tax_totals' => [
+            'entity' => EstimateTaxTotal::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
     ];

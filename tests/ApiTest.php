@@ -1,7 +1,11 @@
 <?php
 
-use Picqer\Financials\Moneybird\Moneybird;
+namespace Picqer\Tests;
+
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Moneybird;
 
 /**
  * Class ApiTest.
@@ -10,26 +14,26 @@ use Picqer\Financials\Moneybird\Connection;
  *  - indicates what the mocked Connection object should expect when interacting with the Client / Entities
  *  - actually interact with the Client / Entities
  */
-class ApiTest extends \PHPUnit_Framework_TestCase
+class ApiTest extends TestCase
 {
     /**
-     * @var \Picqer\Financials\Moneybird\Moneybird
+     * @var Moneybird
      */
     private $client;
 
     /**
-     * @var \Picqer\Financials\Moneybird\Connection
+     * @var Connection
      */
     private $connection;
 
     /**
      * Same as self::$connection, only differently typed to enable autocompletion in IDE.
      *
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $mockedConnection;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->connection = $this->getMockBuilder(Connection::class)->getMock();
         $this->connection->setTesting(true);
