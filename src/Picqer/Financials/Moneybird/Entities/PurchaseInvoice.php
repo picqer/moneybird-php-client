@@ -76,6 +76,10 @@ class PurchaseInvoice extends Model
             'entity' => PurchaseInvoiceDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
+        'payments' => [
+            'entity' => PurchaseInvoicePayment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
     ];
 
     /**
