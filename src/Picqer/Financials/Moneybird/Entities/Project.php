@@ -22,6 +22,7 @@ class Project extends Model
         'id',
         'name',
         'state',
+        'budget',
     ];
 
     /**
