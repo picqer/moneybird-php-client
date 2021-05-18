@@ -26,7 +26,7 @@ abstract class InvoicePayment extends Model
         'financial_mutation_id',
         'transaction_identifier',
         'manual_payment_action',
-		'ledger_account_id',
+        'ledger_account_id',
         'created_at',
         'updated_at',
     ];
