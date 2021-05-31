@@ -10,7 +10,7 @@ use Picqer\Financials\Moneybird\Entities\Generic\InvoicePayment;
 class PurchaseInvoicePayment extends InvoicePayment
 {
     /**
-     * Delete the current purchase invoice payment
+     * Delete the current purchase invoice payment.
      *
      * @return mixed
      *
