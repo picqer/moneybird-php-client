@@ -17,6 +17,7 @@ abstract class InvoiceDetail extends Model
         'tax_rate_id',
         'ledger_account_id',
         'amount',
+        'amount_decimal',
         'description',
         'period',
         'price',
