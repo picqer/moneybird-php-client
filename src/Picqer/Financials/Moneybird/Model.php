@@ -42,6 +42,11 @@ abstract class Model
     protected $endpoint = '';
 
     /**
+     * @var string The Filter URL endpoint of this model
+     */
+    protected $filter_endpoint = '';
+
+    /**
      * @var string Name of the primary key for this model
      */
     protected $primaryKey = 'id';
@@ -442,6 +447,14 @@ abstract class Model
     public function getEndpoint()
     {
         return $this->endpoint;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilterEndpoint()
+    {
+        return $this->filter_endpoint ?? $this->endpoint;
     }
 
     /**
