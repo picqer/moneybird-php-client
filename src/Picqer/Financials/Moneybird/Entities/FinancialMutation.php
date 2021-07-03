@@ -24,10 +24,15 @@ class FinancialMutation extends Model
      */
     private static $allowedBookingTypesToLinkToFinancialMutation = [
         'Document',
+        'ExternalSalesInvoice',
         'LedgerAccount',
         'NewPurchaseInvoice',
         'NewReceipt',
+        'Payment',
+        'PaymentTransaction',
         'PaymentTransactionBatch',
+        'PurchaseTransaction',
+        'PurchaseTransactionBatch',
         'SalesInvoice',
     ];
 
