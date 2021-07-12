@@ -112,7 +112,7 @@ class ConnectionTest extends TestCase
         $request = $this->getRequestFromHistoryContainer();
         $this->assertEquals('POST', $request->getMethod());
 
-        Psr7\rewind_body($request);
+        Psr7\Message::rewindBody($request);
         $this->assertEquals(
             'redirect_uri=testRedirectUrl&grant_type=authorization_code&client_id=testClientId&client_secret=testClientSecret&code=testAuthorizationCode',
             $request->getBody()->getContents()
