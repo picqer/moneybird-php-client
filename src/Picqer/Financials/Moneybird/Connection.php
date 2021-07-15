@@ -429,7 +429,7 @@ class Connection
      */
     private function getNextParams($headerLine)
     {
-        $links = Psr7\parse_header($headerLine);
+        $links = Psr7\Header::parse($headerLine);
 
         foreach ($links as $link) {
             if (isset($link['rel']) && $link['rel'] === 'next') {
