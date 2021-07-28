@@ -29,4 +29,9 @@ class Project extends Model
      * @var string
      */
     protected $endpoint = 'projects';
+
+    /**
+     * @var string
+     */
+    protected $namespace = 'project';
 }
