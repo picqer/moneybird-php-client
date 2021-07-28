@@ -140,10 +140,10 @@ class ConnectionTest extends TestCase
     public function testClientDetectsApiRateLimit()
     {
         $responseStatusCode = 429;
-        $responseHeaderName = 'Retry-After';
-        $responseHeaderValue = 300;
+        $responseHeaderName = 'RateLimit-Remaining';
+        $responseHeaderValue = 60;
 
-        //Note that middlewares are processed 'LIFO': first the response header should be added, then an exception thrown
+        // Note that middlewares are processed 'LIFO': first the response header should be added, then an exception thrown
         $additionalMiddlewares = [
             $this->getMiddleWareThatThrowsBadResponseException($responseStatusCode),
             $this->getMiddleWareThatAddsResponseHeader($responseHeaderName, $responseHeaderValue),
