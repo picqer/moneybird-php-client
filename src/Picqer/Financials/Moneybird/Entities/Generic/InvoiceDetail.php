@@ -29,5 +29,6 @@ abstract class InvoiceDetail extends Model
         'updated_at',
         'product_id',
         '_destroy',
+        'project_id',
     ];
 }
