@@ -52,6 +52,11 @@ class RecurringSalesInvoice extends Model
         'version',
         'active',
         'custom_fields',
+        'prices_are_incl_tax',
+        'total_price_excl_tax',
+        'total_price_excl_tax_base',
+        'total_price_incl_tax',
+        'total_price_incl_tax_base',
     ];
 
     /**
