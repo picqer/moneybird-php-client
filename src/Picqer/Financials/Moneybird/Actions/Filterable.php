@@ -21,7 +21,7 @@ trait Filterable
             $filterList[] = $key . ':' . $value;
         }
 
-        $result = $this->connection()->get($this->getEndpoint(), ['filter' => implode(',', $filterList)]);
+        $result = $this->connection()->get($this->getFilterEndpoint(), ['filter' => implode(',', $filterList)]);
 
         return $this->collectionFromResult($result);
     }
@@ -39,7 +39,7 @@ trait Filterable
             $filterList[] = $key . ':' . $value;
         }
 
-        $result = $this->connection()->get($this->getEndpoint(), ['filter' => implode(',', $filterList)], true);
+        $result = $this->connection()->get($this->getFilterEndpoint(), ['filter' => implode(',', $filterList)], true);
 
         return $this->collectionFromResult($result);
     }
