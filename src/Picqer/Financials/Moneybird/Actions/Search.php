@@ -10,9 +10,13 @@ trait Search
     /**
      * @return mixed
      */
-    public function search($query)
+    public function search($query, $perPage = null, $page = null)
     {
-        $result = $this->connection()->get($this->getEndpoint(), ['query' => $query], true);
+        $result = $this->connection()->get($this->getEndpoint(), [
+            'query' => $query,
+            'per_page' => $perPage,
+            'page' => $page,
+        ], true);
 
         return $this->collectionFromResult($result);
     }
