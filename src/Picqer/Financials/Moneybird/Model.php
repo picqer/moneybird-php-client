@@ -454,7 +454,7 @@ abstract class Model
      */
     public function getFilterEndpoint()
     {
-        return $this->filter_endpoint ?? $this->endpoint;
+        return $this->filter_endpoint ?: $this->endpoint;
     }
 
     /**
