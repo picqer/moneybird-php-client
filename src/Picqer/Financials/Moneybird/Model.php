@@ -44,7 +44,7 @@ abstract class Model
     /**
      * @var string The Filter URL endpoint of this model
      */
-    protected $filter_endpoint = '';
+    protected $filter_endpoint;
 
     /**
      * @var string Name of the primary key for this model
