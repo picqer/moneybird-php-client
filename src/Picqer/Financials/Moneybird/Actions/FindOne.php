@@ -10,8 +10,7 @@ trait FindOne
     use BaseTrait;
 
     /**
-     * @param string|int $id
-     *
+     * @param  string|int  $id
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException

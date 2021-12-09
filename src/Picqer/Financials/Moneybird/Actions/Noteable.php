@@ -15,8 +15,9 @@ trait Noteable
     /**
      * Add a note to the current object.
      *
-     * @param Note $note
+     * @param  Note  $note
      * @return $this
+     *
      * @throws ApiException
      */
     public function addNote(Note $note)

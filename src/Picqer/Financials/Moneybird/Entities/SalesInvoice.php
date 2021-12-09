@@ -132,9 +132,9 @@ class SalesInvoice extends Model
     /**
      * Instruct Moneybird to send the invoice to the contact.
      *
-     * @param string|SendInvoiceOptions $deliveryMethodOrOptions
-     *
+     * @param  string|SendInvoiceOptions  $deliveryMethodOrOptions
      * @return $this
+     *
      * @throws ApiException
      */
     public function sendInvoice($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
@@ -165,8 +165,7 @@ class SalesInvoice extends Model
     /**
      * Find SalesInvoice by invoice_id.
      *
-     * @param string|int $invoiceId
-     *
+     * @param  string|int  $invoiceId
      * @return static
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
@@ -181,8 +180,9 @@ class SalesInvoice extends Model
     /**
      * Register a payment for the current invoice.
      *
-     * @param SalesInvoicePayment $salesInvoicePayment (payment_date and price are required)
+     * @param  SalesInvoicePayment  $salesInvoicePayment  (payment_date and price are required)
      * @return $this
+     *
      * @throws ApiException
      */
     public function registerPayment(SalesInvoicePayment $salesInvoicePayment)
@@ -205,8 +205,9 @@ class SalesInvoice extends Model
     /**
      * Delete a payment for the current invoice.
      *
-     * @param SalesInvoicePayment $salesInvoicePayment (id is required)
+     * @param  SalesInvoicePayment  $salesInvoicePayment  (id is required)
      * @return $this
+     *
      * @throws ApiException
      */
     public function deletePayment(SalesInvoicePayment $salesInvoicePayment)
