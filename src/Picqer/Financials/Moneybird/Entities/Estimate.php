@@ -72,6 +72,7 @@ class Estimate extends Model
         'attachments',
         'events',
         'tax_totals',
+        'prices_are_incl_tax',
     ];
 
     /**
