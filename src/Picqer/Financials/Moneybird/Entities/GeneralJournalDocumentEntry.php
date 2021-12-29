@@ -17,6 +17,7 @@ class GeneralJournalDocumentEntry extends Model
         'administration_id',
         'ledger_account_id',
         'contact_id',
+        'description',
         'debit',
         'credit',
         'project_id',
