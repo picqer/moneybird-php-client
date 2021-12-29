@@ -19,6 +19,7 @@ class GeneralJournalDocumentEntry extends Model
         'contact_id',
         'debit',
         'credit',
+        'project_id',
         'row_order',
         'created_at',
         'updated_at',
