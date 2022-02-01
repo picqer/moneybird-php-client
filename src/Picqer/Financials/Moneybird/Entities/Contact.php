@@ -2,6 +2,7 @@
 
 namespace Picqer\Financials\Moneybird\Entities;
 
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Noteable;
@@ -21,7 +22,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class Contact extends Model
 {
-    use Search, FindAll, FindOne, Storable, Removable, Synchronizable, Noteable;
+    use Search, FindAll, FindOne, Storable, Removable, Filterable, Synchronizable, Noteable;
 
     /**
      * @var array
