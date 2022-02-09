@@ -71,8 +71,9 @@ class Receipt extends Model
     /**
      * Register a payment for the current purchase invoice.
      *
-     * @param ReceiptPayment $receiptPayment (payment_date and price are required)
+     * @param  ReceiptPayment  $receiptPayment  (payment_date and price are required)
      * @return $this
+     *
      * @throws ApiException
      */
     public function registerPayment(ReceiptPayment $receiptPayment)

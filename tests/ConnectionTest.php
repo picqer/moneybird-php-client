@@ -29,8 +29,7 @@ class ConnectionTest extends TestCase
     private $container;
 
     /**
-     * @param callable[] $additionalMiddlewares
-     *
+     * @param  callable[]  $additionalMiddlewares
      * @return Connection
      */
     private function getConnectionForTesting(array $additionalMiddlewares = [])
@@ -56,8 +55,7 @@ class ConnectionTest extends TestCase
     }
 
     /**
-     * @param int $requestNumber
-     *
+     * @param  int  $requestNumber
      * @return RequestInterface
      */
     private function getRequestFromHistoryContainer($requestNumber = 0)

@@ -10,8 +10,7 @@ trait Synchronizable
     use BaseTrait;
 
     /**
-     * @param array $filters
-     *
+     * @param  array  $filters
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
@@ -35,7 +34,7 @@ trait Synchronizable
     }
 
     /**
-     * @param array $ids
+     * @param  array  $ids
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException

@@ -11,7 +11,7 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class FinancialMutation.
  *
- * @property  LedgerAccountBooking[] $ledger_account_bookings
+ * @property LedgerAccountBooking[] $ledger_account_bookings
  */
 class FinancialMutation extends Model
 {
@@ -90,14 +90,14 @@ class FinancialMutation extends Model
     ];
 
     /**
-     * @param string $bookingType
-     * @param string | int $bookingId
-     * @param string | float $priceBase
-     * @param string | float $price
-     * @param string $description
-     * @param string $paymentBatchIdentifier
-     *
+     * @param  string  $bookingType
+     * @param  string | int  $bookingId
+     * @param  string | float  $priceBase
+     * @param  string | float  $price
+     * @param  string  $description
+     * @param  string  $paymentBatchIdentifier
      * @return int
+     *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
@@ -125,10 +125,10 @@ class FinancialMutation extends Model
     }
 
     /**
-     * @param string $bookingType
-     * @param string | int $bookingId
-     *
+     * @param  string  $bookingType
+     * @param  string | int  $bookingId
      * @return array
+     *
      * @throws ApiException
      */
     public function unlinkFromBooking($bookingType, $bookingId)

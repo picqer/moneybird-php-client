@@ -101,7 +101,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @param string $method
+     * @param  string  $method
      */
     public function setMethod($method)
     {
@@ -124,7 +124,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @param null|string $emailAddress
+     * @param  null|string  $emailAddress
      */
     public function setEmailAddress($emailAddress)
     {
@@ -140,7 +140,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @param string $emailMessage
+     * @param  string  $emailMessage
      */
     public function setEmailMessage($emailMessage)
     {
@@ -156,7 +156,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @param bool $mergeable
+     * @param  bool  $mergeable
      */
     public function setMergeable($mergeable)
     {
@@ -172,7 +172,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @param bool $deliverUbl
+     * @param  bool  $deliverUbl
      */
     public function setDeliverUbl($deliverUbl)
     {

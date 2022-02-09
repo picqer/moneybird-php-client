@@ -1,8 +1,14 @@
-# moneybird-php-client
+# Moneybird PHP Client
 
 ![Run phpunit](https://github.com/picqer/moneybird-php-client/workflows/Run%20phpunit/badge.svg)
 
-PHP Client for Moneybird V2
+PHP Client for the [Moneybird API](https://developer.moneybird.com/). This client lets you integrate with Moneybird, for example by:
+- Creating and sending invoices
+- Creating and updating contact
+- Uploading incoming invoices of purchases
+- Create manual journal bookings
+
+This library is created and maintained by [Picqer](https://picqer.com). We are [looking for PHP developers to join our team](https://picqer.com/nl/vacatures/senior-php-developer)!
 
 ## Installation
 This project can easily be installed through Composer.

@@ -85,8 +85,9 @@ class PurchaseInvoice extends Model
     /**
      * Register a payment for the current purchase invoice.
      *
-     * @param PurchaseInvoicePayment $purchaseInvoicePayment (payment_date and price are required)
+     * @param  PurchaseInvoicePayment  $purchaseInvoicePayment  (payment_date and price are required)
      * @return $this
+     *
      * @throws ApiException
      */
     public function registerPayment(PurchaseInvoicePayment $purchaseInvoicePayment)

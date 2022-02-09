@@ -18,6 +18,7 @@ use Picqer\Financials\Moneybird\Model;
  *
  * @property string $id
  * @property ContactCustomField[] $custom_fields
+ * @property ContactPeople[] $contact_people
  */
 class Contact extends Model
 {
@@ -66,6 +67,7 @@ class Contact extends Model
         'updated_at',
         'notes',
         'custom_fields',
+        'contact_people',
         'version',
     ];
 
@@ -77,12 +79,12 @@ class Contact extends Model
     /**
      * @var string
      */
-    protected $filter_endpoint = 'contacts/filter';
+    protected $namespace = 'contact';
 
     /**
      * @var string
      */
-    protected $namespace = 'contact';
+    protected $filter_endpoint = 'contacts/filter';
 
     /**
      * @var array
@@ -92,12 +94,16 @@ class Contact extends Model
             'entity' => ContactCustomField::class,
             'type' => self::NESTING_TYPE_NESTED_OBJECTS,
         ],
+        'contact_people' => [
+            'entity' => ContactPeople::class,
+            'type' => self::NESTING_TYPE_NESTED_OBJECTS,
+        ],
     ];
 
     /**
-     * @param string|int $customerId
-     *
+     * @param  string|int  $customerId
      * @return static
+     *
      * @throws ApiException
      */
     public function findByCustomerId($customerId)

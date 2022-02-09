@@ -8,6 +8,7 @@ class TooManyRequestsException extends ApiException
 {
     /**
      * Moneybird Ratelimit header: RateLimit-Remaining.
+     *
      * @link https://developer.moneybird.com/#throttling
      *
      * @var int
@@ -16,6 +17,7 @@ class TooManyRequestsException extends ApiException
 
     /**
      * Moneybird Ratelimit header: RateLimit-Limit.
+     *
      * @link https://developer.moneybird.com/#throttling
      *
      * @var int
@@ -24,6 +26,7 @@ class TooManyRequestsException extends ApiException
 
     /**
      * Moneybird Ratelimit header: RateLimit-Reset.
+     *
      * @link https://developer.moneybird.com/#throttling
      *
      * @var int
