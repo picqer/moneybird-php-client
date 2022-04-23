@@ -105,6 +105,16 @@ abstract class Model
     }
 
     /**
+     * Get the fillable items.
+     *
+     * @return array
+     */
+    public function getFillable()
+    {
+        return $this->fillable;
+    }
+
+    /**
      * Fill the entity from an array.
      *
      * @param  array  $attributes
@@ -151,8 +161,8 @@ abstract class Model
      */
     protected function fillableFromArray(array $attributes)
     {
-        if (count($this->fillable) > 0) {
-            return array_intersect_key($attributes, array_flip($this->fillable));
+        if (count($this->getFillable()) > 0) {
+            return array_intersect_key($attributes, array_flip($this->getFillable()));
         }
 
         return $attributes;
@@ -164,7 +174,7 @@ abstract class Model
      */
     protected function isFillable($key)
     {
-        return in_array($key, $this->fillable, true);
+        return in_array($key, $this->getFillable(), true);
     }
 
     /**
@@ -429,7 +439,7 @@ abstract class Model
     {
         $result = [];
 
-        foreach ($this->fillable as $attribute) {
+        foreach ($this->getFillable() as $attribute) {
             $result[$attribute] = $this->$attribute;
         }
 
