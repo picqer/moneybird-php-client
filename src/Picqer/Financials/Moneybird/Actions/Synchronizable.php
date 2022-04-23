@@ -9,6 +9,13 @@ trait Synchronizable
 {
     use BaseTrait;
 
+    public function getFillable()
+    {
+        return array_merge(parent::getFillable(), [
+            'version',
+        ]);
+    }
+
     /**
      * @param  array  $filters
      * @return mixed
