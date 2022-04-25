@@ -80,6 +80,10 @@ class PurchaseInvoice extends Model
             'entity' => PurchaseInvoicePayment::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
         ],
+        'notes' => [
+            'entity' => Note::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
     ];
 
     /**
