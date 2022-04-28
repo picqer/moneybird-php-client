@@ -33,6 +33,7 @@ class SalesInvoice extends Model
         'id',
         'administration_id',
         'contact_id',
+        'contact_person_id',
         'update_contact',
         'contact',
         'invoice_id',
