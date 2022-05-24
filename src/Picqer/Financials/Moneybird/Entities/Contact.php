@@ -13,20 +13,55 @@ use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Contact.
- *
- * @property string $id
- * @property ContactCustomField[] $custom_fields
- * @property ContactPeople[] $contact_people
+ * @property string id
+ * @property string company_name
+ * @property string firstname
+ * @property string lastname
+ * @property string attention
+ * @property string address1
+ * @property string address2
+ * @property string zipcode
+ * @property string city
+ * @property string country
+ * @property string email
+ * @property string phone
+ * @property string delivery_method
+ * @property string customer_id
+ * @property string tax_number
+ * @property string chamber_of_commerce
+ * @property string bank_account
+ * @property string send_invoices_to_attention
+ * @property string send_invoices_to_email
+ * @property string send_estimates_to_attention
+ * @property string send_estimates_to_email
+ * @property string sepa_active
+ * @property string sepa_iban
+ * @property string sepa_iban_account_name
+ * @property string sepa_bic
+ * @property string sepa_mandate_id
+ * @property string sepa_mandate_date
+ * @property string sepa_sequence_type
+ * @property string credit_card_number
+ * @property string credit_card_reference
+ * @property string credit_card_type
+ * @property string invoice_workflow_id
+ * @property string estimate_workflow_id
+ * @property string email_ubl
+ * @property string tax_number_validated_at
+ * @property string created_at
+ * @property string updated_at
+ * @property string notes
+ * @property string custom_fields
+ * @property string contact_people
+ * @property string version
  */
 class Contact extends Model
 {
     use Search, FindAll, FindOne, Storable, Removable, Filterable, Synchronizable, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'company_name',
@@ -71,24 +106,16 @@ class Contact extends Model
         'version',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'contacts';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'contact';
 
-    /**
-     * @var string
-     */
+    
     protected $filter_endpoint = 'contacts/filter';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'custom_fields' => [
             'entity' => ContactCustomField::class,
@@ -100,12 +127,7 @@ class Contact extends Model
         ],
     ];
 
-    /**
-     * @param  string|int  $customerId
-     * @return static
-     *
-     * @throws ApiException
-     */
+    
     public function findByCustomerId($customerId)
     {
         $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));

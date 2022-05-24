@@ -5,16 +5,23 @@ namespace Picqer\Financials\Moneybird\Entities;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class User.
+ * @property string id
+ * @property string name
+ * @property string created_at
+ * @property string updated_at
+ * @property string email
+ * @property string email_validated
+ * @property string language
+ * @property string time_zone
+ * @property string permissions
  */
 class User extends Model
 {
     use FindAll;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'name',
@@ -27,8 +34,6 @@ class User extends Model
         'permissions',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'users';
 }

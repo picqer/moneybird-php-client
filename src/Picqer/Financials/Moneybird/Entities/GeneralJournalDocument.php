@@ -9,16 +9,22 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class GeneralJournalDocument.
+ * @property string id
+ * @property string reference
+ * @property string date
+ * @property string created_at
+ * @property string updated_at
+ * @property string general_journal_document_entries
+ * @property string notes
+ * @property string attachments
  */
 class GeneralJournalDocument extends Model
 {
     use FindAll, FindOne, Storable, Removable, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'reference',
@@ -30,19 +36,13 @@ class GeneralJournalDocument extends Model
         'attachments',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'documents/general_journal_documents';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'general_journal_document';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'general_journal_document_entries' => [
             'entity' => GeneralJournalDocumentEntry::class,

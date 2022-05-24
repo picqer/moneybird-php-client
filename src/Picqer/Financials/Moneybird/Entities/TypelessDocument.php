@@ -9,16 +9,23 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class TypelessDocument.
+ * @property string id
+ * @property string contact_id
+ * @property string reference
+ * @property string date
+ * @property string state
+ * @property string origin
+ * @property string created_at
+ * @property string updated_at
+ * @property string attachments
  */
 class TypelessDocument extends Model
 {
     use Attachment, FindAll, FindOne, Storable, Removable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'contact_id',
@@ -31,13 +38,9 @@ class TypelessDocument extends Model
         'attachments',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'documents/typeless_documents';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'typeless_document';
 }

@@ -6,16 +6,22 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class FinancialStatement.
+ * @property string id
+ * @property string financial_account_id
+ * @property string reference
+ * @property string official_date
+ * @property string official_balance
+ * @property string importer_service
+ * @property string financial_mutations
+ * @property string update_journal_entries
  */
 class FinancialStatement extends Model
 {
     use Storable, Removable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'financial_account_id',
@@ -27,19 +33,13 @@ class FinancialStatement extends Model
         'update_journal_entries',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'financial_statements';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'financial_statement';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'financial_mutations' => [
             'entity' => FinancialMutation::class,

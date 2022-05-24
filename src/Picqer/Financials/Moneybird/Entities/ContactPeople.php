@@ -4,12 +4,11 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class ContactPeople.
- *
- * @property string $id
- * @property string $administration_id
- * @property string $firstname
+ * @property string id
+ * @property string administration_id
+ * @property string firstname
  * @property string lastname
  * @property string phone
  * @property string email
@@ -20,9 +19,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class ContactPeople extends Model
 {
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'administration_id',

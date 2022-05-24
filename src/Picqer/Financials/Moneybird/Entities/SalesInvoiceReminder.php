@@ -4,14 +4,20 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class SalesInvoiceReminder.
+ * @property string contact_id
+ * @property string workflow_id
+ * @property string identity_id
+ * @property string document_style_id
+ * @property string sales_invoices
+ * @property string reminder_text
+ * @property string delivery_method
+ * @property string email_address
  */
 class SalesInvoiceReminder extends Model
 {
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'contact_id',
         'workflow_id',
@@ -25,16 +31,10 @@ class SalesInvoiceReminder extends Model
 
     protected $endpoint = 'sales_invoices';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'sales_invoice_reminders';
 
-    /**
-     * Pushes the reminder.
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function send()
     {
         $aReminder = $this->json();

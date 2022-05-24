@@ -13,19 +13,40 @@ use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class ExternalSalesInvoice.
- *
- * @property string $id
- * @property Contact $contact
+ * @property string id
+ * @property string contact_id
+ * @property string reference
+ * @property string date
+ * @property string due_date
+ * @property string entry_number
+ * @property string state
+ * @property string currency
+ * @property string prices_are_incl_tax
+ * @property string source
+ * @property string source_url
+ * @property string origin
+ * @property string paid_at
+ * @property string total_paid
+ * @property string total_unpaid
+ * @property string total_price_excl_tax
+ * @property string total_price_excl_tax_base
+ * @property string total_price_incl_tax
+ * @property string total_price_incl_tax_base
+ * @property string created_at
+ * @property string updated_at
+ * @property string details
+ * @property string payments
+ * @property string notes
+ * @property string attachments
+ * @property string version
  */
 class ExternalSalesInvoice extends Model
 {
     use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'contact_id',
@@ -55,26 +76,18 @@ class ExternalSalesInvoice extends Model
         'version',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'external_sales_invoices';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'external_sales_invoice';
 
-    /**
-     * @var array
-     */
+    
     protected $singleNestedEntities = [
         'contact' => Contact::class,
     ];
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'details' => [
             'entity' => ExternalSalesInvoiceDetail::class,

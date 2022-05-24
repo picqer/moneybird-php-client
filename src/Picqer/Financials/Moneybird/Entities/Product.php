@@ -9,16 +9,24 @@ use Picqer\Financials\Moneybird\Actions\Search;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Product.
+ * @property string id
+ * @property string description
+ * @property string price
+ * @property string currency
+ * @property string frequency
+ * @property string frequency_type
+ * @property string tax_rate_id
+ * @property string ledger_account_id
+ * @property string created_at
+ * @property string updated_at
  */
 class Product extends Model
 {
     use Search, FindAll, FindOne, Storable, Removable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'description',
@@ -32,13 +40,9 @@ class Product extends Model
         'updated_at',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'products';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'product';
 }

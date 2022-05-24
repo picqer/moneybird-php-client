@@ -4,18 +4,28 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Entities\Generic\InvoicePayment;
 
+
 /**
- * Class SalesInvoicePayment.
+ * @property string id
+ * @property string invoice_type
+ * @property string invoice_id
+ * @property string financial_account_id
+ * @property string user_id
+ * @property string payment_transaction_id
+ * @property string price
+ * @property string price_base
+ * @property string payment_date
+ * @property string credit_invoice_id
+ * @property string financial_mutation_id
+ * @property string transaction_identifier
+ * @property string manual_payment_action
+ * @property string ledger_account_id
+ * @property string created_at
+ * @property string updated_at
  */
 class PurchaseInvoicePayment extends InvoicePayment
 {
-    /**
-     * Delete the current purchase invoice payment.
-     *
-     * @return mixed
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function delete()
     {
         return $this->connection()->delete('/documents/purchase_invoices/' . urlencode($this->invoice_id) . '/payments/' . urlencode($this->id));

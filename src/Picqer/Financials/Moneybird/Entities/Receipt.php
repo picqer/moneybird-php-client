@@ -11,16 +11,38 @@ use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Receipt.
+ * @property string id
+ * @property string contact_id
+ * @property string reference
+ * @property string date
+ * @property string due_date
+ * @property string entry_number
+ * @property string state
+ * @property string currency
+ * @property string exchange_rate
+ * @property string revenue_invoice
+ * @property string prices_are_incl_tax
+ * @property string origin
+ * @property string paid_at
+ * @property string tax_number
+ * @property string total_price_excl_tax
+ * @property string total_price_excl_tax_base
+ * @property string total_price_incl_tax
+ * @property string total_price_incl_tax_base
+ * @property string created_at
+ * @property string updated_at
+ * @property string details
+ * @property string payments
+ * @property string notes
+ * @property string attachments
  */
 class Receipt extends Model
 {
     use FindAll, FindOne, Storable, Removable, Attachment, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'contact_id',
@@ -48,19 +70,13 @@ class Receipt extends Model
         'attachments',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'documents/receipts';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'receipt';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'details' => [
             'entity' => ReceiptDetail::class,
@@ -68,14 +84,7 @@ class Receipt extends Model
         ],
     ];
 
-    /**
-     * Register a payment for the current purchase invoice.
-     *
-     * @param  ReceiptPayment  $receiptPayment  (payment_date and price are required)
-     * @return $this
-     *
-     * @throws ApiException
-     */
+    
     public function registerPayment(ReceiptPayment $receiptPayment)
     {
         if (! isset($receiptPayment->payment_date)) {

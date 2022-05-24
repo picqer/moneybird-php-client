@@ -8,20 +8,35 @@ use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class FinancialMutation.
- *
- * @property LedgerAccountBooking[] $ledger_account_bookings
+ * @property string id
+ * @property string amount
+ * @property string code
+ * @property string date
+ * @property string message
+ * @property string contra_account_name
+ * @property string contra_account_number
+ * @property string state
+ * @property string amount_open
+ * @property string sepa_fields
+ * @property string batch_reference
+ * @property string financial_account_id
+ * @property string currency
+ * @property string original_amount
+ * @property string created_at
+ * @property string updated_at
+ * @property string financial_statement_id
+ * @property string processed_at
+ * @property string payments
+ * @property string ledger_account_bookings
+ * @property string account_servicer_transaction_id
  */
 class FinancialMutation extends Model
 {
     use FindAll, Filterable, Synchronizable;
 
-    /**
-     * @see https://developer.moneybird.com/api/financial_mutations/#patch_financial_mutations_id_link_booking
-     *
-     * @var array
-     */
+    
     private static $allowedBookingTypesToLinkToFinancialMutation = [
         'Document',
         'ExternalSalesInvoice',
@@ -36,20 +51,14 @@ class FinancialMutation extends Model
         'SalesInvoice',
     ];
 
-    /**
-     * @see https://developer.moneybird.com/api/financial_mutations/#delete_financial_mutations_id_unlink_booking
-     *
-     * @var array
-     */
+    
     private static $allowedBookingTypesToUnlinkFromFinancialMutation = [
 
         'LedgerAccountBooking',
         'Payment',
     ];
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'amount',
@@ -74,14 +83,10 @@ class FinancialMutation extends Model
         'account_servicer_transaction_id',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'financial_mutations';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'ledger_account_bookings' => [
             'entity' => LedgerAccountBooking::class,
@@ -89,17 +94,7 @@ class FinancialMutation extends Model
         ],
     ];
 
-    /**
-     * @param  string  $bookingType
-     * @param  string | int  $bookingId
-     * @param  string | float  $priceBase
-     * @param  string | float  $price
-     * @param  string  $description
-     * @param  string  $paymentBatchIdentifier
-     * @return int
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function linkToBooking($bookingType, $bookingId, $priceBase, $price = null, $description = null, $paymentBatchIdentifier = null)
     {
         if (! in_array($bookingType, self::$allowedBookingTypesToLinkToFinancialMutation, true)) {
@@ -124,13 +119,7 @@ class FinancialMutation extends Model
         return $this->connection->patch($this->endpoint . '/' . $this->id . '/link_booking', json_encode($parameters));
     }
 
-    /**
-     * @param  string  $bookingType
-     * @param  string | int  $bookingId
-     * @return array
-     *
-     * @throws ApiException
-     */
+    
     public function unlinkFromBooking($bookingType, $bookingId)
     {
         if (! in_array($bookingType, self::$allowedBookingTypesToUnlinkFromFinancialMutation, true)) {

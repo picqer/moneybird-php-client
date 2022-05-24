@@ -4,19 +4,25 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Note.
- *
- * @property string $id
- * @property string $note
- * @property bool $todo
- * @property string $assignee_id
+ * @property string id
+ * @property string note
+ * @property string todo
+ * @property string assignee_id
+ * @property string id
+ * @property string note
+ * @property string todo
+ * @property string assignee_id
+ * @property string user_id
+ * @property string completed_by_id
+ * @property string completed_at
+ * @property string todo_type
+ * @property string created_at
  */
 class Note extends Model
 {
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'note',
@@ -33,8 +39,6 @@ class Note extends Model
         'created_at',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'note';
 }

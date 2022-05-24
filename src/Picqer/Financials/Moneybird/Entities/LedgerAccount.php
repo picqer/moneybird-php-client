@@ -8,16 +8,22 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class LedgerAccount.
+ * @property string id
+ * @property string name
+ * @property string account_type
+ * @property string account_id
+ * @property string parent_id
+ * @property string allowed_document_types
+ * @property string created_at
+ * @property string updated_at
  */
 class LedgerAccount extends Model
 {
     use FindAll, FindOne, Storable, Removable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'name',
@@ -29,13 +35,9 @@ class LedgerAccount extends Model
         'updated_at',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'ledger_accounts';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'ledger_account';
 }

@@ -10,16 +10,26 @@ use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class GeneralDocument.
+ * @property string id
+ * @property string contact_id
+ * @property string reference
+ * @property string date
+ * @property string due_date
+ * @property string entry_number
+ * @property string state
+ * @property string exchange_rate
+ * @property string created_at
+ * @property string updated_at
+ * @property string notes
+ * @property string attachments
  */
 class GeneralDocument extends Model
 {
     use FindAll, FindOne, Storable, Removable, Synchronizable, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'contact_id',
@@ -35,13 +45,9 @@ class GeneralDocument extends Model
         'attachments',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'documents/general_documents';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'general_document';
 }

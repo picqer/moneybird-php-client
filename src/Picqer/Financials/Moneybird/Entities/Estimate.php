@@ -14,21 +14,57 @@ use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Contact.
- *
- * @property int $id
- * @property string $company_name
- * @property string $first_name
- * @property string $last_name
+ * @property string id
+ * @property string administration_id
+ * @property string contact_id
+ * @property string contact
+ * @property string estimate_id
+ * @property string workflow_id
+ * @property string document_style_id
+ * @property string identity_id
+ * @property string draft_id
+ * @property string state
+ * @property string estimate_date
+ * @property string due_date
+ * @property string reference
+ * @property string language
+ * @property string currency
+ * @property string exchange_rate
+ * @property string discount
+ * @property string original_estimate_id
+ * @property string show_tax
+ * @property string sign_online
+ * @property string sent_at
+ * @property string accepted_at
+ * @property string rejected_at
+ * @property string archived_at
+ * @property string created_at
+ * @property string updated_at
+ * @property string public_view_code
+ * @property string version
+ * @property string pre_text
+ * @property string post_text
+ * @property string details
+ * @property string total_price_excl_tax
+ * @property string total_price_excl_tax_base
+ * @property string total_price_incl_tax
+ * @property string total_price_incl_tax_base
+ * @property string total_discount
+ * @property string url
+ * @property string custom_fields
+ * @property string notes
+ * @property string attachments
+ * @property string events
+ * @property string tax_totals
+ * @property string prices_are_incl_tax
  */
 class Estimate extends Model
 {
     use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, Downloadable, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'administration_id',
@@ -75,19 +111,13 @@ class Estimate extends Model
         'prices_are_incl_tax',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'estimates';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'estimate';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'custom_fields' => [
             'entity' => SalesInvoiceCustomField::class,
@@ -111,14 +141,7 @@ class Estimate extends Model
         ],
     ];
 
-    /**
-     * Instruct Moneybird to send the estimate to the contact.
-     *
-     * @param  string|SendInvoiceOptions  $deliveryMethodOrOptions
-     * @return $this
-     *
-     * @throws ApiException
-     */
+    
     public function sendEstimate($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
     {
         if (is_string($deliveryMethodOrOptions)) {

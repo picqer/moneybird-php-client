@@ -7,8 +7,13 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Webhook.
+ * @property string id
+ * @property string url
+ * @property string events
+ * @property string last_http_status
+ * @property string last_http_body
  */
 class Webhook extends Model
 {
@@ -16,9 +21,7 @@ class Webhook extends Model
 
     const JSON_OPTIONS = 0;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'url',
@@ -27,8 +30,6 @@ class Webhook extends Model
         'last_http_body',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'webhooks';
 }

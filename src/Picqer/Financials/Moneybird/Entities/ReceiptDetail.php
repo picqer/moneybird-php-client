@@ -4,14 +4,21 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class ReceiptDetail.
+ * @property string id
+ * @property string description
+ * @property string period
+ * @property string price
+ * @property string amount
+ * @property string tax_rate_id
+ * @property string ledger_account_id
+ * @property string row_order
+ * @property string _destroy
  */
 class ReceiptDetail extends Model
 {
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'description',

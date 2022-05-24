@@ -8,16 +8,18 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class Project.
+ * @property string id
+ * @property string name
+ * @property string state
+ * @property string budget
  */
 class Project extends Model
 {
     use FindAll, FindOne, Storable, Removable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'name',
@@ -25,13 +27,9 @@ class Project extends Model
         'budget',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'projects';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'project';
 }

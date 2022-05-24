@@ -11,16 +11,49 @@ use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class RecurringSalesInvoice.
+ * @property string id
+ * @property string contact_id
+ * @property string contact
+ * @property string workflow_id
+ * @property string state
+ * @property string start_date
+ * @property string invoice_date
+ * @property string last_date
+ * @property string payment_conditions
+ * @property string reference
+ * @property string language
+ * @property string currency
+ * @property string discount
+ * @property string first_due_interval
+ * @property string auto_send
+ * @property string mergeable
+ * @property string sending_scheduled_at
+ * @property string sending_scheduled_user_id
+ * @property string frequency_type
+ * @property string frequency
+ * @property string created_at
+ * @property string updated_at
+ * @property string details
+ * @property string notes
+ * @property string attachments
+ * @property string has_desired_count
+ * @property string desired_count
+ * @property string version
+ * @property string active
+ * @property string custom_fields
+ * @property string prices_are_incl_tax
+ * @property string total_price_excl_tax
+ * @property string total_price_excl_tax_base
+ * @property string total_price_incl_tax
+ * @property string total_price_incl_tax_base
  */
 class RecurringSalesInvoice extends Model
 {
     use FindAll, FindOne, Storable, Removable, Filterable, Synchronizable, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'contact_id',
@@ -59,19 +92,13 @@ class RecurringSalesInvoice extends Model
         'total_price_incl_tax_base',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'recurring_sales_invoices';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'recurring_sales_invoice';
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'details' => [
             'entity' => RecurringSalesInvoiceDetail::class,

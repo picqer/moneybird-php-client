@@ -5,16 +5,37 @@ namespace Picqer\Financials\Moneybird\Entities;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class DocumentStyle.
+ * @property string id
+ * @property string name
+ * @property string identity_id
+ * @property string default
+ * @property string logo_hash
+ * @property string logo_container_full_width
+ * @property string logo_display_width
+ * @property string logo_position
+ * @property string background_hash
+ * @property string paper_size
+ * @property string address_position
+ * @property string font_size
+ * @property string font_family
+ * @property string print_on_stationary
+ * @property string custom_css
+ * @property string invoice_sender_address
+ * @property string invoice_metadata_left
+ * @property string invoice_metadata_right
+ * @property string estimate_sender_address
+ * @property string estimate_metadata_left
+ * @property string estimate_metadata_right
+ * @property string created_at
+ * @property string updated_at
  */
 class DocumentStyle extends Model
 {
     use FindAll;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'name',
@@ -41,8 +62,6 @@ class DocumentStyle extends Model
         'updated_at',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'document_styles';
 }

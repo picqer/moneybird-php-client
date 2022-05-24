@@ -16,19 +16,64 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class SalesInvoice.
- *
- * @property string $id
- * @property Contact $contact
+ * @property string id
+ * @property string administration_id
+ * @property string contact_id
+ * @property string update_contact
+ * @property string contact
+ * @property string invoice_id
+ * @property string invoice_sequence_id
+ * @property string recurring_sales_invoice_id
+ * @property string workflow_id
+ * @property string document_style_id
+ * @property string identity_id
+ * @property string draft_id
+ * @property string state
+ * @property string invoice_date
+ * @property string due_date
+ * @property string first_due_interval
+ * @property string payment_conditions
+ * @property string payment_reference
+ * @property string reference
+ * @property string language
+ * @property string currency
+ * @property string discount
+ * @property string original_sales_invoice_id
+ * @property string paused
+ * @property string paid_at
+ * @property string sent_at
+ * @property string created_at
+ * @property string updated_at
+ * @property string public_view_code
+ * @property string version
+ * @property string details
+ * @property string payments
+ * @property string total_paid
+ * @property string total_unpaid
+ * @property string total_unpaid_base
+ * @property string prices_are_incl_tax
+ * @property string total_price_excl_tax
+ * @property string total_price_excl_tax_base
+ * @property string total_price_incl_tax
+ * @property string total_price_incl_tax_base
+ * @property string total_discount
+ * @property string marked_dubious_on
+ * @property string marked_uncollectible_on
+ * @property string url
+ * @property string payment_url
+ * @property string custom_fields
+ * @property string notes
+ * @property string attachments
+ * @property string events
+ * @property string tax_totals
  */
 class SalesInvoice extends Model
 {
     use FindAll, FindOne, Storable, Removable, Filterable, Downloadable, Synchronizable, Attachment, Noteable;
 
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'id',
         'administration_id',
@@ -82,26 +127,18 @@ class SalesInvoice extends Model
         'tax_totals',
     ];
 
-    /**
-     * @var string
-     */
+    
     protected $endpoint = 'sales_invoices';
 
-    /**
-     * @var string
-     */
+    
     protected $namespace = 'sales_invoice';
 
-    /**
-     * @var array
-     */
+    
     protected $singleNestedEntities = [
         'contact' => Contact::class,
     ];
 
-    /**
-     * @var array
-     */
+    
     protected $multipleNestedEntities = [
         'custom_fields' => [
             'entity' => SalesInvoiceCustomField::class,
@@ -129,14 +166,7 @@ class SalesInvoice extends Model
         ],
     ];
 
-    /**
-     * Instruct Moneybird to send the invoice to the contact.
-     *
-     * @param  string|SendInvoiceOptions  $deliveryMethodOrOptions
-     * @return $this
-     *
-     * @throws ApiException
-     */
+    
     public function sendInvoice($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
     {
         if (is_string($deliveryMethodOrOptions)) {
@@ -162,14 +192,7 @@ class SalesInvoice extends Model
         return $this;
     }
 
-    /**
-     * Find SalesInvoice by invoice_id.
-     *
-     * @param  string|int  $invoiceId
-     * @return static
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function findByInvoiceId($invoiceId)
     {
         $result = $this->connection()->get($this->getEndpoint() . '/find_by_invoice_id/' . urlencode($invoiceId));
@@ -177,14 +200,7 @@ class SalesInvoice extends Model
         return $this->makeFromResponse($result);
     }
 
-    /**
-     * Register a payment for the current invoice.
-     *
-     * @param  SalesInvoicePayment  $salesInvoicePayment  (payment_date and price are required)
-     * @return $this
-     *
-     * @throws ApiException
-     */
+    
     public function registerPayment(SalesInvoicePayment $salesInvoicePayment)
     {
         if (! isset($salesInvoicePayment->payment_date)) {
@@ -202,14 +218,7 @@ class SalesInvoice extends Model
         return $this;
     }
 
-    /**
-     * Delete a payment for the current invoice.
-     *
-     * @param  SalesInvoicePayment  $salesInvoicePayment  (id is required)
-     * @return $this
-     *
-     * @throws ApiException
-     */
+    
     public function deletePayment(SalesInvoicePayment $salesInvoicePayment)
     {
         if (! isset($salesInvoicePayment->id)) {
@@ -221,13 +230,7 @@ class SalesInvoice extends Model
         return $this;
     }
 
-    /**
-     * Create a credit invoice based on the current invoice.
-     *
-     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function duplicateToCreditInvoice()
     {
         $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/duplicate_creditinvoice',
@@ -237,13 +240,7 @@ class SalesInvoice extends Model
         return $this->makeFromResponse($response);
     }
 
-    /**
-     * Register a payment for a credit invoice.
-     *
-     * @return \Picqer\Financials\Moneybird\Entities\SalesInvoice
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function registerPaymentForCreditInvoice()
     {
         $response = $this->connection()->patch($this->getEndpoint() . '/' . $this->id . '/register_payment_creditinvoice',
@@ -253,13 +250,7 @@ class SalesInvoice extends Model
         return $this->makeFromResponse($response);
     }
 
-    /**
-     * Pauses the sales invoice. The automatic workflow steps will not be executed while the sales invoice is paused.
-     *
-     * @return bool
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function pauseWorkflow()
     {
         try {
@@ -275,13 +266,7 @@ class SalesInvoice extends Model
         return true;
     }
 
-    /**
-     * Resumes the sales invoice. The automatic workflow steps will execute again after resuming.
-     *
-     * @return bool
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function resumeWorkflow()
     {
         try {
@@ -297,13 +282,7 @@ class SalesInvoice extends Model
         return true;
     }
 
-    /**
-     * Download as UBL.
-     *
-     * @return string PDF file data
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function downloadUBL()
     {
         $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_ubl');
@@ -311,13 +290,7 @@ class SalesInvoice extends Model
         return $response->getBody()->getContents();
     }
 
-    /**
-     * Download as Packaging slip.
-     *
-     * @return string PDF file data
-     *
-     * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
-     */
+    
     public function downloadPackageSlip()
     {
         $response = $this->connection()->download($this->getEndpoint() . '/' . urlencode($this->id) . '/download_packing_slip_pdf');

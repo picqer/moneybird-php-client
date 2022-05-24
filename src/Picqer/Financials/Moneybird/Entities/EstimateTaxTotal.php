@@ -4,14 +4,17 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Model;
 
+
 /**
- * Class EstimateTaxTotal.
+ * @property string tax_rate_id
+ * @property string taxable_amount
+ * @property string taxable_amount_base
+ * @property string tax_amount
+ * @property string tax_amount_base
  */
 class EstimateTaxTotal extends Model
 {
-    /**
-     * @var array
-     */
+    
     protected $fillable = [
         'tax_rate_id',
         'taxable_amount',
