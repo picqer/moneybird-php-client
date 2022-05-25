@@ -343,7 +343,7 @@ abstract class Model
                     $multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS
                     && empty($result[$attributeNameToUse])
                 ) {
-                    $result[$attributeNameToUse] = new \StdClass();
+                    $result[$attributeNameToUse] = new \stdClass();
                 }
             }
         }

@@ -69,6 +69,7 @@ class Estimate extends Model
         'id',
         'administration_id',
         'contact_id',
+        'contact_person_id',
         'contact',
         'estimate_id',
         'workflow_id',
