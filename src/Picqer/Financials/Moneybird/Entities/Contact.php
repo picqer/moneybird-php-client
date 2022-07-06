@@ -62,6 +62,7 @@ class Contact extends Model
         'invoice_workflow_id',
         'estimate_workflow_id',
         'email_ubl',
+        'direct_debit',
         'tax_number_validated_at',
         'created_at',
         'updated_at',
