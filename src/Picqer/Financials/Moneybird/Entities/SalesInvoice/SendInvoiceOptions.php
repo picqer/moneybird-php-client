@@ -5,6 +5,7 @@ namespace Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use DateTime;
 use InvalidArgumentException;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Configuration options when sending an invoice.
