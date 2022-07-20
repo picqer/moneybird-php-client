@@ -69,6 +69,7 @@ class SendInvoiceOptions implements JsonSerializable
         return $this->scheduled === true;
     }
 
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_filter([
