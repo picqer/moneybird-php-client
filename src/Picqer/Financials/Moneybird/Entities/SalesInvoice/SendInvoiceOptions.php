@@ -5,6 +5,7 @@ namespace Picqer\Financials\Moneybird\Entities\SalesInvoice;
 use DateTime;
 use InvalidArgumentException;
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Configuration options when sending an invoice.
@@ -69,6 +70,7 @@ class SendInvoiceOptions implements JsonSerializable
         return $this->scheduled === true;
     }
 
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return array_filter([
