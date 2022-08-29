@@ -7,6 +7,7 @@ use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Search;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -22,6 +23,8 @@ class Product extends Model
     protected $fillable = [
         'id',
         'description',
+        'title',
+        'identifier',
         'price',
         'currency',
         'frequency',
@@ -41,4 +44,17 @@ class Product extends Model
      * @var string
      */
     protected $namespace = 'product';
+
+    /**
+     * @param  string|int  $identifier
+     * @return static
+     *
+     * @throws ApiException
+     */
+    public function findByIdentifier($identifier)
+    {
+        $result = $this->connection()->get($this->getEndpoint() . '/identifier/' . urlencode($identifier));
+
+        return $this->makeFromResponse($result);
+    }
 }
