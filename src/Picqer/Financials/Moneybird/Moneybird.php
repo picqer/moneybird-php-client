@@ -37,6 +37,7 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoiceCustomField;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
+use Picqer\Financials\Moneybird\Entities\Subscription;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TimeEntry;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
@@ -443,5 +444,14 @@ class Moneybird
     public function workflow($attributes = [])
     {
         return new Workflow($this->connection, $attributes);
+    }
+
+    /**
+     * @param  array  $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\Subscription
+     */
+    public function subscription($attributes = [])
+    {
+        return new Subscription($this->connection, $attributes);
     }
 }
