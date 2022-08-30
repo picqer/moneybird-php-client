@@ -7,6 +7,7 @@ use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Search;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -23,6 +24,8 @@ class Product extends Model
         'id',
         'title',
         'description',
+        'title',
+        'identifier',
         'price',
         'currency',
         'frequency',
