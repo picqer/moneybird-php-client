@@ -20,16 +20,19 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
-        'description',
-        'price',
-        'currency',
-        'frequency',
-        'frequency_type',
-        'tax_rate_id',
-        'ledger_account_id',
-        'created_at',
-        'updated_at',
+    'id',
+    'title',
+    'description',
+    'price',
+    'currency',
+    'frequency',
+    'frequency_type',
+    'tax_rate_id',
+    'ledger_account_id',
+    'identifier',
+    'product_type',
+    'created_at',
+    'updated_at',
     ];
 
     /**
@@ -41,4 +44,19 @@ class Product extends Model
      * @var string
      */
     protected $namespace = 'product';
+
+    /**
+
+    @param string|int $identifier
+
+    @return static
+
+    @throws ApiException
+     */
+    public function findByIdentifier($identifier)
+    {
+        $result = $this->connection()->get($this->getEndpoint() . '/identifier/' . urlencode($identifier));
+
+        return $this->makeFromResponse($result);
+    }
 }
