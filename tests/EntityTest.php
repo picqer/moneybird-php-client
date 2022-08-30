@@ -36,6 +36,7 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoiceEvent;
 use Picqer\Financials\Moneybird\Entities\SalesInvoicePayment;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceReminder;
 use Picqer\Financials\Moneybird\Entities\SalesInvoiceTaxTotal;
+use Picqer\Financials\Moneybird\Entities\Subscription;
 use Picqer\Financials\Moneybird\Entities\TaxRate;
 use Picqer\Financials\Moneybird\Entities\TimeEntry;
 use Picqer\Financials\Moneybird\Entities\TypelessDocument;
@@ -210,6 +211,11 @@ class EntityTest extends TestCase
     public function testSalesInvoiceTaxTotalEntity()
     {
         $this->performEntityTest(SalesInvoiceTaxTotal::class);
+    }
+
+    public function testSubscriptionEntity()
+    {
+        $this->performEntityTest(Subscription::class);
     }
 
     public function testNoteEntity()
