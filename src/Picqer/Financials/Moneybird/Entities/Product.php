@@ -20,19 +20,19 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-    'id',
-    'title',
-    'description',
-    'price',
-    'currency',
-    'frequency',
-    'frequency_type',
-    'tax_rate_id',
-    'ledger_account_id',
-    'identifier',
-    'product_type',
-    'created_at',
-    'updated_at',
+        'id',
+        'title',
+        'description',
+        'price',
+        'currency',
+        'frequency',
+        'frequency_type',
+        'tax_rate_id',
+        'ledger_account_id',
+        'identifier',
+        'product_type',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -46,12 +46,10 @@ class Product extends Model
     protected $namespace = 'product';
 
     /**
-
-    @param string|int $identifier
-
-    @return static
-
-    @throws ApiException
+     * @param  string|int  $identifier
+     * @return static
+     *
+     * @throws ApiException
      */
     public function findByIdentifier($identifier)
     {
