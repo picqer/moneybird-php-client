@@ -11,7 +11,9 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
+
 
 /**
  * Class ExternalSalesInvoice.
@@ -91,5 +93,30 @@ class ExternalSalesInvoice extends Model
         parent::__construct($connection, $attributes);
 
         $this->attachmentPath = 'attachment';
+    }
+
+    /**
+     * Register a payment for the current invoice.
+     *
+     * @param  ExternalSalesInvoicePayment  $salesInvoicePayment  (payment_date and price are required)
+     * @return $this
+     *
+     * @throws ApiException
+     */
+    public function registerPayment(ExternalSalesInvoicePayment $salesInvoicePayment)
+    {
+        if (! isset($salesInvoicePayment->payment_date)) {
+            throw new ApiException('Required [payment_date] is missing');
+        }
+
+        if (! isset($salesInvoicePayment->price)) {
+            throw new ApiException('Required [price] is missing');
+        }
+
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
+            $salesInvoicePayment->jsonWithNamespace()
+        );
+
+        return $this;
     }
 }
