@@ -14,7 +14,6 @@ use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
-
 /**
  * Class ExternalSalesInvoice.
  *
