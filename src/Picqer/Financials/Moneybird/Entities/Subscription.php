@@ -31,6 +31,9 @@ class Subscription extends Model
         'document_style_id',
         'frequency',
         'frequency_type',
+        'mergeable',
+        'subscription_prices_are_incl_tax',
+        'subscription_products',
     ];
 
     /**
