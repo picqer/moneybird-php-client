@@ -290,10 +290,10 @@ class Connection
      *
      * @throws ApiException
      */
-    public function delete($url, $body = null)
+    public function delete($url, $body = null, $params = [])
     {
         try {
-            $request = $this->createRequest('DELETE', $this->formatUrl($url, 'delete'), $body);
+            $request = $this->createRequest('DELETE', $this->formatUrl($url, 'delete'), $body, $params = []);
             $response = $this->client()->send($request);
 
             return $this->parseResponse($response);
