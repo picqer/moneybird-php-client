@@ -81,6 +81,7 @@ class SalesInvoice extends Model
         'attachments',
         'events',
         'tax_totals',
+        'original_estimate_id',
     ];
 
     /**
