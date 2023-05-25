@@ -11,6 +11,7 @@ use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Connection;
+use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -91,5 +92,49 @@ class ExternalSalesInvoice extends Model
         parent::__construct($connection, $attributes);
 
         $this->attachmentPath = 'attachment';
+    }
+
+    /**
+     * Register a payment for the current external sales invoice.
+     *
+     * @param  ExternalSalesInvoicePayment  $externalSalesInvoicePayment  (payment_date and price are required)
+     * @return $this
+     *
+     * @throws ApiException
+     */
+    public function registerPayment(ExternalSalesInvoicePayment $externalSalesInvoicePayment)
+    {
+        if (! isset($externalSalesInvoicePayment->payment_date)) {
+            throw new ApiException('Required [payment_date] is missing');
+        }
+
+        if (! isset($externalSalesInvoicePayment->price)) {
+            throw new ApiException('Required [price] is missing');
+        }
+
+        $this->connection()->post($this->endpoint . '/' . $this->id . '/payments',
+            $externalSalesInvoicePayment->jsonWithNamespace()
+        );
+
+        return $this;
+    }
+
+    /**
+     * Delete a payment for the current external sales invoice.
+     *
+     * @param  ExternalSalesInvoicePayment  $externalSalesInvoicePayment  (id is required)
+     * @return $this
+     *
+     * @throws ApiException
+     */
+    public function deletePayment(ExternalSalesInvoicePayment $externalSalesInvoicePayment)
+    {
+        if (! isset($externalSalesInvoicePayment->id)) {
+            throw new ApiException('Required [id] is missing');
+        }
+
+        $this->connection()->delete($this->endpoint . '/' . $this->id . '/payments/' . $externalSalesInvoicePayment->id);
+
+        return $this;
     }
 }
