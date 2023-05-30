@@ -30,6 +30,5 @@ abstract class InvoiceDetail extends Model
         'product_id',
         'project_id',
         '_destroy',
-        'project_id',
     ];
 }
