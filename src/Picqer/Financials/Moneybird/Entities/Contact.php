@@ -45,6 +45,7 @@ class Contact extends Model
         'tax_number',
         'chamber_of_commerce',
         'bank_account',
+        'moneybird_payments_mandate',
         'send_invoices_to_attention',
         'send_invoices_to_email',
         'send_estimates_to_attention',
@@ -111,5 +112,15 @@ class Contact extends Model
         $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
 
         return $this->makeFromResponse($result);
+    }
+
+    /**
+     * @throws ApiException
+     */
+    public function getPaymentsMandate(): array
+    {
+        return $this->connection()->get(
+            $this->getEndpoint() . '/' . $this->id . '/moneybird_payments_mandate'
+        );
     }
 }
