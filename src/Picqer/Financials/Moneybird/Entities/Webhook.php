@@ -25,6 +25,7 @@ class Webhook extends Model
         'events',
         'last_http_status',
         'last_http_body',
+        'token',
     ];
 
     /**
