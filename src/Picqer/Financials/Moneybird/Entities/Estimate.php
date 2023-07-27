@@ -90,6 +90,10 @@ class Estimate extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => EstimateAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'custom_fields' => [
             'entity' => SalesInvoiceCustomField::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,

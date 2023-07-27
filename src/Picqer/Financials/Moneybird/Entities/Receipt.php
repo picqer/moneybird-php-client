@@ -62,6 +62,10 @@ class Receipt extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => ReceiptAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'details' => [
             'entity' => ReceiptDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,

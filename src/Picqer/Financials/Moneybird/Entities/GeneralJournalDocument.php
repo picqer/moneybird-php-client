@@ -44,6 +44,10 @@ class GeneralJournalDocument extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => GeneralJournalDocumentAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'general_journal_document_entries' => [
             'entity' => GeneralJournalDocumentEntry::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
