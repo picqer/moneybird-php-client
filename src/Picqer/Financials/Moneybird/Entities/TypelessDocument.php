@@ -40,4 +40,14 @@ class TypelessDocument extends Model
      * @var string
      */
     protected $namespace = 'typeless_document';
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => TypelessDocumentAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 }
