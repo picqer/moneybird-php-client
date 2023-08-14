@@ -124,7 +124,7 @@ class Connection
     /**
      * Insert a Middleware for the Guzzle Client.
      *
-     * @param $middleWare
+     * @param  $middleWare
      */
     public function insertMiddleWare($middleWare)
     {
@@ -189,7 +189,7 @@ class Connection
 
     /**
      * @param  string  $method
-     * @param $endpoint
+     * @param  $endpoint
      * @param  null  $body
      * @param  array  $params
      * @param  array  $headers
@@ -430,7 +430,7 @@ class Connection
     }
 
     /**
-     * @param $headerLine
+     * @param  $headerLine
      * @return bool | array
      */
     private function getNextParams($headerLine)

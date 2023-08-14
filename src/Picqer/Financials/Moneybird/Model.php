@@ -214,7 +214,7 @@ abstract class Model
     /**
      * Check if the attribute is changed since the last save/update/create action.
      *
-     * @param $attributeName
+     * @param  $attributeName
      * @return bool
      */
     public function isAttributeDirty($attributeName)
