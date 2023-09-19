@@ -47,6 +47,7 @@ class Receipt extends Model
         'payments',
         'notes',
         'attachments',
+        'version'
     ];
 
     /**
