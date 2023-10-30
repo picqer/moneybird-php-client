@@ -151,8 +151,9 @@ class Estimate extends Model
 
     /**
      * Change the state of the estimate.
+     *
      * @see https://developer.moneybird.com/api/estimates/#patch_estimates_id_change_state
-     * 
+     *
      * @param  string  $state
      * @return $this
      *
