@@ -161,17 +161,6 @@ class Estimate extends Model
      */
     public function changeState(string $state)
     {
-        if (! in_array($state, [
-            'accepted',
-            'rejected',
-            'open',
-            'late',
-            'billed',
-            'archived',
-        ], true)) {
-            throw new InvalidArgumentException("Expected valid state. Received: '$state'");
-        }
-
         $response = $this->connection()->patch($this->getEndpoint() . '/' . urlencode($this->id) . '/change_state', json_encode([
             'state' => $state,
         ]));
