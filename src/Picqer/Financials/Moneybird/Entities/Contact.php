@@ -123,4 +123,12 @@ class Contact extends Model
             $this->getEndpoint() . '/' . $this->id . '/moneybird_payments_mandate'
         );
     }
+
+    public function addContactPerson(array $attributes): ContactPeople
+    {
+        $attributes['contact_id'] = $this->id;
+        $contactPerson = new ContactPeople($this->connection(), $attributes);
+
+        return $contactPerson->save();
+    }
 }
