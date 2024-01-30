@@ -57,7 +57,7 @@ class ModelTest extends TestCase
         $dummyResponse = [
             'id' => $salesInvoiceId,
             'contact' => [
-                'id' =>$contactId,
+                'id' => $contactId,
             ],
         ];
 
