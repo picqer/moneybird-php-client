@@ -3,6 +3,7 @@
 namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\Attachment;
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Noteable;
@@ -17,7 +18,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class Receipt extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Attachment, Noteable, Synchronizable;
+    use Filterable, FindAll, FindOne, Storable, Removable, Attachment, Noteable, Synchronizable;
 
     /**
      * @var array
