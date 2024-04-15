@@ -90,6 +90,10 @@ class Estimate extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => EstimateAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'custom_fields' => [
             'entity' => SalesInvoiceCustomField::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
@@ -136,6 +140,29 @@ class Estimate extends Model
 
         $response = $this->connection->patch($this->endpoint . '/' . $this->id . '/send_estimate', json_encode([
             'estimate_sending' => $options->jsonSerialize(),
+        ]));
+
+        if (is_array($response)) {
+            $this->selfFromResponse($response);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Change the state of the estimate.
+     *
+     * @see https://developer.moneybird.com/api/estimates/#patch_estimates_id_change_state
+     *
+     * @param  string  $state
+     * @return $this
+     *
+     * @throws ApiException
+     */
+    public function changeState(string $state)
+    {
+        $response = $this->connection()->patch($this->getEndpoint() . '/' . urlencode($this->id) . '/change_state', json_encode([
+            'state' => $state,
         ]));
 
         if (is_array($response)) {

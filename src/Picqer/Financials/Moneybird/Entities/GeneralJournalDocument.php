@@ -2,6 +2,7 @@
 
 namespace Picqer\Financials\Moneybird\Entities;
 
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Noteable;
@@ -14,7 +15,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class GeneralJournalDocument extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Noteable;
+    use Filterable, FindAll, FindOne, Storable, Removable, Noteable;
 
     /**
      * @var array
@@ -44,6 +45,10 @@ class GeneralJournalDocument extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => GeneralJournalDocumentAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'general_journal_document_entries' => [
             'entity' => GeneralJournalDocumentEntry::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,

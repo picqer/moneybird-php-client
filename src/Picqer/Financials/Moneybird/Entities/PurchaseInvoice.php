@@ -72,6 +72,10 @@ class PurchaseInvoice extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => PurchaseInvoiceAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'details' => [
             'entity' => PurchaseInvoiceDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,

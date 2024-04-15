@@ -3,6 +3,7 @@
 namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\Attachment;
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Removable;
@@ -14,7 +15,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class TypelessDocument extends Model
 {
-    use Attachment, FindAll, FindOne, Storable, Removable;
+    use Attachment, Filterable, FindAll, FindOne, Storable, Removable;
 
     /**
      * @var array
@@ -40,4 +41,14 @@ class TypelessDocument extends Model
      * @var string
      */
     protected $namespace = 'typeless_document';
+
+    /**
+     * @var array
+     */
+    protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => TypelessDocumentAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
+    ];
 }

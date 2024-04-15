@@ -5,6 +5,7 @@ namespace Picqer\Financials\Moneybird;
 use Picqer\Financials\Moneybird\Entities\Administration;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
+use Picqer\Financials\Moneybird\Entities\ContactPeople;
 use Picqer\Financials\Moneybird\Entities\CustomField;
 use Picqer\Financials\Moneybird\Entities\DocumentStyle;
 use Picqer\Financials\Moneybird\Entities\Estimate;
@@ -85,6 +86,15 @@ class Moneybird
     public function contact($attributes = [])
     {
         return new Contact($this->connection, $attributes);
+    }
+
+    /**
+     * @param  array  $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\ContactPeople
+     */
+    public function contactPerson($attributes = [])
+    {
+        return new ContactPeople($this->connection, $attributes);
     }
 
     /**

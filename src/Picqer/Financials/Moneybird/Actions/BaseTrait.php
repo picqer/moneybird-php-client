@@ -29,7 +29,7 @@ trait BaseTrait
     /**
      * Create a new object with the response from the API.
      *
-     * @param $response
+     * @param  $response
      * @return static
      *
      * @see \Picqer\Financials\Moneybird\Model::makeFromResponse()

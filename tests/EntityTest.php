@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Entities\Administration;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Entities\ContactCustomField;
+use Picqer\Financials\Moneybird\Entities\ContactPeople;
 use Picqer\Financials\Moneybird\Entities\CustomField;
 use Picqer\Financials\Moneybird\Entities\DocumentStyle;
 use Picqer\Financials\Moneybird\Entities\Estimate;
@@ -61,6 +62,11 @@ class EntityTest extends TestCase
     public function testContactEntity()
     {
         $this->performEntityTest(Contact::class);
+    }
+
+    public function testContactPeopleEntity()
+    {
+        $this->performEntityTest(ContactPeople::class);
     }
 
     public function testContactCustomFieldEntity()

@@ -3,11 +3,13 @@
 namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\Attachment;
+use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
 
@@ -16,7 +18,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class Receipt extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Attachment, Noteable;
+    use Filterable, FindAll, FindOne, Storable, Removable, Attachment, Noteable, Synchronizable;
 
     /**
      * @var array
@@ -46,6 +48,7 @@ class Receipt extends Model
         'payments',
         'notes',
         'attachments',
+        'version',
     ];
 
     /**
@@ -62,6 +65,10 @@ class Receipt extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
+        'attachments' => [
+            'entity' => ReceiptAttachment::class,
+            'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
+        ],
         'details' => [
             'entity' => ReceiptDetail::class,
             'type' => self::NESTING_TYPE_ARRAY_OF_OBJECTS,
