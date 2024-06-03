@@ -89,9 +89,9 @@ class Contact extends Model
     ];
 
     /**
-     * @param string|int $customerId
-     *
+     * @param  string|int  $customerId
      * @return static
+     *
      * @throws ApiException
      */
     public function findByCustomerId($customerId)

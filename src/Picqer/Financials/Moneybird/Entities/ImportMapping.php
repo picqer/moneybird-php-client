@@ -34,7 +34,7 @@ class ImportMapping extends Model
     protected $endpoint = 'import_mappings';
 
     /**
-     * @param string $type The type of import mapping to request
+     * @param  string  $type  The type of import mapping to request
      *
      * Type should be any of: financial_account bank_mutation contact document_attachment general_journal identity
      * incoming_invoice attachment payment history invoice_attachment transaction ledger_account tax_rate product

@@ -3,7 +3,6 @@
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Psr7;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\Contact;
 use Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException;
@@ -25,8 +24,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     private $container;
 
     /**
-     * @param callable[] $additionalMiddlewares
-     *
+     * @param  callable[]  $additionalMiddlewares
      * @return \Picqer\Financials\Moneybird\Connection
      */
     private function getConnectionForTesting(array $additionalMiddlewares = [])
@@ -52,8 +50,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param int $requestNumber
-     *
+     * @param  int  $requestNumber
      * @return RequestInterface
      */
     private function getRequestFromHistoryContainer($requestNumber = 0)

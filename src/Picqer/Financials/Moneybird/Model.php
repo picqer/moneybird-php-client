@@ -69,8 +69,9 @@ abstract class Model
 
     /**
      * Model constructor.
-     * @param \Picqer\Financials\Moneybird\Connection $connection
-     * @param array $attributes
+     *
+     * @param  \Picqer\Financials\Moneybird\Connection  $connection
+     * @param  array  $attributes
      */
     public function __construct(Connection $connection, array $attributes = [])
     {
@@ -101,8 +102,8 @@ abstract class Model
     /**
      * Fill the entity from an array.
      *
-     * @param array $attributes
-     * @param bool $first_initialize
+     * @param  array  $attributes
+     * @param  bool  $first_initialize
      */
     protected function fill(array $attributes, $first_initialize)
     {
@@ -140,8 +141,7 @@ abstract class Model
     /**
      * Get the fillable attributes of an array.
      *
-     * @param array $attributes
-     *
+     * @param  array  $attributes
      * @return array
      */
     protected function fillableFromArray(array $attributes)
@@ -154,7 +154,7 @@ abstract class Model
     }
 
     /**
-     * @param string $key
+     * @param  string  $key
      * @return bool
      */
     protected function isFillable($key)
@@ -163,8 +163,8 @@ abstract class Model
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
+     * @param  string  $key
+     * @param  mixed  $value
      */
     protected function setAttribute($key, $value)
     {
@@ -209,7 +209,7 @@ abstract class Model
     /**
      * Check if the attribute is changed since the last save/update/create action.
      *
-     * @param $attributeName
+     * @param  $attributeName
      * @return bool
      */
     public function isAttributeDirty($attributeName)
@@ -230,8 +230,7 @@ abstract class Model
     }
 
     /**
-     * @param string $key
-     *
+     * @param  string  $key
      * @return mixed
      */
     public function __get($key)
@@ -244,8 +243,8 @@ abstract class Model
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
+     * @param  string  $key
+     * @param  mixed  $value
      */
     public function __set($key, $value)
     {
@@ -289,8 +288,7 @@ abstract class Model
     }
 
     /**
-     * @param bool $useAttributesAppend
-     *
+     * @param  bool  $useAttributesAppend
      * @return array
      */
     private function getArrayWithNestedObjects($useAttributesAppend = true)
@@ -330,7 +328,7 @@ abstract class Model
                     $multipleNestedEntities[$attributeName]['type'] === self::NESTING_TYPE_NESTED_OBJECTS
                     && empty($result[$attributeNameToUse])
                 ) {
-                    $result[$attributeNameToUse] = new \StdClass();
+                    $result[$attributeNameToUse] = new \stdClass();
                 }
             }
         }
@@ -341,8 +339,7 @@ abstract class Model
     /**
      * Create a new object with the response from the API.
      *
-     * @param array $response
-     *
+     * @param  array  $response
      * @return static
      */
     public function makeFromResponse(array $response)
@@ -356,8 +353,7 @@ abstract class Model
     /**
      * Recreate this object with the response from the API.
      *
-     * @param array $response
-     *
+     * @param  array  $response
      * @return $this
      */
     public function selfFromResponse(array $response)
@@ -384,8 +380,7 @@ abstract class Model
     }
 
     /**
-     * @param array $result
-     *
+     * @param  array  $result
      * @return array
      */
     public function collectionFromResult(array $result)
@@ -447,8 +442,7 @@ abstract class Model
     /**
      * Determine if an attribute exists on the model.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return bool
      */
     public function __isset($name)

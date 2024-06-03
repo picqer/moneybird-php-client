@@ -13,7 +13,8 @@ $administrationId = '';
 
 /**
  * Function to retrieve persisted data for the example.
- * @param string $key
+ *
+ * @param  string  $key
  * @return null|string
  */
 function getValue($key)
@@ -28,8 +29,9 @@ function getValue($key)
 
 /**
  * Function to persist some data for the example.
- * @param string $key
- * @param string $value
+ *
+ * @param  string  $key
+ * @param  string  $value
  */
 function setValue($key, $value)
 {
@@ -42,9 +44,9 @@ function setValue($key, $value)
  * Function to authorize with Moneybird, this redirects to Moneybird login promt and retrieves authorization code
  * to set up requests for oAuth tokens.
  *
- * @param string $redirectUrl
- * @param string $clientId
- * @param string $clientSecret
+ * @param  string  $redirectUrl
+ * @param  string  $clientId
+ * @param  string  $clientSecret
  */
 function authorize($redirectUrl, $clientId, $clientSecret)
 {
@@ -58,11 +60,11 @@ function authorize($redirectUrl, $clientId, $clientSecret)
 /**
  * Function to connect to Moneybird, this creates the client and automatically retrieves oAuth tokens if needed.
  *
- * @param string $redirectUrl
- * @param string $clientId
- * @param string $clientSecret
- *
+ * @param  string  $redirectUrl
+ * @param  string  $clientId
+ * @param  string  $clientSecret
  * @return \Picqer\Financials\Moneybird\Connection
+ *
  * @throws Exception
  */
 function connect($redirectUrl, $clientId, $clientSecret)

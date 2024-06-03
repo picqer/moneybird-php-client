@@ -10,8 +10,7 @@ trait FindAll
     use BaseTrait;
 
     /**
-     * @param array $params
-     *
+     * @param  array  $params
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
@@ -24,8 +23,7 @@ trait FindAll
     }
 
     /**
-     * @param array $params
-     *
+     * @param  array  $params
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException

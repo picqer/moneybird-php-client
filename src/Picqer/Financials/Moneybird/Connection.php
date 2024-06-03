@@ -114,7 +114,7 @@ class Connection
     /**
      * Insert a custom Guzzle client.
      *
-     * @param Client $client
+     * @param  Client  $client
      */
     public function setClient($client)
     {
@@ -124,7 +124,7 @@ class Connection
     /**
      * Insert a Middleware for the Guzzle Client.
      *
-     * @param $middleWare
+     * @param  $middleWare
      */
     public function insertMiddleWare($middleWare)
     {
@@ -132,9 +132,9 @@ class Connection
     }
 
     /**
-     * @throws ApiException
-     *
      * @return Client
+     *
+     * @throws ApiException
      */
     public function connect()
     {
@@ -149,13 +149,13 @@ class Connection
     }
 
     /**
-     * @param string $method
-     * @param string $endpoint
-     * @param null $body
-     * @param array $params
-     * @param array $headers
-     *
+     * @param  string  $method
+     * @param  string  $endpoint
+     * @param  null  $body
+     * @param  array  $params
+     * @param  array  $headers
      * @return \GuzzleHttp\Psr7\Request
+     *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
@@ -188,13 +188,13 @@ class Connection
     }
 
     /**
-     * @param string $method
-     * @param $endpoint
-     * @param null $body
-     * @param array $params
-     * @param array $headers
-     *
+     * @param  string  $method
+     * @param  $endpoint
+     * @param  null  $body
+     * @param  array  $params
+     * @param  array  $headers
      * @return \GuzzleHttp\Psr7\Request
+     *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
      */
     private function createRequestNoJson($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
@@ -218,10 +218,11 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param array $params
-     * @param bool $fetchAll
+     * @param  string  $url
+     * @param  array  $params
+     * @param  bool  $fetchAll
      * @return mixed
+     *
      * @throws ApiException
      */
     public function get($url, array $params = [], $fetchAll = false)
@@ -245,10 +246,10 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param string $body
-     *
+     * @param  string  $url
+     * @param  string  $body
      * @return mixed
+     *
      * @throws ApiException
      */
     public function post($url, $body)
@@ -264,9 +265,10 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param string $body
+     * @param  string  $url
+     * @param  string  $body
      * @return mixed
+     *
      * @throws ApiException
      */
     public function patch($url, $body)
@@ -282,9 +284,10 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param string $body
+     * @param  string  $url
+     * @param  string  $body
      * @return mixed
+     *
      * @throws ApiException
      */
     public function delete($url, $body = null)
@@ -300,9 +303,10 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param array $options
+     * @param  string  $url
+     * @param  array  $options
      * @return mixed
+     *
      * @throws ApiException
      */
     public function download($url, $options = [])
@@ -317,9 +321,10 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param array $options
+     * @param  string  $url
+     * @param  array  $options
      * @return mixed
+     *
      * @throws ApiException
      */
     public function upload($url, $options)
@@ -349,7 +354,7 @@ class Connection
     }
 
     /**
-     * @param mixed $clientId
+     * @param  mixed  $clientId
      */
     public function setClientId($clientId)
     {
@@ -357,7 +362,7 @@ class Connection
     }
 
     /**
-     * @param mixed $clientSecret
+     * @param  mixed  $clientSecret
      */
     public function setClientSecret($clientSecret)
     {
@@ -365,7 +370,7 @@ class Connection
     }
 
     /**
-     * @param mixed $authorizationCode
+     * @param  mixed  $authorizationCode
      */
     public function setAuthorizationCode($authorizationCode)
     {
@@ -373,7 +378,7 @@ class Connection
     }
 
     /**
-     * @param mixed $accessToken
+     * @param  mixed  $accessToken
      */
     public function setAccessToken($accessToken)
     {
@@ -391,7 +396,7 @@ class Connection
     }
 
     /**
-     * @param mixed $redirectUrl
+     * @param  mixed  $redirectUrl
      */
     public function setRedirectUrl($redirectUrl)
     {
@@ -407,8 +412,9 @@ class Connection
     }
 
     /**
-     * @param Response $response
+     * @param  Response  $response
      * @return mixed
+     *
      * @throws ApiException
      */
     private function parseResponse(Response $response)
@@ -424,7 +430,7 @@ class Connection
     }
 
     /**
-     * @param $headerLine
+     * @param  $headerLine
      * @return bool | array
      */
     private function getNextParams($headerLine)
@@ -494,8 +500,7 @@ class Connection
     /**
      * Parse the response in the Exception to return the Exact error messages.
      *
-     * @param Exception $exception
-     *
+     * @param  Exception  $exception
      * @return \Picqer\Financials\Moneybird\Exceptions\ApiException
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\Api\TooManyRequestsException
@@ -528,9 +533,8 @@ class Connection
     }
 
     /**
-     * @param ResponseInterface $response
-     * @param string $errorMessage
-     *
+     * @param  ResponseInterface  $response
+     * @param  string  $errorMessage
      * @return void
      *
      * @throws TooManyRequestsException
@@ -547,9 +551,8 @@ class Connection
     }
 
     /**
-     * @param string $url
-     * @param string $method
-     *
+     * @param  string  $url
+     * @param  string  $method
      * @return string
      */
     private function formatUrl($url, $method = 'get')
@@ -570,7 +573,7 @@ class Connection
     }
 
     /**
-     * @param mixed $administrationId
+     * @param  mixed  $administrationId
      */
     public function setAdministrationId($administrationId)
     {
@@ -578,8 +581,7 @@ class Connection
     }
 
     /**
-     * @param int|string $administrationId
-     *
+     * @param  int|string  $administrationId
      * @return static
      */
     public function withAdministrationId($administrationId)
@@ -610,7 +612,7 @@ class Connection
     }
 
     /**
-     * @param bool $testing
+     * @param  bool  $testing
      */
     public function setTesting($testing)
     {
@@ -630,7 +632,7 @@ class Connection
     }
 
     /**
-     * @param array $scopes
+     * @param  array  $scopes
      */
     public function setScopes($scopes)
     {

@@ -113,9 +113,9 @@ class Estimate extends Model
     /**
      * Instruct Moneybird to send the estimate to the contact.
      *
-     * @param string|SendInvoiceOptions $deliveryMethodOrOptions
-     *
+     * @param  string|SendInvoiceOptions  $deliveryMethodOrOptions
      * @return $this
+     *
      * @throws ApiException
      */
     public function sendEstimate($deliveryMethodOrOptions = SendInvoiceOptions::METHOD_EMAIL)
