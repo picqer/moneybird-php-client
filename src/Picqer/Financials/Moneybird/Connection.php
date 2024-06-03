@@ -420,7 +420,7 @@ class Connection
     private function parseResponse(Response $response)
     {
         try {
-            $response->getBody()->rewind();
+            Psr7\Message::rewindBody($response);
             $json = json_decode($response->getBody()->getContents(), true);
 
             return $json;
@@ -483,7 +483,7 @@ class Connection
         $response = $this->client()->post($this->getTokenUrl(), $body);
 
         if ($response->getStatusCode() == 200) {
-            $response->getBody()->rewind();
+            Psr7\Message::rewindBody($response);
             $body = json_decode($response->getBody()->getContents(), true);
 
             if (json_last_error() === JSON_ERROR_NONE) {
@@ -517,7 +517,7 @@ class Connection
             return new ApiException('Response is NULL.', 0, $exception);
         }
 
-        $response->getBody()->rewind();
+        Psr7\Message::rewindBody($response);
         $responseBody = $response->getBody()->getContents();
         $decodedResponseBody = json_decode($responseBody, true);
 
