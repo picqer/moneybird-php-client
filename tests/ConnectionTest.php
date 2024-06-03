@@ -108,7 +108,7 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
         $request = $this->getRequestFromHistoryContainer();
         $this->assertEquals('POST', $request->getMethod());
 
-        Psr7\rewind_body($request);
+        $request->getBody()->rewind();
         $this->assertEquals(
             'redirect_uri=testRedirectUrl&grant_type=authorization_code&client_id=testClientId&client_secret=testClientSecret&code=testAuthorizationCode',
             $request->getBody()->getContents()
