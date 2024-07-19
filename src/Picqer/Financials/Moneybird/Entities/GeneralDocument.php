@@ -33,6 +33,7 @@ class GeneralDocument extends Model
         'updated_at',
         'notes',
         'attachments',
+        'version',
     ];
 
     /**

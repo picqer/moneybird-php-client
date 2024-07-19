@@ -72,6 +72,7 @@ class FinancialMutation extends Model
         'payments',
         'ledger_account_bookings',
         'account_servicer_transaction_id',
+        'version',
     ];
 
     /**

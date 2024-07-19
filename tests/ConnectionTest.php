@@ -5,7 +5,6 @@ namespace Picqer\Tests;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Psr7;
 use PHPUnit\Framework\TestCase;
 use Picqer\Financials\Moneybird\Connection;
 use Picqer\Financials\Moneybird\Entities\Contact;
@@ -110,7 +109,7 @@ class ConnectionTest extends TestCase
         $request = $this->getRequestFromHistoryContainer();
         $this->assertEquals('POST', $request->getMethod());
 
-        Psr7\Message::rewindBody($request);
+        $request->getBody()->rewind();
         $this->assertEquals(
             'redirect_uri=testRedirectUrl&grant_type=authorization_code&client_id=testClientId&client_secret=testClientSecret&code=testAuthorizationCode',
             $request->getBody()->getContents()
