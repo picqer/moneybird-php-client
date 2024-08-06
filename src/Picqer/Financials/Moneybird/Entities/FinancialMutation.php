@@ -4,6 +4,7 @@ namespace Picqer\Financials\Moneybird\Entities;
 
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
+use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Exceptions\ApiException;
 use Picqer\Financials\Moneybird\Model;
@@ -15,7 +16,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class FinancialMutation extends Model
 {
-    use FindAll, Filterable, Synchronizable;
+    use FindAll, Filterable, Synchronizable, FindOne;
 
     /**
      * @see https://developer.moneybird.com/api/financial_mutations/#patch_financial_mutations_id_link_booking
