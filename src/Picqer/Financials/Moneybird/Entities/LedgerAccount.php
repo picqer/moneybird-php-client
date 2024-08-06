@@ -25,6 +25,8 @@ class LedgerAccount extends Model
         'account_id',
         'parent_id',
         'allowed_document_types',
+        'taxonomy_item',
+        'financial_account_id',
         'created_at',
         'updated_at',
     ];
