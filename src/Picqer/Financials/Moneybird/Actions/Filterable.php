@@ -11,8 +11,8 @@ trait Filterable
 
     /**
      * @param  array  $filters
-     * @param  int|null  $perPage Number of results per page
-     * @param  int|null  $page Page to load, typically starts at 1
+     * @param  int|null  $perPage  Number of results per page
+     * @param  int|null  $page  Page to load, typically starts at 1
      * @return mixed
      *
      * @throws \Picqer\Financials\Moneybird\Exceptions\ApiException
