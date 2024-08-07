@@ -8,6 +8,7 @@ use Picqer\Financials\Moneybird\Actions\FindOne;
 use Picqer\Financials\Moneybird\Actions\Noteable;
 use Picqer\Financials\Moneybird\Actions\Removable;
 use Picqer\Financials\Moneybird\Actions\Storable;
+use Picqer\Financials\Moneybird\Actions\Synchronizable;
 use Picqer\Financials\Moneybird\Model;
 
 /**
@@ -15,7 +16,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class GeneralJournalDocument extends Model
 {
-    use Filterable, FindAll, FindOne, Storable, Removable, Noteable;
+    use Filterable, FindAll, FindOne, Storable, Removable, Noteable, Synchronizable;
 
     /**
      * @var array
