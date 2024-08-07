@@ -27,6 +27,7 @@ use Picqer\Financials\Moneybird\Entities\Project;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoice;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoiceDetail;
 use Picqer\Financials\Moneybird\Entities\PurchaseInvoicePayment;
+use Picqer\Financials\Moneybird\Entities\PurchaseTransaction;
 use Picqer\Financials\Moneybird\Entities\Receipt;
 use Picqer\Financials\Moneybird\Entities\ReceiptDetail;
 use Picqer\Financials\Moneybird\Entities\ReceiptPayment;
@@ -301,6 +302,15 @@ class Moneybird
     public function purchaseInvoicePayment($attributes = [])
     {
         return new PurchaseInvoicePayment($this->connection, $attributes);
+    }
+
+    /**
+     * @param  array  $attributes
+     * @return \Picqer\Financials\Moneybird\Entities\PurchaseTransaction
+     */
+    public function purchaseTransaction($attributes = [])
+    {
+        return new PurchaseTransaction($this->connection, $attributes);
     }
 
     /**
