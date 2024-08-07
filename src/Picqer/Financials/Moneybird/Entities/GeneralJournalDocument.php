@@ -29,6 +29,7 @@ class GeneralJournalDocument extends Model
         'updated_at',
         'general_journal_document_entries',
         'notes',
+        'version',
         'attachments',
     ];
 
