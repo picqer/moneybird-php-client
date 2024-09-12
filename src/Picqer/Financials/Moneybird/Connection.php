@@ -351,11 +351,11 @@ class Connection
     public function getAuthUrl()
     {
         return $this->authUrl . '?' . http_build_query([
-            'client_id'     => $this->clientId,
-            'redirect_uri'  => $this->redirectUrl,
+            'client_id' => $this->clientId,
+            'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
-            'state'         => $this->state,
-            'scope'         => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank time_entries settings',
+            'state' => $this->state,
+            'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank time_entries settings',
         ]);
     }
 
