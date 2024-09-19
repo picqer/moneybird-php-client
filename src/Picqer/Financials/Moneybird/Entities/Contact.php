@@ -91,13 +91,13 @@ class Contact extends Model
      * @var array
      */
     protected $multipleNestedEntities = [
-        'custom_fields' => [
+        'custom_fields'  => [
             'entity' => ContactCustomField::class,
-            'type' => self::NESTING_TYPE_NESTED_OBJECTS,
+            'type'   => self::NESTING_TYPE_NESTED_OBJECTS,
         ],
         'contact_people' => [
             'entity' => ContactPeople::class,
-            'type' => self::NESTING_TYPE_NESTED_OBJECTS,
+            'type'   => self::NESTING_TYPE_NESTED_OBJECTS,
         ],
     ];
 
@@ -109,7 +109,7 @@ class Contact extends Model
      */
     public function findByCustomerId($customerId)
     {
-        $result = $this->connection()->get($this->getEndpoint() . '/customer_id/' . urlencode($customerId));
+        $result = $this->connection()->get($this->getEndpoint().'/customer_id/'.urlencode($customerId));
 
         return $this->makeFromResponse($result);
     }
@@ -120,7 +120,15 @@ class Contact extends Model
     public function getPaymentsMandate(): array
     {
         return $this->connection()->get(
-            $this->getEndpoint() . '/' . $this->id . '/moneybird_payments_mandate'
+            $this->getEndpoint().'/'.$this->id.'/moneybird_payments_mandate'
+        );
+    }
+
+    public function requestNewPaymentsMandate(array $attributes = [])
+    {
+        return $this->connection()->post(
+            $this->getEndpoint().'/'.$this->id.'/moneybird_payments_mandate',
+            json_encode($attributes, JSON_THROW_ON_ERROR)
         );
     }
 
