@@ -2,6 +2,7 @@
 
 namespace Picqer\Financials\Moneybird\Entities;
 
+use JsonException;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
 use Picqer\Financials\Moneybird\Actions\FindOne;
@@ -124,6 +125,23 @@ class Contact extends Model
         );
     }
 
+
+    /**
+     * @throws ApiException
+     * @throws JsonException
+     */
+    public function getPaymentsMandateUrl(array $attributes = []): array
+    {
+        return $this->connection()->post(
+            $this->getEndpoint().'/'.$this->id.'/moneybird_payments_mandate/url',
+            json_encode($attributes, JSON_THROW_ON_ERROR)
+        );
+    }
+
+    /**
+     * @throws ApiException
+     * @throws JsonException
+     */
     public function requestNewPaymentsMandate(array $attributes = [])
     {
         return $this->connection()->post(
@@ -132,6 +150,9 @@ class Contact extends Model
         );
     }
 
+    /**
+     * @throws ApiException
+     */
     public function addContactPerson(array $attributes): ContactPeople
     {
         $attributes['contact_id'] = $this->id;
