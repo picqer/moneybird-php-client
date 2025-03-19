@@ -3,6 +3,7 @@
 namespace Picqer\Financials\Moneybird\Entities;
 
 use InvalidArgumentException;
+use Picqer\Financials\Moneybird\Actions\Attachment;
 use Picqer\Financials\Moneybird\Actions\Downloadable;
 use Picqer\Financials\Moneybird\Actions\Filterable;
 use Picqer\Financials\Moneybird\Actions\FindAll;
@@ -24,7 +25,7 @@ use Picqer\Financials\Moneybird\Model;
  */
 class Estimate extends Model
 {
-    use FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, Downloadable, Noteable;
+    use Attachment, FindAll, FindOne, Storable, Removable, Synchronizable, Filterable, Downloadable, Noteable;
 
     /**
      * @var array
