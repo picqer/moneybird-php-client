@@ -22,7 +22,7 @@ class Webhook extends Model
     protected $fillable = [
         'id',
         'url',
-        'events',
+        'enabled_events',
         'last_http_status',
         'last_http_body',
         'token',
