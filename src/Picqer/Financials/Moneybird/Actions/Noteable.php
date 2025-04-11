@@ -32,14 +32,14 @@ trait Noteable
     /**
      * Delete a note from the current object.
      *
-     * @param  Note|string  $note Note object or note ID
+     * @param  Note|string  $note  Note object or note ID
      * @return $this
      *
      * @throws ApiException
      */
     public function deleteNote(Note|string $note)
     {
-        if (!is_string($note)) {
+        if (! is_string($note)) {
             $note = $note->id;
         }
 
