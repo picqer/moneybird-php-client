@@ -69,6 +69,11 @@ class Connection
     private $redirectUrl;
 
     /**
+     * @var string|null
+     */
+    private ?string $state = null;
+
+    /**
      * @var Client
      */
     private $client;
@@ -349,6 +354,7 @@ class Connection
             'client_id' => $this->clientId,
             'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
+            'state' => $this->state,
             'scope' => $this->scopes ? implode(' ', $this->scopes) : 'sales_invoices documents estimates bank time_entries settings',
         ]);
     }
@@ -401,6 +407,14 @@ class Connection
     public function setRedirectUrl($redirectUrl)
     {
         $this->redirectUrl = $redirectUrl;
+    }
+
+    /**
+     * @param  string  $state
+     */
+    public function setState(string $state): void
+    {
+        $this->state = $state;
     }
 
     /**
