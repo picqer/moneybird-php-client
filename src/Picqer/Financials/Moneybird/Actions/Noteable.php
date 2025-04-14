@@ -37,7 +37,7 @@ trait Noteable
      *
      * @throws ApiException
      */
-    public function deleteNote(Note|string $note)
+    public function deleteNote($note)
     {
         if (! is_string($note)) {
             $note = $note->id;
