@@ -39,6 +39,7 @@ class Subscription extends Model
         'prices_are_incl_tax',
         'subscription_prices_are_incl_tax',
         'subscription_products',
+        'recurring_sales_invoice_id',
     ];
 
     /**
