@@ -20,6 +20,7 @@ class TaxRate extends Model
         'name',
         'percentage',
         'tax_rate_type',
+        'country',
         'show_tax',
         'active',
         'created_at',
