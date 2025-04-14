@@ -27,6 +27,7 @@ class Subscription extends Model
         'product_id',
         'amount',
         'discount',
+        'cancelled_at',
         'contact_id',
         'contact_person_id',
         'end_date',
