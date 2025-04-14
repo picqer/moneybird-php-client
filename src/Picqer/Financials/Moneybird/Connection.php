@@ -71,7 +71,7 @@ class Connection
     /**
      * @var string|null
      */
-    private ?string $state = null;
+    private $state = null;
 
     /**
      * @var Client
