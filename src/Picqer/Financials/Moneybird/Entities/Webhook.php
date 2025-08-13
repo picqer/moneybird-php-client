@@ -9,6 +9,14 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class Webhook.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string $url
+ * @property array $enabled_events
+ * @property int|string|null $last_http_status
+ * @property string|null $last_http_body
+ * @property string $token
  */
 class Webhook extends Model
 {
@@ -21,6 +29,7 @@ class Webhook extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'url',
         'enabled_events',
         'last_http_status',

@@ -7,6 +7,11 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class CustomField.
+ *
+ * @property string|int|null $id
+ * @property string|int|null $administration_id
+ * @property string $name
+ * @property string|null $source
  */
 class CustomField extends Model
 {
@@ -17,6 +22,7 @@ class CustomField extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'name',
         'source',
     ];

@@ -11,7 +11,29 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class FinancialMutation.
  *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string $amount
+ * @property string $code
+ * @property string $date
+ * @property string $message
+ * @property string $contra_account_name
+ * @property string $contra_account_number
+ * @property string $state
+ * @property string $amount_open
+ * @property array $sepa_fields
+ * @property string $batch_reference
+ * @property string|int $financial_account_id
+ * @property string $currency
+ * @property string $original_amount
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string|int $financial_statement_id
+ * @property string|null $processed_at
+ * @property array $payments
  * @property LedgerAccountBooking[] $ledger_account_bookings
+ * @property string $account_servicer_transaction_id
+ * @property int $version
  */
 class FinancialMutation extends Model
 {
@@ -52,6 +74,7 @@ class FinancialMutation extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'amount',
         'code',
         'date',

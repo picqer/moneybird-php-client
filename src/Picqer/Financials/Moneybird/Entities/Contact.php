@@ -16,9 +16,57 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class Contact.
  *
- * @property string $id
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|null $company_name
+ * @property string|null $firstname
+ * @property string|null $lastname
+ * @property string|null $attention
+ * @property string|null $address1
+ * @property string|null $address2
+ * @property string|null $zipcode
+ * @property string|null $city
+ * @property string $country
+ * @property string|null $phone
+ * @property string|null $delivery_method
+ * @property string $customer_id
+ * @property string|null $tax_number
+ * @property string|null $chamber_of_commerce
+ * @property string|null $bank_account
+ * @property bool $is_trusted
+ * @property float|null $max_transfer_amount
+ * @property string|null $email
+ * @property bool $email_ubl
+ * @property string|null $send_invoices_to_attention
+ * @property string|null $send_invoices_to_email
+ * @property string|null $send_estimates_to_attention
+ * @property string|null $send_estimates_to_email
+ * @property bool|null $sepa_active
+ * @property string|null $sepa_iban
+ * @property string|null $sepa_iban_account_name
+ * @property string|null $sepa_bic
+ * @property string|null $sepa_mandate_id
+ * @property string|null $sepa_mandate_date
+ * @property string $sepa_sequence_type
+ * @property string|null $credit_card_number
+ * @property string|null $credit_card_reference
+ * @property string|null $credit_card_type
+ * @property string|null $tax_number_validated_at
+ * @property bool|null $tax_number_valid
+ * @property string|int|null $invoice_workflow_id
+ * @property string|int|null $estimate_workflow_id
+ * @property string|null $si_identifier
+ * @property string|null $si_identifier_type
+ * @property bool $moneybird_payments_mandate
+ * @property string $created_at
+ * @property string $updated_at
+ * @property int $version
+ * @property string $sales_invoices_url
+ * @property array $notes
  * @property ContactCustomField[] $custom_fields
  * @property ContactPeople[] $contact_people
+ * @property bool $archived
+ * @property array $events
  */
 class Contact extends Model
 {

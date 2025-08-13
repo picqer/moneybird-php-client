@@ -10,17 +10,17 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class ContactPeople.
  *
- * @property string $id
- * @property string $contact_id
- * @property string $administration_id
- * @property string $firstname
- * @property string lastname
- * @property string phone
- * @property string email
- * @property string department
- * @property string created_at
- * @property string updated_at
- * @property string version
+ * @property string|int $id
+ * @property string|int $contact_id
+ * @property string|int $administration_id
+ * @property string|null $firstname
+ * @property string|null $lastname
+ * @property string|null $phone
+ * @property string|null $email
+ * @property string|null $department
+ * @property string $created_at
+ * @property string $updated_at
+ * @property int $version
  */
 class ContactPeople extends Model
 {

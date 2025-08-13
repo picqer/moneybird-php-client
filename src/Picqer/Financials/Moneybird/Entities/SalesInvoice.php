@@ -19,8 +19,65 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class SalesInvoice.
  *
- * @property string $id
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $contact_id
+ * @property string|int $contact_person_id
+ * @property bool $update_contact
  * @property Contact $contact
+ * @property string|int $invoice_id
+ * @property string|int $invoice_sequence_id
+ * @property string|int $recurring_sales_invoice_id
+ * @property string|int $workflow_id
+ * @property string|int $document_style_id
+ * @property string|int $identity_id
+ * @property string|int $draft_id
+ * @property string $state
+ * @property string $invoice_date
+ * @property string $due_date
+ * @property string $first_due_interval
+ * @property string $payment_conditions
+ * @property string $payment_reference
+ * @property string $reference
+ * @property string $language
+ * @property string $currency
+ * @property string $discount
+ * @property string|int $original_sales_invoice_id
+ * @property bool $paused
+ * @property string|null $paid_at
+ * @property string|null $sent_at
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $public_view_code
+ * @property int $version
+ * @property array $details
+ * @property array $payments
+ * @property string $total_paid
+ * @property string $total_unpaid
+ * @property string $total_unpaid_base
+ * @property bool $prices_are_incl_tax
+ * @property string $total_price_excl_tax
+ * @property string $total_price_excl_tax_base
+ * @property string $total_price_incl_tax
+ * @property string $total_price_incl_tax_base
+ * @property string $total_discount
+ * @property string|null $marked_dubious_on
+ * @property string|null $marked_uncollectible_on
+ * @property string $url
+ * @property string $payment_url
+ * @property array $custom_fields
+ * @property array $notes
+ * @property array $attachments
+ * @property array $events
+ * @property array $tax_totals
+ * @property string|int $original_estimate_id
+ * @property Contact $contact_person
+ * @property string|int|null $subscription_id
+ * @property string|null $short_payment_reference
+ * @property string|null $public_view_code_expires_at
+ * @property int $reminder_count
+ * @property string|null $next_reminder
+ * @property array $time_entries
  */
 class SalesInvoice extends Model
 {
@@ -82,6 +139,13 @@ class SalesInvoice extends Model
         'events',
         'tax_totals',
         'original_estimate_id',
+        'contact_person',
+        'subscription_id',
+        'short_payment_reference',
+        'public_view_code_expires_at',
+        'reminder_count',
+        'next_reminder',
+        'time_entries',
     ];
 
     /**

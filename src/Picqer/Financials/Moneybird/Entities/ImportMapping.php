@@ -8,6 +8,11 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class ImportMapping.
+ *
+ * @property string|int $administration_id
+ * @property string $entity_type
+ * @property string|int $old_id
+ * @property string|int $new_id
  */
 class ImportMapping extends Model
 {

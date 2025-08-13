@@ -12,6 +12,19 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class GeneralJournalDocument.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string $reference
+ * @property string $date
+ * @property string $journal_type
+ * @property string $created_at
+ * @property string $updated_at
+ * @property array $general_journal_document_entries
+ * @property array $notes
+ * @property array $attachments
+ * @property int $version
+ * @property array $events
  */
 class GeneralJournalDocument extends Model
 {
@@ -22,13 +35,17 @@ class GeneralJournalDocument extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'reference',
         'date',
+        'journal_type',
         'created_at',
         'updated_at',
         'general_journal_document_entries',
         'notes',
         'attachments',
+        'version',
+        'events',
     ];
 
     /**

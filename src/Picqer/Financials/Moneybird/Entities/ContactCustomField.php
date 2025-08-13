@@ -7,7 +7,7 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class ContactCustomField.
  *
- * @property string $id
+ * @property string|int $id
  * @property string $name
  * @property string $value
  */

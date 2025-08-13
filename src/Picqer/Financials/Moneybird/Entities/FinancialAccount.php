@@ -7,6 +7,17 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class FinancialAccount.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string $type
+ * @property string $name
+ * @property string $identifier
+ * @property string $currency
+ * @property string $provider
+ * @property bool $active
+ * @property string $created_at
+ * @property string $updated_at
  */
 class FinancialAccount extends Model
 {
@@ -17,6 +28,7 @@ class FinancialAccount extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'type',
         'name',
         'identifier',

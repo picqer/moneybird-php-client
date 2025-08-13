@@ -12,6 +12,20 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class TypelessDocument.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int|null $contact_id
+ * @property Contact|null $contact
+ * @property string|null $reference
+ * @property string $date
+ * @property string $state
+ * @property string|null $origin
+ * @property int $version
+ * @property string $created_at
+ * @property string $updated_at
+ * @property array $attachments
+ * @property array $events
  */
 class TypelessDocument extends Model
 {
@@ -22,14 +36,18 @@ class TypelessDocument extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
+        'contact',
         'reference',
         'date',
         'state',
         'origin',
+        'version',
         'created_at',
         'updated_at',
         'attachments',
+        'events',
     ];
 
     /**
