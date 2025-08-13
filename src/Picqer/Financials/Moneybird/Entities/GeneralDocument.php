@@ -12,6 +12,23 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class GeneralDocument.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $contact_id
+ * @property Contact $contact
+ * @property string $reference
+ * @property string $date
+ * @property string $due_date
+ * @property string $entry_number
+ * @property string $state
+ * @property string $exchange_rate
+ * @property string $created_at
+ * @property string $updated_at
+ * @property array $notes
+ * @property array $attachments
+ * @property int $version
+ * @property array $events
  */
 class GeneralDocument extends Model
 {
@@ -22,7 +39,9 @@ class GeneralDocument extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
+        'contact',
         'reference',
         'date',
         'due_date',
@@ -34,6 +53,7 @@ class GeneralDocument extends Model
         'notes',
         'attachments',
         'version',
+        'events',
     ];
 
     /**

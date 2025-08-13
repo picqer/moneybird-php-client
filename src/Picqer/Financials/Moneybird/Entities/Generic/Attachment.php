@@ -6,6 +6,17 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class InvoiceDetail.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $attachable_id
+ * @property string $attachable_type
+ * @property string $filename
+ * @property string $content_type
+ * @property int $size
+ * @property int|null $rotation
+ * @property string|null $created_at
+ * @property string|null $updated_at
  */
 abstract class Attachment extends Model
 {

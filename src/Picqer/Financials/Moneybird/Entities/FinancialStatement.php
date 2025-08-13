@@ -8,6 +8,14 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class FinancialStatement.
+ *
+ * @property string|int $id
+ * @property string|int $financial_account_id
+ * @property string $reference
+ * @property string $official_date
+ * @property string $official_balance
+ * @property string $importer_service
+ * @property array $financial_mutations
  */
 class FinancialStatement extends Model
 {
@@ -24,7 +32,6 @@ class FinancialStatement extends Model
         'official_balance',
         'importer_service',
         'financial_mutations',
-        'update_journal_entries',
     ];
 
     /**

@@ -16,12 +16,55 @@ use Picqer\Financials\Moneybird\Entities\SalesInvoice\SendInvoiceOptions;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class Contact.
+ * Class Estimate.
  *
- * @property int $id
- * @property string $company_name
- * @property string $first_name
- * @property string $last_name
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $contact_id
+ * @property string|int $contact_person_id
+ * @property Contact $contact
+ * @property string|int $estimate_id
+ * @property string|int $workflow_id
+ * @property string|int $document_style_id
+ * @property string|int $identity_id
+ * @property string|int $draft_id
+ * @property string $state
+ * @property string $estimate_date
+ * @property string $due_date
+ * @property string $reference
+ * @property string $language
+ * @property string $currency
+ * @property string $exchange_rate
+ * @property string $discount
+ * @property string|int $original_estimate_id
+ * @property bool $show_tax
+ * @property bool $sign_online
+ * @property string|null $sent_at
+ * @property string|null $accepted_at
+ * @property string|null $rejected_at
+ * @property string|null $archived_at
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $public_view_code
+ * @property int $version
+ * @property string|null $pre_text
+ * @property string|null $post_text
+ * @property array $details
+ * @property string $total_price_excl_tax
+ * @property string $total_price_excl_tax_base
+ * @property string $total_price_incl_tax
+ * @property string $total_price_incl_tax_base
+ * @property string $total_discount
+ * @property string $url
+ * @property array $custom_fields
+ * @property array $notes
+ * @property array $attachments
+ * @property array $events
+ * @property array $tax_totals
+ * @property bool $prices_are_incl_tax
+ * @property Contact $contact_person
+ * @property string|int $estimate_sequence_id
+ * @property string|null $public_view_code_expires_at
  */
 class Estimate extends Model
 {
@@ -75,6 +118,9 @@ class Estimate extends Model
         'events',
         'tax_totals',
         'prices_are_incl_tax',
+        'contact_person',
+        'estimate_sequence_id',
+        'public_view_code_expires_at',
     ];
 
     /**

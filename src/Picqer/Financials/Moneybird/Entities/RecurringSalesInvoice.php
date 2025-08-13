@@ -13,6 +13,47 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class RecurringSalesInvoice.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $contact_id
+ * @property Contact $contact
+ * @property string|int|null $contact_person_id
+ * @property Contact $contact_person
+ * @property string|int $workflow_id
+ * @property string $state
+ * @property string $start_date
+ * @property string $invoice_date
+ * @property string $last_date
+ * @property string $payment_conditions
+ * @property string $reference
+ * @property string $language
+ * @property string $currency
+ * @property string $discount
+ * @property string $first_due_interval
+ * @property bool $auto_send
+ * @property bool $mergeable
+ * @property string|null $sending_scheduled_at
+ * @property string|int|null $sending_scheduled_user_id
+ * @property string $frequency_type
+ * @property string $frequency
+ * @property string $created_at
+ * @property string $updated_at
+ * @property array $details
+ * @property array $notes
+ * @property array $attachments
+ * @property bool $has_desired_count
+ * @property int $desired_count
+ * @property int $version
+ * @property bool $active
+ * @property array $custom_fields
+ * @property bool $prices_are_incl_tax
+ * @property string $total_price_excl_tax
+ * @property string $total_price_excl_tax_base
+ * @property string $total_price_incl_tax
+ * @property string $total_price_incl_tax_base
+ * @property array $events
+ * @property array $subscription
  */
 class RecurringSalesInvoice extends Model
 {
@@ -23,8 +64,11 @@ class RecurringSalesInvoice extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
         'contact',
+        'contact_person_id',
+        'contact_person',
         'workflow_id',
         'state',
         'start_date',
@@ -57,6 +101,8 @@ class RecurringSalesInvoice extends Model
         'total_price_excl_tax_base',
         'total_price_incl_tax',
         'total_price_incl_tax_base',
+        'events',
+        'subscription',
     ];
 
     /**

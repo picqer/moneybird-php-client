@@ -7,6 +7,18 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class Workflow.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string $type
+ * @property string $name
+ * @property bool $default
+ * @property string $currency
+ * @property string $language
+ * @property bool $active
+ * @property bool $prices_are_incl_tax
+ * @property string $created_at
+ * @property string $updated_at
  */
 class Workflow extends Model
 {
@@ -17,6 +29,7 @@ class Workflow extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'type',
         'name',
         'default',

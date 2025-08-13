@@ -5,7 +5,19 @@ namespace Picqer\Financials\Moneybird\Entities;
 use Picqer\Financials\Moneybird\Model;
 
 /**
- * Class InvoiceDetail.
+ * Class GeneralJournalDocumentEntry.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $ledger_account_id
+ * @property string|int|null $contact_id
+ * @property string $description
+ * @property string $debit
+ * @property string $credit
+ * @property string|int|null $project_id
+ * @property int $row_order
+ * @property string $created_at
+ * @property string $updated_at
  */
 class GeneralJournalDocumentEntry extends Model
 {

@@ -7,6 +7,16 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class User.
+ *
+ * @property string|int $id
+ * @property string $name
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $email
+ * @property bool $email_validated
+ * @property string $language
+ * @property string $time_zone
+ * @property array $permissions
  */
 class User extends Model
 {

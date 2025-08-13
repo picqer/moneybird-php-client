@@ -7,6 +7,17 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class TaxRate.
+ *
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string $name
+ * @property string $percentage
+ * @property string $tax_rate_type
+ * @property string $country
+ * @property bool $show_tax
+ * @property bool $active
+ * @property string $created_at
+ * @property string $updated_at
  */
 class TaxRate extends Model
 {
@@ -17,6 +28,7 @@ class TaxRate extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'name',
         'percentage',
         'tax_rate_type',

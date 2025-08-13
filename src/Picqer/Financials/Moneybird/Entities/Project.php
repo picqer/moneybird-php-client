@@ -10,6 +10,11 @@ use Picqer\Financials\Moneybird\Model;
 
 /**
  * Class Project.
+ *
+ * @property string|int $id
+ * @property string $name
+ * @property string $state
+ * @property string $budget
  */
 class Project extends Model
 {

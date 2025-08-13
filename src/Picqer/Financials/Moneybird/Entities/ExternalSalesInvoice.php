@@ -17,8 +17,39 @@ use Picqer\Financials\Moneybird\Model;
 /**
  * Class ExternalSalesInvoice.
  *
- * @property string $id
+ * @property string|int $id
+ * @property string|int $administration_id
+ * @property string|int $contact_id
  * @property Contact $contact
+ * @property string $reference
+ * @property string $date
+ * @property string $due_date
+ * @property string $entry_number
+ * @property string $state
+ * @property string $currency
+ * @property bool $prices_are_incl_tax
+ * @property string $source
+ * @property string|null $source_url
+ * @property string $origin
+ * @property string|null $paid_at
+ * @property string $total_paid
+ * @property string $total_unpaid
+ * @property string $total_unpaid_base
+ * @property string $total_price_excl_tax
+ * @property string $total_price_excl_tax_base
+ * @property string $total_price_incl_tax
+ * @property string $total_price_incl_tax_base
+ * @property string|null $marked_dubious_on
+ * @property string|null $marked_uncollectible_on
+ * @property string $created_at
+ * @property string $updated_at
+ * @property array $details
+ * @property array $payments
+ * @property array $notes
+ * @property array $attachments
+ * @property int $version
+ * @property array $events
+ * @property array $tax_totals
  */
 class ExternalSalesInvoice extends Model
 {
@@ -29,7 +60,9 @@ class ExternalSalesInvoice extends Model
      */
     protected $fillable = [
         'id',
+        'administration_id',
         'contact_id',
+        'contact',
         'reference',
         'date',
         'due_date',
@@ -43,10 +76,13 @@ class ExternalSalesInvoice extends Model
         'paid_at',
         'total_paid',
         'total_unpaid',
+        'total_unpaid_base',
         'total_price_excl_tax',
         'total_price_excl_tax_base',
         'total_price_incl_tax',
         'total_price_incl_tax_base',
+        'marked_dubious_on',
+        'marked_uncollectible_on',
         'created_at',
         'updated_at',
         'details',
@@ -54,6 +90,8 @@ class ExternalSalesInvoice extends Model
         'notes',
         'attachments',
         'version',
+        'events',
+        'tax_totals',
     ];
 
     /**
