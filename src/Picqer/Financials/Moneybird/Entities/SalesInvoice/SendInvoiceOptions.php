@@ -16,6 +16,7 @@ class SendInvoiceOptions implements JsonSerializable
     const METHOD_SIMPLER_INVOICING = 'Simplerinvoicing';
     const METHOD_POST = 'Post';
     const METHOD_MANUAL = 'Manual';
+    const METHOD_PEPPOL = 'Peppol';
     const METHOD_DEFAULT = null;
 
     /** @var string */
