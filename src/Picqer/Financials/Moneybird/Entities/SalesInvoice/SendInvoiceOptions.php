@@ -87,10 +87,12 @@ class SendInvoiceOptions implements JsonSerializable
         ], function ($item) {
             return $item !== null;
         });
-        if (!$result) {
+
+        if (! $result) {
             // Make sure the result is an object, not an array
-            $result = new \StdClass();
+            $result = new \stdClass();
         }
+
         return $result;
     }
 
