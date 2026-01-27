@@ -57,6 +57,7 @@ class RecurringSalesInvoice extends Model
         'total_price_excl_tax_base',
         'total_price_incl_tax',
         'total_price_incl_tax_base',
+        'subscription'
     ];
 
     /**
