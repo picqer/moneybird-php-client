@@ -16,6 +16,8 @@ class SendInvoiceOptions implements JsonSerializable
     const METHOD_SIMPLER_INVOICING = 'Simplerinvoicing';
     const METHOD_POST = 'Post';
     const METHOD_MANUAL = 'Manual';
+    const METHOD_PEPPOL = 'Peppol';
+    const METHOD_DEFAULT = null;
 
     /** @var string */
     private $method;
@@ -56,6 +58,7 @@ class SendInvoiceOptions implements JsonSerializable
             self::METHOD_SIMPLER_INVOICING,
             self::METHOD_POST,
             self::METHOD_MANUAL,
+            self::METHOD_DEFAULT,
         ];
     }
 
@@ -73,7 +76,7 @@ class SendInvoiceOptions implements JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        return array_filter([
+        $result = array_filter([
             'delivery_method' => $this->getMethod(),
             'sending_scheduled' => $this->isScheduled() ?: null,
             'deliver_ubl' => $this->getDeliverUbl(),
@@ -84,6 +87,13 @@ class SendInvoiceOptions implements JsonSerializable
         ], function ($item) {
             return $item !== null;
         });
+
+        if (! $result) {
+            // Make sure the result is an object, not an array
+            $result = new \stdClass();
+        }
+
+        return $result;
     }
 
     /**
@@ -95,7 +105,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMethod()
     {
@@ -103,7 +113,7 @@ class SendInvoiceOptions implements JsonSerializable
     }
 
     /**
-     * @param  string  $method
+     * @param  string|null  $method
      */
     public function setMethod($method)
     {
